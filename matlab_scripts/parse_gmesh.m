@@ -1,12 +1,8 @@
-% parsing the input file
-clearvars
-clc
+function file_name = parse_gmesh()
 
 tags = {'$MeshFormat', '$PhysicalNames', ...
     '$Nodes', '$Elements'};
 parsed_data = struct();
-
-mesh_format = '';
 
 [file_name, file_path] = uigetfile('*.msh', 'Select mesh file');
 input_file = [file_path,file_name];
@@ -57,5 +53,5 @@ if(exist('results', 'dir') ~= 7), mkdir('results'); end
 respth = './results/';
 save([respth, strrep(file_name, '.msh', '')], 'regions', 'nodes', 'elements',...
     'n_regions', 'n_nodes', 'n_elements')
-clearvars
+
 disp('Finished parsing')
