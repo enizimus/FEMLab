@@ -49,9 +49,13 @@ elements_cell = parsed_data(3).val_cell; n_elements = parsed_data(3).n_items;
 [regions, nodes, elements] = mat2struct(phy_names, n_regions,...
                 nodes_cell, n_nodes, elements_cell, n_elements);
 
+ind = contains({regions.name}, 'source');
+[regions(ind).dim] = deal(3);
+
 if(exist('results', 'dir') ~= 7), mkdir('results'); end
 respth = './results/';
 save([respth, strrep(file_name, '.msh', '')], 'regions', 'nodes', 'elements',...
     'n_regions', 'n_nodes', 'n_elements')
 
+file_name = strrep(file_name, '.msh', '');
 disp('Finished parsing')
