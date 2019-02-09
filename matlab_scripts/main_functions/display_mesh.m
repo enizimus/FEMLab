@@ -1,4 +1,7 @@
-function display_mesh(file_name)
+function display_mesh(file_name, do_print)
+
+plt_pth = '.\plots\';
+if(nargin < 2 || isempty(do_print)), do_print = 0; end
 
 load(['.\results\', file_name])
 %tags = [regions.tag];
@@ -69,10 +72,16 @@ for i_lines = 1:n_lines
     end
 end
 hold off
-title(['Plotted : ', file_name, '.msh'], 'interpreter', 'none')
+title([file_name, '.msh'], 'interpreter', 'none')
 lgd = legend(legend_pick(1:i_lgnd-1), lgnd(lgnd_ind),...
     'location', 'eastoutside');
 title(lgd, 'Regions : ')
+if(do_print)
+    if(exist(plt_pth, 'dir') ~= 7)
+        mkdir(plt_pth)
+    end
+    print([plt_pth, file_name, '_mesh'], '-dpng')
+end
 
 
 
