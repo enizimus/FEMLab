@@ -1,0 +1,6 @@
+$RegionParams
+3
+Air 1
+Source 1
+Dirichlet 1
+$EndRegionParams

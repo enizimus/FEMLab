@@ -50,12 +50,15 @@ elements_cell = parsed_data(3).val_cell; n_elements = parsed_data(3).n_items;
                 nodes_cell, n_nodes, elements_cell, n_elements);
 
 [regions, replace_tags] = separate_regions(regions);
-elements = replace_region_tags(elements, n_elements, replace_tags);
+element_r = replace_region_tags(elements, n_elements, replace_tags);
+[regparams, regs] = read_settings();
+
+fclose(fid);
 
 if(exist('results', 'dir') ~= 7), mkdir('results'); end
 respth = './results/';
 save([respth, strrep(file_name, '.msh', '')], 'regions', 'nodes', 'elements',...
-    'n_regions', 'n_nodes', 'n_elements')
+    'n_regions', 'n_nodes', 'n_elements', 'element_r', 'regparams', 'regs')
 
 file_name = strrep(file_name, '.msh', '');
 disp('Finished parsing')

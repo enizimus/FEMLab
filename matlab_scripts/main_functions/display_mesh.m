@@ -19,14 +19,12 @@ n_lines = elem_offset-1;
 lines = [elements(1:n_lines).nodes];
 lines = reshape(lines, [2, n_lines])';
 color_mat_lines = zeros(n_lines, 3);
-arr = reshape([elements(1:n_lines).tags], [2, n_lines])';
-arr(:,2) = [];
+arr = element_r(1:n_lines);
 [tag_order_lines, I] = sort(arr);
 lines = lines(I,:);
 
 n_tri = n_elements-i_elem+1;
-arr = reshape([elements(i_elem:n_elements).tags], [2, n_tri])';
-arr(:,2) = [];
+arr = element_r(i_elem:n_elements);
 [tag_order, I] = sort(arr);
 triangles = [elements(i_elem:n_elements).nodes];
 triangles = reshape(triangles, [3, n_tri])';
