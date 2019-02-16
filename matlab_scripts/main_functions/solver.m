@@ -4,7 +4,7 @@ respth = ['.\results\', file_name];
 load(respth)
 
 i_elem = 1;
-while(elements(i_elem).tags(1) == 1)
+while(elements(i_elem).type == 1)
     i_elem = i_elem + 1;
 end
 

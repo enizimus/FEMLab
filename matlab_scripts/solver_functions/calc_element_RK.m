@@ -4,10 +4,10 @@ n = 3;
 
 if(elem_tag == 3) %if region is source
     f = sourparams(1); % Stromdichte J
-    k1 = regparams(3); % \mu of copper
+    k1 = regparams(3); % \mu of copper of source
 else
     f = 0;
-    k1 = regparams(element.tags(1));
+    k1 = regparams(elem_tag);
 end
 k = [k1 k1];
 kmn = @(k, b, c) k(1)*b(1)*b(2) + k(2)*c(1)*c(2);

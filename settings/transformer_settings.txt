@@ -1,5 +1,6 @@
 $RegionParams
-3
+4
+Neumann 2 0
 Air 4 1257e-9
 Source 3 1257e-9
 Dirichlet 1 1
