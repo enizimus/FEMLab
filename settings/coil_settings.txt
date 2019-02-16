@@ -1,0 +1,11 @@
+$RegionParams
+3
+Air 3 1257e-9
+Source 2 1257e-9
+Dirichlet 1 1
+$EndRegionParams
+$SourceParams
+2
+CurrentDens 10e-3
+CurrentPT 0
+$EndSourceParams

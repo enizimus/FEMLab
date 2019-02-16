@@ -3,7 +3,7 @@ function [regions, nodes, elements] = mat2struct(phy_names, n_regions, nodes_cel
 regions = struct('dim', {}, 'tag', {}, 'name', {});
 nodes = struct('x', {}, 'y', {}, 'z', {});
 elements = struct('type', {}, 'n_tags',...
-    {}, 'tags', {}, 'nodes', {});
+    {}, 'tags', {}, 'nodes', {}, 'K', {}, 'R', {}, 'n', {});
 
 nodes_mat = cell2mat(nodes_cell);
 elements_mat = cell2mat(elements_cell);
