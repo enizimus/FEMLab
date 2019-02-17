@@ -51,6 +51,7 @@ elements_cell = parsed_data(3).val_cell; n_elements = parsed_data(3).n_items;
 
 [regions, replace_tags] = separate_regions(regions);
 element_r = replace_region_tags(elements, n_elements, replace_tags);
+nodes_prop = get_dirichlet_nodes(elements, element_r, n_nodes);
 [regparams, sourparams] = read_settings(file_name);
 
 fclose(fid);
@@ -59,7 +60,7 @@ if(exist('results', 'dir') ~= 7), mkdir('results'); end
 respth = './results/';
 save([respth, strrep(file_name, '.msh', '')], 'regions', 'nodes', 'elements',...
     'n_regions', 'n_nodes', 'n_elements', 'element_r', ...
-    'regparams', 'replace_tags', 'sourparams');
+    'regparams', 'replace_tags', 'sourparams', 'nodes_prop');
 
 file_name = strrep(file_name, '.msh', '');
 disp('Finished parsing')

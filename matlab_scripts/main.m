@@ -2,7 +2,7 @@ clearvars
 clc
 close all
 
-pths = {'helper_functions', ...
+pths = {'helper_functions', 'classes', ...
 'main_functions', 'solver_functions'};
 
 addpath(pths{1}, pths{2}, pths{3});
