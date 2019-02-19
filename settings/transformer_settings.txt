@@ -1,12 +1,9 @@
-$RegionParams
-4
-Neumann 2 0
-Air 4 1257e-9
-Source 3 1257e-9
-Dirichlet 1 1
-$EndRegionParams
-$SourceParams
-2
-CurrentDens 10e-3
-CurrentPT 0
-$EndSourceParams
+$Parameters
+6
+neumann_boundary 0
+dirichlet_boundary 0
+source1 10e-3
+source2 20e-3
+iron 2000
+air 1257e-9
+$EndParameters

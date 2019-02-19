@@ -59,8 +59,11 @@ reg_keys = [regions.tag];
 regions_c = Regions(regnames, regparams);
 regions_c = regions_c.set_reg_map(reg_keys, reg_vals);
 
-[regions, replace_tags] = separate_regions(regions);
-element_r = replace_region_tags(elements, n_elements, replace_tags);
+%[regions, replace_tags] = separate_regions(regions);
+%element_r = replace_region_tags(elements, n_elements, replace_tags);
+element_r = reshape([elements.tags], [2, n_elements])';
+element_r(:,2) = [];
+
 [nodes_prop, n_sys] = get_dirichlet_nodes(elements, element_r, n_nodes, regions_c);
 
 
@@ -70,7 +73,7 @@ if(exist('results', 'dir') ~= 7), mkdir('results'); end
 respth = './results/';
 save([respth, strrep(file_name, '.msh', '')], 'regions', 'nodes', 'elements',...
     'n_regions', 'n_nodes', 'n_elements', 'element_r', 'regions_c', ...
-    'regparams', 'replace_tags', 'nodes_prop', 'n_sys');
+    'regparams', 'nodes_prop', 'n_sys');
 
 file_name = strrep(file_name, '.msh', '');
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
