@@ -32,7 +32,7 @@ R = R(I);
 I = any(K,1);
 K = K(:,I);
 
-U_known = get_known_U(u_known, regparams);
+U_known = get_known_U(u_known, regions_c);
 U_unknown = K\R;
 U(u_unknown) = U_unknown;
 U(u_known) = U_known;

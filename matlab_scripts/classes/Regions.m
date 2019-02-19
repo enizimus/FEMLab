@@ -83,15 +83,27 @@ classdef Regions
             end
         end
         
-        function param = get_param(obj, key)
-            if(isnumeric(key) && isKey(obj.reg_map, key))
-                param = obj.regs(obj.reg_map(key));
-            elseif(isstring(key) && isKey(obj.regs, key))
-                param = obj.regs(key);
+        function is_sour = is_source(obj, key)
+            is_sour = 0;
+            if(contains(obj.reg_map(key), 'source'))
+                is_sour = 1;
             end
         end
         
+        function param = get_param(obj, key)
+            if(isnumeric(key))
+                param = zeros(size(key));
+                for i = 1:numel(key)
+                    if(isKey(obj.reg_map, key(i)))
+                        param(i) = obj.regs(obj.reg_map(key(i)));
+                    end
+                end
+            elseif(isstring(key) && isKey(obj.regs, key))
+                param = obj.regs(key);
+            end
+            
+            
+        end
         
     end
-    
 end

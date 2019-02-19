@@ -66,7 +66,6 @@ element_r(:,2) = [];
 
 [nodes_prop, n_sys] = get_dirichlet_nodes(elements, element_r, n_nodes, regions_c);
 
-
 fclose(fid);
 
 if(exist('results', 'dir') ~= 7), mkdir('results'); end
