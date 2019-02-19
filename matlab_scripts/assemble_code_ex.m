@@ -4,7 +4,7 @@ tic
 respth = ['.\results\', file_name];
 load(respth)
 
-K = sparse(n_nodes, n_nodes);
+K = zeros(n_nodes);
 R = zeros(n_nodes,1);
 
 i_elem = 1;
@@ -22,27 +22,19 @@ for i_el=i_elem:n_elements
     
 end
 
-U = zeros(n_nodes, 1);
-
 I = any(K,2);
-u_unknown = I;
-u_known = ~I;
 K = K(I,:);
 R = R(I);
 I = any(K,1);
 K = K(:,I);
 
-U_known = get_known_U(u_known, regparams);
-U_unknown = K\R;
-U(u_unknown) = U_unknown;
-U(u_known) = U_known;
+U = K\R;
 
 figure;surface(1:size(K,1),size(K,1):-1:1,K,K);colormap(bluewhitered);shading flat 
-eigenvals = eigs(K);
+eigenvals = eig(K);
 condition_number = max(abs(eigenvals))/min(abs(eigenvals));
 disp(['Condition Number: ',num2str(condition_number)]);
 
 save(respth, 'U', 'K', 'R','condition_number', '-append'); 
-
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end
