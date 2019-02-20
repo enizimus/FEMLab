@@ -3,7 +3,8 @@ function set_up_elements(file_name)
 disp('-Calculating element matrices ...')
 tic
 respth = ['.\results\', file_name];
-load(respth)
+load(respth, 'elements', 'regions_c', 'n_nodes', 'n_elements',...
+    'nodes', 'nodes_prop', 'element_r')
 
 i_elem = 1;
 while(elements(i_elem).type == 1)
@@ -17,9 +18,7 @@ for i_el = i_elem:n_elements
         regions_c, element_r(i_el));
 end
 
-save(respth, 'regions', 'nodes', 'elements',...
-    'n_regions', 'n_nodes', 'n_elements', 'element_r', ...
-    'nodes_prop', 'n_sys', 'regions_c');
+save(respth, 'elements', '-append');
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end

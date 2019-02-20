@@ -64,6 +64,7 @@ function [varargout] = clr(varargin)
    
 % color list
 color_list = {  ...  
+166, 232, 250, 'bleu';
 200, 186, 128, 'green_beige';
 206, 177, 129, 'pale_beige';
 210, 173, 107, 'sand_yellow';
@@ -123,6 +124,7 @@ color_list = {  ...
 059, 059, 049, 'grey_olive';
 046, 055, 037, 'bottle_green';
 049, 047, 032, 'green';
+139, 224, 166, 'best_green';
 036, 052, 039, 'fir_green';
 065, 110, 050, 'grass_green';
 104, 127, 088, 'reseda_green';

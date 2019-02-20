@@ -8,6 +8,7 @@ classdef Regions
         predef_colors =  {[255, 250, 10], [22, 95, 229], [237, 33, 60]};
         colors = containers.Map('KeyType', 'char', 'ValueType', 'any');
         dir_codes = [];
+        colrs = [61, 210, 1, 32]
     end
     
     methods
@@ -46,6 +47,7 @@ classdef Regions
         function obj = fill_color_map(obj)
             n_keys = length(obj.regs);
             keys_c = keys(obj.regs);
+            i_clr = 1;
             for i_key = 1:n_keys
                 clr_set = 0;
                 for i_pred = 1:3
@@ -55,7 +57,8 @@ classdef Regions
                     end
                 end
                 if(~clr_set)
-                    obj.colors(keys_c{i_key}) = clr()/255;
+                    obj.colors(keys_c{i_key}) = clr(obj.colrs(i_clr))/255;
+                    i_clr = i_clr + 1;
                 end
             end
         end

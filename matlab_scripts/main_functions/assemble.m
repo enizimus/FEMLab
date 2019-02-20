@@ -1,10 +1,14 @@
 function assemble(file_name)
+% After calling this function elements.K and elements.R have the right
+% dimension. Not done previously to have easier indexing.
+%
+
 disp('-Assembling solution matrix and calculating solution ...')
 tic
 respth = ['.\results\', file_name];
-load(respth)
+load(respth, 'elements', 'regions_c', 'n_nodes', 'n_elements')
 
-K = sparse(n_nodes, n_nodes);
+K = spalloc(n_nodes, n_nodes, 6*n_nodes);
 R = zeros(n_nodes,1);
 
 i_elem = 1;
@@ -19,6 +23,9 @@ for i_el=i_elem:n_elements
     
     K(i_N, i_N) = K(i_N, i_N) + elements(i_el).K(i_n, i_n);
     R(i_N) = R(i_N) + elements(i_el).R(i_n);
+    
+    elements(i_el).K = elements(i_el).K(i_n, i_n);
+    elements(i_el).R = elements(i_el).R(i_n);
     
 end
 
@@ -38,11 +45,11 @@ U(u_unknown) = U_unknown;
 U(u_known) = U_known;
 
 figure;surface(1:size(K,1),size(K,1):-1:1,K,K);colormap(bluewhitered);shading flat 
-eigenvals = eigs(K);
+eigenvals = eig(full(K)); % to be fixed
 condition_number = max(abs(eigenvals))/min(abs(eigenvals));
 disp(['Condition Number: ',num2str(condition_number)]);
 
-save(respth, 'U', 'K', 'R','condition_number', '-append'); 
+save(respth, 'elements', 'U', 'K', 'R', 'condition_number', '-append'); 
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end

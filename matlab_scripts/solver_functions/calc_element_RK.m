@@ -1,6 +1,6 @@
 function [K,R,U,n] = calc_element_RK(nodes, nodes_prop, element, regions_c, elem_tag)
 
-mu_0 = 1257e-9;
+mu_0 = 1.2566e-06;
 kmn = @(k, b, c) k(1)*b(1)*b(2) + k(2)*c(1)*c(2);
 rm = @(f,A) f*A/3;
 
@@ -8,10 +8,10 @@ rm = @(f,A) f*A/3;
 
 if(regions_c.is_source(elem_tag)) %if region is source
     f = regions_c.get_param(elem_tag); % Stromdichte J
-    k1 = mu_0; % \mu of copper of source
+    k1 = 1/mu_0; % \mu of copper of source
 else
     f = 0;
-    k1 = regions_c.get_param(elem_tag);
+    k1 = 1/(regions_c.get_param(elem_tag)*mu_0); % 1/(mu_r * mu_0)
 end
 %k1 = 1/k1; % to get reluctance from \mu
 k = [k1 k1];

@@ -3,7 +3,8 @@ function display_mesh(file_name, do_print)
 plt_pth = '.\plots\';
 if(nargin < 2 || isempty(do_print)), do_print = 0; end
 
-load(['.\results\', file_name])
+respth = ['.\results\', file_name];
+load(respth)
 lgnd = cell(n_regions, 1);
 legend_pick = gobjects(size(lgnd));
 
@@ -58,6 +59,7 @@ title([file_name, '.msh'], 'interpreter', 'none')
 lgd = legend(legend_pick(1:i_lgnd-1), lgnd(1:i_lgnd-1),...
     'location', 'eastoutside', 'interpreter', 'none');
 title(lgd, 'Regions : ')
+set(gca,'YTick',[], 'XTick',[]);
 if(do_print)
     if(exist(plt_pth, 'dir') ~= 7)
         mkdir(plt_pth)
@@ -65,5 +67,6 @@ if(do_print)
     print([plt_pth, file_name, '_mesh'], '-dpng')
 end
 
+save(respth, 'triangles', 'lines', '-append')
 
 

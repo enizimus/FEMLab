@@ -11,3 +11,4 @@ file_name = parse_gmesh();
 display_mesh(file_name,1)
 set_up_elements(file_name)
 assemble(file_name)
+display_potentials(file_name)
