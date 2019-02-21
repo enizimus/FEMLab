@@ -7,8 +7,8 @@ pths = {'helper_functions', 'classes', ...
 
 addpath(pths{1}, pths{2}, pths{3}, pths{4});
 
-file_name = parse_gmesh();
-display_mesh(file_name,1)
-set_up_elements(file_name)
-assemble(file_name)
-display_potentials(file_name)
+files = parse_gmesh();
+display_mesh(files, 1)
+set_up_elements(files)
+assemble(files)
+display_potentials(files, 1)

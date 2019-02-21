@@ -1,12 +1,12 @@
-function assemble(file_name)
+function assemble(files)
 % After calling this function elements.K and elements.R have the right
 % dimension. Not done previously to have easier indexing.
 %
 
 disp('-Assembling solution matrix and calculating solution ...')
 tic
-respth = ['.\results\', file_name];
-load(respth, 'elements', 'regions_c', 'n_nodes', 'n_elements')
+
+load(files.respth, 'elements', 'regions_c', 'n_nodes', 'n_elements')
 
 K = spalloc(n_nodes, n_nodes, 6*n_nodes);
 R = zeros(n_nodes,1);
@@ -49,7 +49,7 @@ eigenvals = eig(full(K)); % to be fixed
 condition_number = max(abs(eigenvals))/min(abs(eigenvals));
 disp(['Condition Number: ',num2str(condition_number)]);
 
-save(respth, 'elements', 'U', 'K', 'R', 'condition_number', '-append'); 
+save(files.respth, 'elements', 'U', 'K', 'R', 'condition_number', '-append'); 
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end

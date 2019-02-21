@@ -1,6 +1,0 @@
-$Parameters
-3
-dirichlet 0
-air 1
-source 10e-3
-$EndParameters

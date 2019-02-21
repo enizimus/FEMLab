@@ -1,9 +1,9 @@
-function set_up_elements(file_name)
-%SOLVER
+function set_up_elements(files)
+
 disp('-Calculating element matrices ...')
 tic
-respth = ['.\results\', file_name];
-load(respth, 'elements', 'regions_c', 'n_nodes', 'n_elements',...
+
+load(files.respth, 'elements', 'regions_c', 'n_nodes', 'n_elements',...
     'nodes', 'nodes_prop', 'element_r')
 
 i_elem = 1;
@@ -18,7 +18,7 @@ for i_el = i_elem:n_elements
         regions_c, element_r(i_el));
 end
 
-save(respth, 'elements', '-append');
+save(files.respth, 'elements', '-append');
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end

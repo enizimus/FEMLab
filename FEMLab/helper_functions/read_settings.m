@@ -1,9 +1,10 @@
-function [regparams, regs] = read_settings(file_name)
+function [regparams, regs] = read_settings(file_path)
 
 settings = {'$Parameters'};
-file_name = strrep(file_name, '.msh', '_settings.txt');
-file_path = '..\settings\';
-input_file = [file_path,file_name];
+%file_name = strrep(file_name, '.msh', '_settings.txt');
+%file_path = '..\settings\';
+input_file = [file_path, 'settings.txt'];
+
 if(exist(input_file, 'file')==2)
     fid = fopen(input_file);
 else

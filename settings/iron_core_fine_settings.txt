@@ -1,7 +1,0 @@
-$Parameters
-4
-dirichlet 0
-air 1
-source 1
-iron 6000
-$EndParameters
