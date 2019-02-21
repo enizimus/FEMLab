@@ -2,8 +2,8 @@ $Parameters
 6
 neumann_boundary 0
 dirichlet_boundary 0
-source1 10e-3
-source2 20e-3
+source1 1
+source2 22
 iron 5000
 air 1
 $EndParameters

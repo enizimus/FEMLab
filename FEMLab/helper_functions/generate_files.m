@@ -7,6 +7,7 @@ files.file_path = file_path;
 files.mesh_file = [file_path, file_name, '.msh'];
 files.results = [file_path, 'results\']; 
 files.finfo = [files.results, 'finfo.mat'];
+files.setfile = [file_path, 'settings.txt'];
 files.respth = [files.results, file_name];
 files.pltpth = [file_path, 'plots\'];
 files.pltpth_mesh = [files.pltpth, file_name, '_mesh'];

@@ -77,7 +77,7 @@ if(file_changed(files, f_info))
         'n_regions', 'n_nodes', 'n_elements', 'element_r', 'regions_c', ...
         'regparams', 'nodes_prop', 'n_sys');
 else
-    disp('-File not changed since last parse')
+    disp('-Files not changed since last parse')
     tic
 end
 
