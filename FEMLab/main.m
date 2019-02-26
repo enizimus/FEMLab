@@ -9,6 +9,9 @@ addpath(pths{1}, pths{2}, pths{3}, pths{4});
 
 files = parse_gmesh();
 display_mesh(files, 1)
-set_up_elements(files)
+set_up_elements(files)  
 assemble(files)
 display_potentials(files, 1)
+calc_B(files)
+display_B(files, 1)
+

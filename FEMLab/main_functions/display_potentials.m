@@ -13,6 +13,7 @@ title([files.file_name, ' potential'], 'interpreter', 'none')
 xlabel('x')
 ylabel('y')
 zlabel('A')
+view(2)
 
 if(do_print)
     print(files.pltpth_pot, print_format)
