@@ -2,6 +2,7 @@ classdef Regions
     
     properties
         regs = containers.Map('KeyType', 'char', 'ValueType', 'double');
+        def = containers.Map('KeyType', 'char', 'ValueType', 'double');
         reg_map = containers.Map('KeyType', 'double', 'ValueType', 'char');
         reg_map_inv = containers.Map('KeyType', 'char', 'ValueType', 'double');
         predef_keys = {'dirichlet', 'neumann', 'source'};
@@ -13,8 +14,9 @@ classdef Regions
     
     methods
         
-        function obj = Regions(keys, vals)
+        function obj = Regions(keys, vals, id)
             obj.regs = containers.Map(keys, vals);
+            obj.def = containers.Map(keys, id);
             obj = fill_color_map(obj);
         end
         

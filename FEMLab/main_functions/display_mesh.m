@@ -65,6 +65,6 @@ if(do_print)
     print(files.pltpth_mesh, print_format)
 end
 
-save(files.respth, 'triangles', 'lines', '-append')
+save(files.respth, 'triangles', 'lines', 'elem_offset', '-append')
 
 

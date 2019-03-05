@@ -1,38 +1,65 @@
-function [regparams, regs] = read_settings(file_path)
+function settings = read_settings(file_path)
+% settings.txt format :
+%       %Faces (id = 2)
+%           [name] [id] [material mu_0] [J]
+%       %Edges (id = 1)
+%           [name] [id] [DRB/NRB/SRC] [VAL]
+%
+%       where : - J   : Current density
+%               - DRB : Dirichlet boundary condition
+%               - NRB : Neumann boundary condition
+%               - SRC : Source
+%               - VAL : Value of selected DRB/NRB/SRC
 
-settings = {'$Parameters'};
-%file_name = strrep(file_name, '.msh', '_settings.txt');
-%file_path = '..\settings\';
+
 input_file = [file_path, 'settings.txt'];
 
 if(exist(input_file, 'file')==2)
     fid = fopen(input_file);
 else
-    disp({'Setting file not found at : ', input_file})
+    error(['Setting file not found at : ', input_file])
 end
 
-line = get_line(fid);
-if(strcmp(line, settings{1}))
-    n_regparams = str2double(get_line(fid));
-    regparams = zeros(1,n_regparams);
-    %params_tag = zeros(1,n_regparams);
-    regs = cell(1, n_regparams);
-    for i_reg=1:n_regparams
-        line = get_line(fid);
-        line_split = strsplit(line, ' ');
-        regs(i_reg) = line_split(1);
-        %params_tag(i_reg) = str2double(line_split{2});
-        regparams(i_reg) = str2double(line_split{2});
-    end
+settings = struct();
+parsed_data = struct();
+tags = {'$Edges', '$Faces'};
+is_parsing = 1;
+i_tag = 1;
+n_tags = length(tags);
+
+while(is_parsing)
     line = get_line(fid);
+    if(strcmp(line, tags{i_tag}))
+        n_items = str2double(get_line(fid));
+        val_cell = cell(n_items, 1);
+        for i=1:n_items
+            val_cell(i) = {get_line(fid)};
+        end
+        parsed_data(i_tag).val_cell = val_cell;
+        parsed_data(i_tag).n_items = n_items;
+        
+        end_tag = strrep(tags{i_tag}, '$', '$End');
+        while(~strcmp(get_line(fid), end_tag))
+        end
+    end
+    
+    i_tag = i_tag + 1;
+    if(i_tag > n_tags), is_parsing = 0; end
 end
+
+i_reg = 1;
+for i_tag = 1:n_tags
+    for i_item = 1:parsed_data(i_tag).n_items
+        parts = strsplit(parsed_data(i_tag).val_cell{i_item});
+        settings(i_reg).name = parts{1};
+        settings(i_reg).id = str2double(parts{2});
+        settings(i_reg).reg = parts{3};
+        settings(i_reg).sour = str2double(parts{4});
+        i_reg = i_reg + 1;
+    end
+end
+
 fclose(fid);
-% choosing a region parameter using the region tag atribute, so that when
-% using the array regparams we access the according parameter through the
-% tag of the region in question regparams(2) would return the region
-% parameter of the region with tag = 2 (third row in mesh file)
-%parameters = zeros(1, max(params_tag));
-%parameters(params_tag) = regparams;
 
 
 

@@ -62,8 +62,9 @@ if(file_changed(files, f_info))
     reg_vals = {regions.name};
     reg_keys = [regions.tag];
     
-    [regparams, regnames] = read_settings(file_path);
-    regions_c = Regions(regnames, regparams);
+    settings = read_settings(file_path);
+    [regnames, regparams, ids] = extract_kvi(settings);
+    regions_c = Regions(regnames, regparams, ids);
     regions_c = regions_c.set_reg_map(reg_keys, reg_vals);
     
     element_r = reshape([elements.tags], [2, n_elements])';
