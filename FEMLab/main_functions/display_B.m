@@ -12,7 +12,7 @@ y = nodes_B(:,2);
 xlin = linspace(min(x),max(x), n_p);
 ylin = linspace(min(y),max(y), n_p);
 [X,Y] = meshgrid(xlin,ylin);
-f = scatteredInterpolant(x,y,B);
+f = scatteredInterpolant(x,y,B');
 Z = f(X,Y);
 
 figure
