@@ -56,6 +56,7 @@ classdef Regions
                     if(contains(keys_c(i_key), obj.predef_keys(i_pred)))
                         obj.colors(keys_c{i_key}) = obj.predef_colors{i_pred}/255;
                         clr_set = 1;
+                        break;
                     end
                 end
                 if(~clr_set)

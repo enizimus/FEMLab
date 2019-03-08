@@ -27,10 +27,4 @@ title('|B|')
 if(do_print)
     print(files.pltpth_B, print_format)
 end
-
-figure
-contour(X,Y,Z)
-colorbar
-
-
 end
