@@ -13,6 +13,7 @@ files.pltpth = [file_path, 'plots\'];
 files.pltpth_mesh = [files.pltpth, file_name, '_mesh'];
 files.pltpth_pot = [files.pltpth, file_name, '_potential'];
 files.pltpth_B = [files.pltpth, file_name, '_Bfield'];
+files.f_changed = 1;
 
 if(exist(files.pltpth, 'dir') ~= 7)
         mkdir(files.pltpth)

@@ -34,8 +34,9 @@ parsed_data = struct();
 file_name = strrep(file_name, '.msh', '');
 files = generate_files(file_path, file_name);
 f_info = read_finfo(files);
+files.f_changed = file_changed(files, f_info);
 
-if(file_changed(files, f_info))
+if(files.f_changed)
     
     disp('-Parsing gmesh file ...')
     tic
