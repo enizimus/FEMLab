@@ -1,4 +1,30 @@
 function files = parse_gmesh()
+% PARSE_GMESH - reads the .msh file and extracts the data into a
+% more suitable format for further calculations
+%
+% Syntax:  files = parse_gmesh()
+%
+% Inputs:
+%    None
+%
+% Outputs:
+%    files - struct containing file and result paths
+%    [selected-msh-file].mat (contains the extracted data
+%
+% Example: 
+%    files = parse_gmesh()
+%
+% Other m-files required: Regions.m, generate_files.m, read_finfo, 
+%                         file_changed.m, generate_finfo.m, get_line.m,
+%                         mat2struct.m, extract_lines_tris.m, 
+%                         read_settings.m, extract_kvi.m, Regions.m,
+%                         get_dirichlet_nodes.m 
+% Subfunctions: none
+% MAT-files required: None
+%
+% Author: Eniz Museljic
+% email: eniz.m@outlook.com
+% Feb 2019
 
 tags = {'$MeshFormat', '$PhysicalNames', ...
     '$Nodes', '$Elements'};
@@ -62,9 +88,9 @@ if(file_changed(files, f_info))
     reg_vals = {regions.name};
     reg_keys = [regions.tag];
     
-    settings = read_settings(file_path);
+    [settings, n_items] = read_settings(file_path);
     [regnames, regparams, ids] = extract_kvi(settings);
-    regions_c = Regions(regnames, regparams, ids);
+    regions_c = Regions(regnames, regparams, ids, n_items);
     regions_c = regions_c.set_reg_map(reg_keys, reg_vals);
     
     element_r = reshape([elements.tags], [2, n_elements])';
@@ -77,6 +103,8 @@ if(file_changed(files, f_info))
     save(files.respth, 'regions', 'nodes', 'elements',...
         'n_regions', 'n_nodes', 'n_elements', 'element_r', 'regions_c', ...
         'regparams', 'nodes_prop', 'n_sys');
+    
+    extract_lines_tris(files)
 else
     disp('-Files not changed since last parse')
     tic

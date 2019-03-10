@@ -1,4 +1,4 @@
-function settings = read_settings(file_path)
+function [settings, n_it] = read_settings(file_path)
 % settings.txt format :
 %       %Faces (id = 2)
 %           [name] [id] [material mu_0] [J]
@@ -23,6 +23,7 @@ end
 settings = struct();
 parsed_data = struct();
 tags = {'$Edges', '$Faces'};
+n_it = zeros(size(tags));
 is_parsing = 1;
 i_tag = 1;
 n_tags = length(tags);
@@ -31,6 +32,7 @@ while(is_parsing)
     line = get_line(fid);
     if(strcmp(line, tags{i_tag}))
         n_items = str2double(get_line(fid));
+        n_it(i_tag) = n_items;
         val_cell = cell(n_items, 1);
         for i=1:n_items
             val_cell(i) = {get_line(fid)};

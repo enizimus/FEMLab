@@ -9,14 +9,20 @@ classdef Regions
         predef_colors =  {[255, 250, 10], [22, 95, 229], [237, 33, 60]};
         colors = containers.Map('KeyType', 'char', 'ValueType', 'any');
         dir_codes = [];
-        colrs = [61, 210, 1, 32]
+        colrs = [61, 210, 1, 32];
+        n_edges = 0;
+        n_faces = 0;
+        n_items = [0 0];
     end
     
     methods
         
-        function obj = Regions(keys, vals, id)
+        function obj = Regions(keys, vals, id, n_items)
             obj.regs = containers.Map(keys, vals);
             obj.def = containers.Map(keys, id);
+            obj.n_edges = n_items(1);
+            obj.n_faces = n_items(2);
+            obj.n_items = n_items;
             obj = fill_color_map(obj);
         end
         
@@ -34,6 +40,19 @@ classdef Regions
             
             obj.dir_codes = codes;
             
+        end
+        
+        function key_arr = get_regions_keys(obj, type)
+            % get_regions_keys(obj, type) - returns an array containing the
+            % regions keys, if type == 'num' then it returns the numeric
+            % keys, else it returns the string keys
+            %
+            if(strcmp(type, 'num'))
+                temp = keys(obj.reg_map);
+                key_arr = [temp{:}];
+            else
+                key_arr = values(obj.reg_map);
+            end
         end
         
         function obj = set_reg_map(obj, keys, vals)
