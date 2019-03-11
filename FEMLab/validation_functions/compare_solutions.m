@@ -1,4 +1,4 @@
-function compare_solutions(files, N)
+function compare_solutions(files, N, opt)
 
 load(files.respth, 'B', 'nodes_B', 'triangles', 'nodes', ...
     'n_tri')
@@ -36,7 +36,8 @@ for i_lp = 1:N
     end
 end
 
-% #2 finding the nearest B point calculated earlier
+% #2 finding the nearest B point, if more than one with equal distance
+% calculate the mean of their B-fields
 
 for i_lp = 1:N
     xlp = xl(i_lp); ylp = yl(i_lp);
@@ -48,7 +49,7 @@ for i_lp = 1:N
     B_fem2(i_lp) = mean(B(I));
 end
 
-B_exact = calc_exact_B(N, 'diag');
+B_exact = calc_exact_B(N, 'diag', opt);
 
 abserr = [abs(B_exact - B_fem); abs(B_exact - B_fem2)];
 

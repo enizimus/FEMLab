@@ -15,4 +15,4 @@ end
 %display_mesh(files, 1)
 display_potentials(files, 1)
 display_B(files, 1)
-compare_solutions(files, 100)
+compare_solutions(files, 100, 'circ')
