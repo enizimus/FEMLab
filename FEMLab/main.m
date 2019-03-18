@@ -6,8 +6,8 @@ add_fun_paths()
 
 files = parse_gmesh();
 
-if(files.f_changed)
-    set_up_elements(files)
+if(1) %files.f_changed
+    set_up_elements(files, 'integrate')
     assemble(files)
     calc_B(files)
 end

@@ -1,6 +1,7 @@
 classdef Regions
     
     properties
+        mu_0 = 1.2566e-06;
         regs = containers.Map('KeyType', 'char', 'ValueType', 'double');
         def = containers.Map('KeyType', 'char', 'ValueType', 'double');
         reg_map = containers.Map('KeyType', 'double', 'ValueType', 'char');
