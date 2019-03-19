@@ -15,4 +15,8 @@ end
 %display_mesh(files, 1)
 display_potentials(files, 1)
 display_B(files, {'quiv', 'abs'})
-compare_solutions(files, 100, 'circ')
+
+% for validation purpose to select circular mesh edge and circular source
+% region in the coil examples
+msh_opt = struct('edge', {'circ'}, 'src', {'circ'}); 
+compare_solutions(files, 100, msh_opt)

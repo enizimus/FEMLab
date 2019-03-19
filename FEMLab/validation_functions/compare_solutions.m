@@ -1,15 +1,21 @@
-function compare_solutions(files, N, opt)
+function compare_solutions(files, N, msh_opt)
 
 load(files.respth, 'B', 'nodes_B', 'triangles', 'nodes', ...
     'n_tri')
 
 % N - number of test points on diagonal test line
 
-msh_r = 0.5; % radius of circular mesh
-phi = pi/4;
-r = linspace(0, msh_r, N);
-xl = r*cos(phi);
-yl = r*sin(phi);
+if(strcmp(msh_opt.edge, 'circ'))
+    msh_r = 0.5; % radius of circular mesh
+    phi = pi/4;
+    r = linspace(0, msh_r, N);
+    xl = r*cos(phi);
+    yl = r*sin(phi);
+elseif(strcmp(msh_opt.edge, 'rect'))
+    xl = linspace(0, 1, N);
+    yl = xl;
+    r = sqrt(xl.^2 + yl.^2);
+end
 
 B_fem = zeros(1,N);
 B_fem2 = zeros(1,N);
@@ -33,7 +39,7 @@ for i_lp = 1:N
             %plot(xlp,ylp,'m*')
             B_fem(i_lp) = B(i_tri);
             break;
-        end 
+        end
     end
 end
 
@@ -42,16 +48,15 @@ end
 
 for i_lp = 1:N
     xlp = xl(i_lp); ylp = yl(i_lp);
-   
+    
     d = sqrt((xlp - nodes_B(:,1)).^2 + ...
-             (ylp - nodes_B(:,2)).^2);
+        (ylp - nodes_B(:,2)).^2);
     I = d == min(d);
     
     B_fem2(i_lp) = mean(B(I));
 end
 
-B_exact = calc_exact_B(N, xl, yl, 'diag', opt);
-
+B_exact = calc_exact_B(N, xl, yl, r, 'diag', msh_opt);
 abserr = [abs(B_exact - B_fem); abs(B_exact - B_fem2)];
 
 figure
@@ -77,8 +82,8 @@ xlabel('r')
 ylabel('|B| [T]')
 xlim([min(r) max(r)])
 legend([p1, p2], {['B-FEM1 err_sum = ', num2str(sum(abserr(1,:)))], ...
-       ['B-FEM2 err_sum = ', num2str(sum(abserr(2,:)))]}, ...
-       'interpreter', 'none', 'location', 'southoutside')
+    ['B-FEM2 err_sum = ', num2str(sum(abserr(2,:)))]}, ...
+    'interpreter', 'none', 'location', 'southoutside')
 hold off
 
 
