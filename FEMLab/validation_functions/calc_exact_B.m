@@ -1,16 +1,15 @@
-function B = calc_exact_B(N, type, opt)
+function B = calc_exact_B(N, x, y, type, opt)
 
 R = 0.2;
+msh_r = 0.5;
 mu_0 = 1.257e-6;
 J = 10e-3;
 
 if(strcmp(type, 'diag'))
     B = zeros(1,N);
-    x = linspace(0,1,N);
-    y = x;
     
     if(strcmp(opt, 'circ'))
-        r = sqrt(x.^2 + y.^2) > R;
+        r = linspace(0, msh_r, N) > R; %sqrt(x.^2 + y.^2) > R;
     elseif(strcmp(opt, 'rect'))
         r = (x > R) & (y > R);
     end

@@ -5,13 +5,14 @@ load(files.respth, 'B', 'nodes_B', 'triangles', 'nodes', ...
 
 % N - number of test points on diagonal test line
 
+msh_r = 0.5; % radius of circular mesh
+phi = pi/4;
+r = linspace(0, msh_r, N);
+xl = r*cos(phi);
+yl = r*sin(phi);
+
 B_fem = zeros(1,N);
 B_fem2 = zeros(1,N);
-
-xl = linspace(0,1,N);
-yl = xl;
-
-r = sqrt(xl.^2 + yl.^2);
 
 % #1 finding in which triangle the point is
 
@@ -49,7 +50,7 @@ for i_lp = 1:N
     B_fem2(i_lp) = mean(B(I));
 end
 
-B_exact = calc_exact_B(N, 'diag', opt);
+B_exact = calc_exact_B(N, xl, yl, 'diag', opt);
 
 abserr = [abs(B_exact - B_fem); abs(B_exact - B_fem2)];
 
