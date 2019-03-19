@@ -13,6 +13,6 @@ if(1) %files.f_changed
 end
 
 %display_mesh(files, 1)
-display_potentials(files)
+display_potentials(files, 1)
 display_B(files, {'quiv', 'abs'})
 compare_solutions(files, 100, 'circ')

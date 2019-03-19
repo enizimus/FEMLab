@@ -19,21 +19,23 @@ k = [k1 k1];
 [xe, ye] = get_element_xy(nodes, [element.nodes]);
 
 K = zeros(3,3);
-R_p = rm(f,A)*ones(3,1);
-r_p = zeros(3,1);
+R_p = zeros(3,1); 
 
 if(strcmp(opt, 'integrate'))
-    fun = @int_tri;
+    fun_K = @int_tri_K;
+    fun_R = @int_tri_R;
 else
-    fun = @pre_int;
+    fun_K = @pre_int;
+    fun_R = @pre_int_R;
 end
 
 for i=1:3
     for j=1:3
         b = [abc(2,i),abc(2,j)];
         c = [abc(3,i),abc(3,j)];
-        K(i,j) = fun(A, k, b, c, f_K, xe, ye);
+        K(i,j) = fun_K(A, k, b, c, f_K, xe, ye);
     end
+    R_p(i) = fun_R(A, abc(:,i), f, f_R, xe, ye);
 end
 
 K_len = max([length(i_k), length(i_n)]);
