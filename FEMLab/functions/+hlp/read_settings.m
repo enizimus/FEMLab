@@ -29,19 +29,19 @@ i_tag = 1;
 n_tags = length(tags);
 
 while(is_parsing)
-    line = get_line(fid);
+    line = hlp.get_line(fid);
     if(strcmp(line, tags{i_tag}))
-        n_items = str2double(get_line(fid));
+        n_items = str2double(hlp.get_line(fid));
         n_it(i_tag) = n_items;
         val_cell = cell(n_items, 1);
         for i=1:n_items
-            val_cell(i) = {get_line(fid)};
+            val_cell(i) = {hlp.get_line(fid)};
         end
         parsed_data(i_tag).val_cell = val_cell;
         parsed_data(i_tag).n_items = n_items;
         
         end_tag = strrep(tags{i_tag}, '$', '$End');
-        while(~strcmp(get_line(fid), end_tag))
+        while(~strcmp(hlp.get_line(fid), end_tag))
         end
     end
     

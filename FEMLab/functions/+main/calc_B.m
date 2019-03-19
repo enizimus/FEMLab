@@ -13,7 +13,7 @@ nodes_B = zeros(n_tri, 2);
 for i_tri = 1:n_tri
     x = [nodes(triangles(i_tri,:)).x];
     y = [nodes(triangles(i_tri,:)).y];
-    ABC = solve_abc(x,y);
+    ABC = slvr.solve_abc(x,y);
     
     cBy = -(U(triangles(i_tri,:))'*ABC(1,:)');
     cBx = U(triangles(i_tri,:))'*ABC(2,:)';

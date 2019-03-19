@@ -39,12 +39,12 @@ R = R(I);
 I = any(K,1);
 K = K(:,I);
 
-U_known = get_known_U(u_known, regions_c);
+U_known = slvr.get_known_U(u_known, regions_c);
 U_unknown = K\R;
 U(u_unknown) = U_unknown;
 U(u_known) = U_known;
 
-figure;surface(1:size(K,1),size(K,1):-1:1,K,K);colormap(bluewhitered);shading flat 
+figure;surface(1:size(K,1),size(K,1):-1:1,K,K);colormap(hlp.bluewhitered);shading flat 
 eigenvals = eig(full(K)); % to be fixed
 condition_number = max(abs(eigenvals))/min(abs(eigenvals));
 disp(['Condition Number: ',num2str(condition_number)]);

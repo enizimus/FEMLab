@@ -5,8 +5,8 @@ nodes = struct('x', {}, 'y', {}, 'z', {});
 elements = struct('type', {}, 'n_tags',...
     {}, 'tags', {}, 'nodes', {}, 'K', {}, 'R', {}, 'U', {}, 'n', {});
 
-nodes_mat = cell2mat(nodes_cell);
-elements_mat = cell2mat(elements_cell);
+nodes_mat = hlp.cell2mat(nodes_cell);
+elements_mat = hlp.cell2mat(elements_cell);
 
 for i_region = n_regions:-1:1
     line = strsplit(phy_names{i_region}, ' ');

@@ -11,9 +11,9 @@ n_opt = length(opt);
 for i_opt = 1:n_opt
     
     if(strcmp(opt{i_opt}, 'abs'))
-        disp_absB(files, do_print, print_format)
+        dspl.disp_absB(files, do_print, print_format)
     elseif(strcmp(opt{i_opt}, 'quiv'))
-        disp_quivB(files, do_print, print_format)
+        dspl.disp_quivB(files, do_print, print_format)
     end
     
 end

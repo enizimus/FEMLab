@@ -32,16 +32,16 @@ parsed_data = struct();
 
 [file_name, file_path] = uigetfile('*.msh', 'Select mesh file');
 file_name = strrep(file_name, '.msh', '');
-files = generate_files(file_path, file_name);
-f_info = read_finfo(files);
-files.f_changed = file_changed(files, f_info);
+files = hlp.generate_files(file_path, file_name);
+f_info = hlp.read_finfo(files);
+files.f_changed = hlp.file_changed(files, f_info);
 
 if(files.f_changed)
     
     disp('-Parsing gmesh file ...')
     tic
     
-    generate_finfo(files);
+    hlp.generate_finfo(files);
     input_file = files.mesh_file;
     fid = fopen(input_file);
     
@@ -49,28 +49,28 @@ if(files.f_changed)
     i_tag = 1;
     n_tags = numel(tags);
     
-    [line, err] = get_line(fid);
+    [line, err] = hlp.get_line(fid);
     if(strcmp(line, tags{i_tag}) && err == 0)
-        mesh_format = get_line(fid);
+        mesh_format = hlp.get_line(fid);
         end_tag = strrep(tags{i_tag}, '$', '$End');
-        while(~strcmp(get_line(fid), end_tag))
+        while(~strcmp(hlp.get_line(fid), end_tag))
         end
         i_tag = i_tag + 1;
     end
     
     while(is_parsing)
-        line = get_line(fid);
+        line = hlp.get_line(fid);
         if(strcmp(line, tags{i_tag}))
-            n_items = str2double(get_line(fid));
+            n_items = str2double(hlp.get_line(fid));
             val_cell = cell(n_items, 1);
             for i=1:n_items
-                val_cell(i) = {get_line(fid)};
+                val_cell(i) = {hlp.get_line(fid)};
             end
             parsed_data(i_tag-1).val_cell = val_cell;
             parsed_data(i_tag-1).n_items = n_items;
             
             end_tag = strrep(tags{i_tag}, '$', '$End');
-            while(~strcmp(get_line(fid), end_tag))
+            while(~strcmp(hlp.get_line(fid), end_tag))
             end
         end
         
@@ -83,21 +83,21 @@ if(files.f_changed)
     nodes_cell = parsed_data(2).val_cell; n_nodes = parsed_data(2).n_items;
     elements_cell = parsed_data(3).val_cell; n_elements = parsed_data(3).n_items;
     
-    [regions, nodes, elements] = mat2struct(phy_names, n_regions,...
+    [regions, nodes, elements] = hlp.mat2struct(phy_names, n_regions,...
         nodes_cell, n_nodes, elements_cell, n_elements);
     
     reg_vals = {regions.name};
     reg_keys = [regions.tag];
     
-    [settings, n_items] = read_settings(file_path);
-    [regnames, regparams, ids] = extract_kvi(settings);
-    regions_c = Regions(regnames, regparams, ids, n_items);
+    [settings, n_items] = hlp.read_settings(file_path);
+    [regnames, regparams, ids] = hlp.extract_kvi(settings);
+    regions_c = cls.Regions(regnames, regparams, ids, n_items);
     regions_c = regions_c.set_reg_map(reg_keys, reg_vals);
     
     element_r = reshape([elements.tags], [2, n_elements])';
     element_r(:,2) = [];
     
-    [nodes_prop, n_sys] = get_dirichlet_nodes(elements, element_r, n_nodes, regions_c);
+    [nodes_prop, n_sys] = hlp.get_dirichlet_nodes(elements, element_r, n_nodes, regions_c);
     
     fclose(fid);
     
@@ -105,7 +105,7 @@ if(files.f_changed)
         'n_regions', 'n_nodes', 'n_elements', 'element_r', 'regions_c', ...
         'regparams', 'nodes_prop', 'n_sys');
     
-    extract_lines_tris(files)
+    hlp.extract_lines_tris(files)
 else
     disp('-Files not changed since last parse')
     tic

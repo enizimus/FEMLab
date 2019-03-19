@@ -56,7 +56,7 @@ for i_lp = 1:N
     B_fem2(i_lp) = mean(B(I));
 end
 
-B_exact = calc_exact_B(N, xl, yl, r, 'diag', msh_opt);
+B_exact = vld.calc_exact_B(N, xl, yl, r, 'diag', msh_opt);
 abserr = [abs(B_exact - B_fem); abs(B_exact - B_fem2)];
 
 figure

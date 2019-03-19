@@ -80,7 +80,7 @@ classdef Regions
                     end
                 end
                 if(~clr_set)
-                    obj.colors(keys_c{i_key}) = clr(obj.colrs(i_clr))/255;
+                    obj.colors(keys_c{i_key}) = hlp.clr(obj.colrs(i_clr))/255;
                     i_clr = i_clr + 1;
                 end
             end

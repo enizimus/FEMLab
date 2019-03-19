@@ -1,10 +1,8 @@
 function [K,R,U,n] = calc_element_RK(f_K, f_R, nodes, nodes_prop, element, regions_c, elem_tag, opt)
 
 mu_0 = regions_c.mu_0;
-%kmn = @(k, b, c) k(1)*b(1)*b(2) + k(2)*c(1)*c(2);
-rm = @(f,A) f*A/3;
 
-[U, i_k, i_n] = set_known_u([element.nodes], nodes_prop, regions_c);
+[U, i_k, i_n] = slvr.set_known_u([element.nodes], nodes_prop, regions_c);
 
 if(regions_c.is_source(elem_tag)) %if region is source
     f = regions_c.get_param(elem_tag); % Stromdichte J
@@ -15,18 +13,18 @@ else
 end
 
 k = [k1 k1];
-[abc, A] = calc_abc(nodes, [element.nodes]);
-[xe, ye] = get_element_xy(nodes, [element.nodes]);
+[abc, A] = slvr.calc_abc(nodes, [element.nodes]);
+[xe, ye] = hlp.get_element_xy(nodes, [element.nodes]);
 
 K = zeros(3,3);
 R_p = zeros(3,1); 
 
 if(strcmp(opt, 'integrate'))
-    fun_K = @int_tri_K;
-    fun_R = @int_tri_R;
+    fun_K = @slvr.int_tri_K;
+    fun_R = @slvr.int_tri_R;
 else
-    fun_K = @pre_int;
-    fun_R = @pre_int_R;
+    fun_K = @slvr.pre_int_K;
+    fun_R = @slvr.pre_int_R;
 end
 
 for i=1:3
