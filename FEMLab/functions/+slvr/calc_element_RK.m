@@ -1,4 +1,4 @@
-function [K,R,U,n] = calc_element_RK(f_K, f_R, nodes, nodes_prop, element, regions_c, elem_tag, opt)
+function [K,R,U,n] = calc_element_RK(fun_K, fun_R, f_K, f_R, nodes, nodes_prop, element, regions_c, elem_tag)
 
 mu_0 = regions_c.mu_0;
 
@@ -19,19 +19,9 @@ k = [k1 k1];
 K = zeros(3,3);
 R_p = zeros(3,1); 
 
-if(strcmp(opt, 'integrate'))
-    fun_K = @slvr.int_tri_K;
-    fun_R = @slvr.int_tri_R;
-else
-    fun_K = @slvr.pre_int_K;
-    fun_R = @slvr.pre_int_R;
-end
-
 for i=1:3
     for j=1:3
-        b = [abc(2,i),abc(2,j)];
-        c = [abc(3,i),abc(3,j)];
-        K(i,j) = fun_K(A, k, b, c, f_K, xe, ye);
+        K(i,j) = fun_K(A, k, abc, f_K, xe, ye, i, j);
     end
     R_p(i) = fun_R(A, abc(:,i), f, f_R, xe, ye);
 end
