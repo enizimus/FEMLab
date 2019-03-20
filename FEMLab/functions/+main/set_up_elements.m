@@ -7,6 +7,7 @@ load(files.respth, 'elements', 'regions_c', 'n_nodes', 'n_elements',...
     'nodes', 'nodes_prop', 'element_r')
 
 i_elem = 1;
+
 while(elements(i_elem).type == 1)
     i_elem = i_elem + 1;
 end
