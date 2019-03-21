@@ -1,4 +1,4 @@
-function calc_B(files)
+function calc_B(files, prob_opt)
 
 disp('-Calculating magnetic field ...')
 tic
@@ -10,18 +10,22 @@ Bx = zeros(1,n_tri);
 By = zeros(1,n_tri);
 nodes_B = zeros(n_tri, 2);
 
+[f_Bx, f_By] = slvr.get_B_fun(prob_opt);
+
 for i_tri = 1:n_tri
+   
     x = [nodes(triangles(i_tri,:)).x];
     y = [nodes(triangles(i_tri,:)).y];
     ABC = slvr.solve_abc(x,y);
+    nodes_B(i_tri, :) = [sum(x)/3, sum(y)/3];
     
-    cBy = -(U(triangles(i_tri,:))'*ABC(1,:)');
-    cBx = U(triangles(i_tri,:))'*ABC(2,:)';
+    cBy = f_By(U(triangles(i_tri,:)), ABC, x, y);
+    cBx = f_Bx(U(triangles(i_tri,:)), ABC);
     
     Bx(i_tri) = cBx;
     By(i_tri) = cBy;
     B(i_tri) = sqrt(cBx^2 + cBy^2);
-    nodes_B(i_tri, :) = [sum(x)/3, sum(y)/3];
+    
 end
 
 save(files.respth, 'B', 'Bx', 'By', 'nodes_B', '-append')
