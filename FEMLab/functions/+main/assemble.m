@@ -1,7 +1,27 @@
 function assemble(files)
+% ASSEMBLE - Loads the previously calculated element matrices, assembles
+% the whole equation system and solves it to get the node potentials.
 % After calling this function elements.K and elements.R have the right
 % dimension. Not done previously to have easier indexing.
 %
+% Syntax:  assemble(files)
+%
+% Inputs:
+%    files - struct containing file and result paths
+%
+% Outputs:
+%    none
+%
+% Other m-files required: get_known_U.m, bluewhitered.m
+%
+% Subfunctions: none
+% MAT-files required: Results.mat
+%
+% Author: Eniz Museljic
+% email: eniz.m@outlook.com
+% Feb 2019
+
+
 
 disp('-Assembling solution matrix and calculating solution ...')
 tic

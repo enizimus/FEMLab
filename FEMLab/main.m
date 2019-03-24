@@ -5,7 +5,8 @@ close all
 addpath('functions')
 
 files = main.parse_gmesh();
-msh_opt = struct('edge', {'rect'}, 'src', {'circ'}); 
+
+msh_opt = struct('edge', {'circ'}, 'src', {'circ'}); 
 prob_opt = struct('type', {'planar'}, 'int', {1});
 
 if(files.f_changed)
@@ -14,7 +15,7 @@ if(files.f_changed)
     main.calc_B(files, prob_opt)
 end
 
-%dspl.display_mesh(files, 1)
+dspl.display_mesh(files, 1)
 dspl.display_potentials(files, 1)
 dspl.display_B(files, {'quiv', 'abs'})
 

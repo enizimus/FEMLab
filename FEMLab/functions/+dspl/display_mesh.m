@@ -31,67 +31,31 @@ load(files.respth, 'elements', 'nodes', 'n_elements', 'n_nodes', ...
     'tag_order_lines', 'tag_order', 'n_tri',...
     'triangles', 'lines', 'n_lines');
 
-% new code ------------------
-% n_items = regions_c.n_items;
-% rkeys = regions_c.get_regions_keys('num');
-% [I_l, I_t] = sep_lines_tris(n_items, element_r, rkeys, ...
-%     n_tri, n_lines);
-% 
-% figure
-% hold on
-% for i_r = 1:n_items(1)
-%     colr = regions_c.get_color(rkeys(i_r));
-%     plot([nodes(lines(I_l(:,i_r),1)).x, nodes(lines(I_l(:,i_r),2)).x],...
-%               [nodes(lines(I_l(:,i_r),1)).y, nodes(lines(I_l(:,i_r),2)).y],...
-%               'linewidth', 1.2, 'color', colr);
-% end
-% 
-% for i_r = n_items(1)+1:sum(n_items)
-%     colr = regions_c.get_color(rkeys(i_r));
-%     triplot(triangles(I_t(:,i_r), :), [nodes.x], [nodes.y], ...
-%         'color', colr, ...
-%         'linewidth', 1.1);
-% end
-% end new code --------------
+n_items = regions_c.n_items;
+rkeys = regions_c.get_regions_keys('num');
+lgnd = regions_c.get_regions_keys('str');
 
-lgnd = cell(n_regions, 1);
-legend_pick = gobjects(size(lgnd));
+[I_l, I_t] = hlp.sep_lines_tris(n_items, element_r, rkeys, ...
+    n_tri, n_lines);
 
+figure
+hold on
+for i_r = 1:n_items(1)
+    colr = regions_c.get_color(rkeys(i_r));
+    plot([nodes(lines(I_l(:,i_r),1)).x, nodes(lines(I_l(:,i_r),2)).x],...
+              [nodes(lines(I_l(:,i_r),1)).y, nodes(lines(I_l(:,i_r),2)).y],...
+              'linewidth', 1.2, 'color', colr);
+end
 
-f_color = [-1,0,0];
-i_lgnd = 1;
-figure, hold on
-for i_tri = 1:n_tri
-    colr = regions_c.get_color(tag_order(i_tri));
-    hp = triplot(triangles(i_tri, :), [nodes.x], [nodes.y], ...
+for i_r = n_items(1)+1:sum(n_items)
+    colr = regions_c.get_color(rkeys(i_r));
+    triplot(triangles(I_t(:,i_r), :), [nodes.x], [nodes.y], ...
         'color', colr, ...
         'linewidth', 1.1);
-    
-    if( sum(f_color - colr) ~= 0)
-        legend_pick(i_lgnd) = hp;
-        f_color = colr;
-        lgnd(i_lgnd) = {regions_c.get_name(tag_order(i_tri))};
-        i_lgnd = i_lgnd + 1;
-    end
 end
-for i_lines = 1:n_lines
-    colr = regions_c.get_color(tag_order_lines(i_lines));
-    hp = plot([nodes(lines(i_lines,1)).x, nodes(lines(i_lines,2)).x],...
-              [nodes(lines(i_lines,1)).y, nodes(lines(i_lines,2)).y],...
-              'linewidth', 1.2, 'color', colr);
-    if( sum(f_color - colr) ~= 0)
-        legend_pick(i_lgnd) = hp;
-        f_color = colr;
-        lgnd(i_lgnd) = {regions_c.get_name(tag_order_lines(i_lines))}; 
-        i_lgnd = i_lgnd + 1;
-    end
-end
-hold off
 title([files.file_name, '.msh'], 'interpreter', 'none')
-lgd = legend(legend_pick(1:i_lgnd-1), lgnd(1:i_lgnd-1),...
-    'location', 'eastoutside', 'interpreter', 'none');
+lgd = legend(lgnd, 'location', 'eastoutside', 'interpreter', 'none');
 title(lgd, 'Regions : ')
-set(gca,'YTick',[], 'XTick',[]);
 
 if(do_print)
     print(files.pltpth_mesh, print_format)
