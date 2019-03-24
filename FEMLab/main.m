@@ -5,8 +5,8 @@ close all
 addpath('functions')
 
 files = main.parse_gmesh();
-msh_opt = struct('edge', {'circ'}, 'src', {'circ'}); 
-prob_opt = struct('type', {'axissymetric'}, 'int', {1});
+msh_opt = struct('edge', {'rect'}, 'src', {'circ'}); 
+prob_opt = struct('type', {'planar'}, 'int', {1});
 
 if(files.f_changed)
     main.set_up_elements(files, prob_opt)
@@ -21,4 +21,4 @@ dspl.display_B(files, {'quiv', 'abs'})
 % for validation purpose to select circular mesh edge and circular source
 % region in the coil examples
 
-%vld.compare_solutions(files, 100, msh_opt)
+vld.compare_solutions(files, 100, msh_opt)

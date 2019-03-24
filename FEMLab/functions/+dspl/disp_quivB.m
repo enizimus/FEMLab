@@ -2,15 +2,17 @@ function disp_quivB(files, do_print, print_format)
 
 n_p = 300;
 n_s = 10;
-load(files.respth, 'B', 'nodes_B', 'Bx', 'By');
+
+load(files.respth, 'B', 'nodes', 'Bx', 'By');
+
 n_points = length(B);
-x = nodes_B(:,1);
-y = nodes_B(:,2);
+x = [nodes.x];
+y = [nodes.y];
 
 xlin = linspace(min(x),max(x), n_p);
 ylin = linspace(min(y),max(y), n_p);
 [X,Y] = meshgrid(xlin,ylin);
-f = scatteredInterpolant(x,y,B');
+f = scatteredInterpolant(x',y',B');
 Z = f(X,Y);
 
 figure
@@ -21,25 +23,27 @@ view(2)
 xlabel('x')
 ylabel('y')
 title('|B|')
-hold on
-I = 1:n_s:n_points;
-quiver3(nodes_B(I,1), nodes_B(I,2), B(I)', Bx(I)', By(I)', zeros(size(Bx(I)))', 'linewidth', 0.6, 'color', 'b')
+
+% hold on
+% I = 1:n_s:n_points;
+% quiver3(nodes_B(I,1), nodes_B(I,2), B(I)', Bx(I)', By(I)', zeros(size(Bx(I)))', 'linewidth', 0.6, 'color', 'b')
+
+% figure
+% contour(X,Y,Z)
+% hold on
+% quiver(nodes_B(I,1), nodes_B(I,2), Bx(I)', By(I)', 'linewidth', 0.6, 'color', 'b')
+% xlabel('x')
+% ylabel('y')
+% title('B')
 
 figure
-contour(X,Y,Z)
-hold on
-quiver(nodes_B(I,1), nodes_B(I,2), Bx(I)', By(I)', 'linewidth', 0.6, 'color', 'b')
-xlabel('x')
-ylabel('y')
-title('B')
-
-figure
-quiver(nodes_B(I,1), nodes_B(I,2), Bx(I)', By(I)', 'linewidth', 0.6, 'color', 'b')
+quiver(x, y, Bx, By, 'linewidth', 0.6, 'color', 'b')
 xlabel('x')
 ylabel('y')
 title('B')
 grid on
-
+xlim([min(x), max(x)])
+ylim([min(y), max(y)])
 
 if(do_print)
     print(files.pltpth_B, print_format)
