@@ -7,7 +7,7 @@ addpath('functions')
 files = main.parse_gmesh();
 
 msh_opt = struct('edge', {'circ'}, 'src', {'circ'}); 
-prob_opt = struct('type', {'planar'}, 'int', {1});
+prob_opt = struct('type', {'planar'}, 'int', {1}, 'fieldplt', {{'quiv', 'abs'}});
 
 if(files.f_changed)
     main.set_up_elements(files, prob_opt)
@@ -17,7 +17,7 @@ end
 
 dspl.display_mesh(files, 1)
 dspl.display_potentials(files, 1)
-dspl.display_B(files, {'quiv', 'abs'})
+dspl.display_B(files, prob_opt, 1)
 
 % for validation purpose to select circular mesh edge and circular source
 % region in the coil examples

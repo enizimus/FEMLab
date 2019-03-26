@@ -1,4 +1,7 @@
-function disp_quivB(files, do_print, print_format)
+function disp_quivB(files, labels, do_print, print_format)
+
+if(nargin < 4 || isempty(print_format)), print_format = '-dpng'; end
+if(nargin < 3 || isempty(do_print)), do_print = 0; end
 
 n_p = 300;
 n_s = 10;
@@ -23,6 +26,7 @@ view(2)
 xlabel('x')
 ylabel('y')
 title('|B|')
+axis off
 
 % hold on
 % I = 1:n_s:n_points;
@@ -38,12 +42,13 @@ title('|B|')
 
 figure
 quiver(x, y, Bx, By, 'linewidth', 0.6, 'color', 'b')
-xlabel('x')
-ylabel('y')
+xlabel(labels.x)
+ylabel(labels.y)
 title('B')
 grid on
 xlim([min(x), max(x)])
 ylim([min(y), max(y)])
+axis off
 
 if(do_print)
     print(files.pltpth_B, print_format)

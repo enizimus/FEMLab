@@ -11,7 +11,7 @@ function display_mesh(files, do_print, print_format)
 % Outputs:
 %    None
 %
-% Example: 
+% Example:
 %    display_mesh(files, 1, '-dpng')
 %    display_mesh(files, 1, '-depsc')
 %
@@ -42,9 +42,10 @@ figure
 hold on
 for i_r = 1:n_items(1)
     colr = regions_c.get_color(rkeys(i_r));
-    plot([nodes(lines(I_l(:,i_r),1)).x, nodes(lines(I_l(:,i_r),2)).x],...
-              [nodes(lines(I_l(:,i_r),1)).y, nodes(lines(I_l(:,i_r),2)).y],...
-              'linewidth', 1.2, 'color', colr);
+    x = [nodes(lines(I_l(:,i_r),1)).x, nodes(lines(I_l(:,i_r),2)).x];
+    y = [nodes(lines(I_l(:,i_r),1)).y, nodes(lines(I_l(:,i_r),2)).y];
+    [x,y] = hlp.get_non_rep(x,y);
+    plot(x, y, 'linewidth', 1.2, 'color', colr);
 end
 
 for i_r = n_items(1)+1:sum(n_items)
@@ -56,6 +57,7 @@ end
 title([files.file_name, '.msh'], 'interpreter', 'none')
 lgd = legend(lgnd, 'location', 'eastoutside', 'interpreter', 'none');
 title(lgd, 'Regions : ')
+axis off
 
 if(do_print)
     print(files.pltpth_mesh, print_format)
