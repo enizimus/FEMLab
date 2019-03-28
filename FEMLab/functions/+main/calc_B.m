@@ -27,6 +27,7 @@ disp('-Calculating magnetic field ...')
 tic
 
 slvr.calc_tri_B(files, prob_opt)
+slvr.calc_tri_point_B(files)
 slvr.calc_weighted_B(files)
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])

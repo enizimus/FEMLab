@@ -4,12 +4,13 @@ close all
 
 addpath('functions')
 
+%% FIX GET FUNS TO GET RIGHT FUN FOR CALC W B
+
 files = main.parse_gmesh();
 
-msh_opt = struct('edge', {'circ'}, 'src', {'circ'}); 
-prob_opt = struct('type', {'planar'}, 'int', {1}, 'fieldplt', {{'quiv', 'abs'}});
+[prob_opt, msh_opt] = hlp.problem_info_ui();
 
-if(files.f_changed)
+if(1) %files.f_changed)
     main.set_up_elements(files, prob_opt)
     main.assemble(files)
     main.calc_B(files, prob_opt)
