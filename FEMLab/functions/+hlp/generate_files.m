@@ -13,6 +13,8 @@ files.pltpth = [file_path, 'plots\'];
 files.pltpth_mesh = [files.pltpth, file_name, '_mesh'];
 files.pltpth_pot = [files.pltpth, file_name, '_potential'];
 files.pltpth_B = [files.pltpth, file_name, '_Bfield'];
+files.pltpth_valid1 = [files.pltpth, file_name, '_validation_comp'];
+files.pltpth_valid2 = [files.pltpth, file_name, '_validation_error'];
 files.f_changed = 1;
 
 if(exist(files.pltpth, 'dir') ~= 7)
