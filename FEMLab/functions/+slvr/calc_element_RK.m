@@ -1,4 +1,4 @@
-function [K,R,U,n] = calc_element_RK(fun_K, fun_R, f_K, f_R, nodes, nodes_prop, element, regions_c, elem_tag)
+function [K,R,U,n,A] = calc_element_RK(fun_K, fun_R, f_K, f_R, nodes, nodes_prop, element, regions_c, elem_tag)
 
 mu_0 = regions_c.mu_0;
 
