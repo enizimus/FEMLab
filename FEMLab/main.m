@@ -4,22 +4,19 @@ clc
 
 addpath('functions')
 
-files = main.parse_gmesh();
+files = io.parse_gmesh();
 
-[prob_opt, msh_opt] = hlp.problem_info_ui();
-
-% prob_opt = struct('type', {'planar'}, 'int', {1}, 'fieldplt', {{'quiv'}});
-% msh_opt = struct('edge', {'circ'}, 'src', {'circ'});
+[prob_opt, msh_opt] = io.problem_info_ui();
 
 if(1)%files.f_changed)
-    main.set_up_elements(files, prob_opt)
-    main.assemble(files)
-    main.calc_B(files, prob_opt)
+    fem.set_up_elements(files, prob_opt)
+    fem.assemble(files)
+    fem.calc_B(files, prob_opt)
 end
 
-% dspl.display_mesh(files, 1)
-% dspl.display_potentials(files, 1)
-dspl.display_B(files, prob_opt, 1)
+% gfx.display_mesh(files, 1)
+% gfx.display_potentials(files, 1)
+gfx.display_B(files, prob_opt, 1)
 
 % for validation purpose to select circular mesh edge and circular source
 % region in the coil examples
