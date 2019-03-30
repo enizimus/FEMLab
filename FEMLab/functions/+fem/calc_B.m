@@ -26,10 +26,13 @@ function calc_B(files, prob_opt)
 disp('-Calculating magnetic field ...')
 tic
 
+n_p = 10;
+
+[xlims,ylims] = msh.get_xy_lims(files);
 slv.calc_tri_B(files, prob_opt)
 slv.calc_tri_point_B(files)
-x = linspace(-1,1,20);
-y = linspace(-1,1,20);
+x = linspace(xlims(1),xlims(2),n_p);
+y = linspace(ylims(1),ylims(2),n_p);
 [X,Y] = meshgrid(x,y);
 [B, Bx, By] = slv.eval_B(files, X, Y);
 save(files.respth, 'B', 'Bx', 'By', 'X', 'Y', '-append')

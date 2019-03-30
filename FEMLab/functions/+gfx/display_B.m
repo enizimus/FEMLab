@@ -14,8 +14,9 @@ for i_opt = 1:n_opt
         case('quiv')
             gfx.disp_quivB(files, labels, do_print, print_format)
         case('slice')
-            % under work
             gfx.disp_sliceB(files, labels, do_print, print_format)
+        case('cont')
+            gfx.disp_contourB(files, labels, do_print, print_format)
         otherwise
             error('[ERR] Not supported plot type')
     end
