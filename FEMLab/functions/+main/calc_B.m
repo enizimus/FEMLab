@@ -28,6 +28,11 @@ tic
 
 slvr.calc_tri_B(files, prob_opt)
 slvr.calc_tri_point_B(files)
-%slvr.calc_weighted_B(files)
+x = linspace(0,2,20);
+y = linspace(-1,1,20);
+[X,Y] = meshgrid(x,y);
+[B, Bx, By] = slvr.eval_B(files, X, Y);
+save(files.respth, 'B', 'Bx', 'By', 'X', 'Y', '-append')
+
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])

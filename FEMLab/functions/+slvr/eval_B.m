@@ -1,12 +1,12 @@
 function [B, Bx, By] = eval_B(files, x, y)
 
 load(files.respth, 'triangles', 'nodes', 'n_nodes', 'nodes_Bc',...
-                    'Bp', 'Bpx', 'Bpy')
+                    'Bp', 'Bpx', 'Bpy', 'tri_area')
 
-n_points = length(x);
-B = zeros(n_points, 1);
-Bx = zeros(n_points, 1);
-By = zeros(n_points, 1);
+n_points = size(x,1)*size(x,2);
+B = zeros(size(x));
+Bx = zeros(size(x));
+By = zeros(size(x));
 
 surr_tri = slvr.find_tris(triangles, nodes, x, y);
 N = slvr.get_funs('formarr');
@@ -22,6 +22,5 @@ for i_p = 1:n_points
     B(i_p) = Bp(I)*N_form;
     Bx(i_p) = Bpx(I)*N_form;
     By(i_p) = Bpy(I)*N_form;
-    
 end
 
