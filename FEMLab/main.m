@@ -8,7 +8,7 @@ files = io.parse_gmesh();
 
 [prob_opt, msh_opt] = io.problem_info_ui();
 
-if(files.f_changed)
+if(1) %files.f_changed)
     fem.set_up_elements(files, prob_opt)
     fem.assemble(files)
     fem.calc_B(files, prob_opt, msh_opt)
