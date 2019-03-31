@@ -1,4 +1,4 @@
-function calc_B(files, prob_opt)
+function calc_B(files, prob_opt, msh_opt)
 % CALC_B - Calculates the magnetic field from the previously calculated
 % potentials. First the magnetic field defined in the middle of the
 % triangle is calculated and from those the field in the triangle nodes.
@@ -26,14 +26,13 @@ function calc_B(files, prob_opt)
 disp('-Calculating magnetic field ...')
 tic
 
-n_p = 10;
+npoints = 30;
 
 [xlims,ylims] = msh.get_xy_lims(files);
+[X,Y] = msh.get_xy_mesh(msh_opt,xlims,ylims,npoints);
+
 slv.calc_tri_B(files, prob_opt)
 slv.calc_tri_point_B(files)
-x = linspace(xlims(1),xlims(2),n_p);
-y = linspace(ylims(1),ylims(2),n_p);
-[X,Y] = meshgrid(x,y);
 [B, Bx, By] = slv.eval_B(files, X, Y);
 save(files.respth, 'B', 'Bx', 'By', 'X', 'Y', '-append')
 

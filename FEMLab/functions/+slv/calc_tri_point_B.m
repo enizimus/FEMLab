@@ -14,6 +14,7 @@ for i_node = 1:n_nodes
     Bpx(i_node) = Bcx(c_mat(i_node,:))*tri_area(c_mat(i_node,:))/sum(tri_area(c_mat(i_node,:)));
     Bpy(i_node) = Bcy(c_mat(i_node,:))*tri_area(c_mat(i_node,:))/sum(tri_area(c_mat(i_node,:)));
     Bp(i_node) = sqrt(Bpx(i_node)^2 + Bpy(i_node)^2);
+    
 end
 
 save(files.respth, 'Bp', 'Bpx', 'Bpy', '-append')

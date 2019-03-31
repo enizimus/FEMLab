@@ -18,7 +18,7 @@ end
 B_exact = vld.calc_exact_B(N, xl, yl, r, 'diag', msh_opt);
 [B_fem,~,~] = slv.eval_B(files, xl, yl);
 
-abserr = abs(B_exact - B_fem');
+abserr = abs(B_exact - B_fem);
 
 figure
 plot(r, B_exact, 'linewidth', 1.2)

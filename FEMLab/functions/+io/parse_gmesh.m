@@ -30,6 +30,8 @@ tags = {'$MeshFormat', '$PhysicalNames', ...
     '$Nodes', '$Elements'};
 parsed_data = struct();
 
+def.read_defs();
+
 [file_name, file_path] = uigetfile('*.msh', 'Select mesh file');
 file_name = strrep(file_name, '.msh', '');
 files = io.generate_files(file_path, file_name);

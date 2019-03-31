@@ -1,6 +1,6 @@
 function p_tris = find_tris(triangles, nodes, xp, yp)
 
-epsilon = 1e-5;
+epsilon = def.get('triangle_area_eps');
 n_tri = size(triangles, 1);
 n_points = size(xp,1)*size(xp,2);
 p_tris = zeros(size(xp));
