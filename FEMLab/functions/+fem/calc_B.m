@@ -26,7 +26,7 @@ function calc_B(files, prob_opt, msh_opt)
 disp('-Calculating magnetic field ...')
 tic
 
-npoints = 20;
+npoints = 30;
 
 [xlims,ylims] = msh.get_xy_lims(files);
 [X,Y] = msh.get_xy_mesh(msh_opt,xlims,ylims,npoints);

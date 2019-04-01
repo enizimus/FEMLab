@@ -8,7 +8,9 @@ B = zeros(size(x));
 Bx = zeros(size(x));
 By = zeros(size(x));
 
-surr_tri = msh.find_tris(triangles, nodes, x, y);
+TRI = triangulation(triangles, [nodes.x]', [nodes.y]');
+surr_tri = pointLocation(TRI, x(:), y(:));
+
 N = slv.get_funs('formarr');
 
 for i_p = 1:n_points
