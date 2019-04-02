@@ -5,9 +5,9 @@ if(nargin < 3 || isempty(do_print)), do_print = 0; end
 
 load(files.respth, 'B', 'X', 'Y');
 
-nl = 30;
+nl = 20;
 figure
-contourf(X,Y,B,nl)
+contour(X,Y,B,nl)
 colorbar
 xlabel(labels.x)
 ylabel(labels.y)

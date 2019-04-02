@@ -1,6 +1,11 @@
-$Parameters
+$Edges
+1
+dirichlet 1 DRB 0
+$EndEdges
+$Faces
 3
-dirichlet 0
-iron 8000
-source 100e-3
-$EndParameters
+air 2 1 0
+source 2 1 10e-3
+iron 2 5000 0
+$EndFaces
+

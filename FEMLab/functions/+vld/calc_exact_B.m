@@ -15,4 +15,13 @@ if(strcmp(type, 'diag'))
     
     B(r) = (mu_0*J*R^2)./(2*(sqrt(x(r).^2+y(r).^2)));
     B(~r) = (mu_0*J*(sqrt(x(~r).^2+y(~r).^2)))./2;
+    
+else
+    
+    a = 0.3;
+    B = zeros(1,N);
+    r = linspace(0,2,N);
+    
+    B(r <= a) = mu_0*J*R;
+    
 end

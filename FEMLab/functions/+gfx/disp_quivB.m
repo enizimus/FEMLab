@@ -8,7 +8,7 @@ load(files.respth, 'Bx', 'By', 'X', 'Y');
 figure
 %gfx.ext.even_stream_line(X, Y, Bx, By, 1, 2, 'Color', 'b', 'linewidth', 0.2);
 %hold on
-quiver(X, Y, Bx, By, 'linewidth', 0.6, 'color', 'b')
+quiver(X, Y, Bx, By, 'linewidth', 0.8, 'color', 'b')
 xlabel(labels.x)
 ylabel(labels.y)
 title('B')

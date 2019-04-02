@@ -1,21 +1,28 @@
-function compare_solutions(files, N, msh_opt, do_print, print_format)
+function compare_solutions(files, N, prob_opt, msh_opt, do_print, print_format)
 
-if(nargin < 5 || isempty(print_format)), print_format = '-dpng'; end
-if(nargin < 4 || isempty(do_print)), do_print = 0; end
+if(nargin < 6 || isempty(print_format)), print_format = '-dpng'; end
+if(nargin < 5 || isempty(do_print)), do_print = 0; end
 
-if(strcmp(msh_opt.edge, 'circ'))
-    msh_r = 0.5; % radius of circular mesh
-    phi = pi/4;
-    r = linspace(0, msh_r, N);
-    xl = r*cos(phi);
-    yl = r*sin(phi);
-elseif(strcmp(msh_opt.edge, 'rect'))
-    xl = linspace(0, 1, N);
-    yl = xl;
-    r = sqrt(xl.^2 + yl.^2);
+if(strcmp(prob_opt.type, 'planar'))
+    if(strcmp(msh_opt.edge, 'circ'))
+        msh_r = 0.5; % radius of circular mesh
+        phi = pi/4;
+        r = linspace(0, msh_r, N);
+        xl = r*cos(phi);
+        yl = r*sin(phi);
+    elseif(strcmp(msh_opt.edge, 'rect'))
+        xl = linspace(0, 1, N);
+        yl = xl;
+        r = sqrt(xl.^2 + yl.^2);
+    end
+else
+    
+    xl = linspace(0, 2, N);
+    r = xl;
+    yl = zeros(size(xl));
 end
 
-B_exact = vld.calc_exact_B(N, xl, yl, r, 'diag', msh_opt);
+B_exact = vld.calc_exact_B(N, xl, yl, r, prob_opt.valid, msh_opt);
 [B_fem,~,~] = slv.eval_B(files, xl, yl);
 
 abserr = abs(B_exact - B_fem);
