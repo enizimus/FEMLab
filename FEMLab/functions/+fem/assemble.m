@@ -64,12 +64,12 @@ U_unknown = K\R;
 U(u_unknown) = U_unknown;
 U(u_known) = U_known;
 
-figure;surface(1:size(K,1),size(K,1):-1:1,K,K);colormap(util.bluewhitered);shading flat 
-eigenvals = eig(full(K)); % to be fixed
-condition_number = max(abs(eigenvals))/min(abs(eigenvals));
-disp(['Condition Number: ',num2str(condition_number)]);
+% figure;surface(1:size(K,1),size(K,1):-1:1,K,K);colormap(util.bluewhitered);shading flat 
+% eigenvals = eig(full(K)); % to be fixed
+% condition_number = max(abs(eigenvals))/min(abs(eigenvals));
+% disp(['Condition Number: ',num2str(condition_number)]);
 
-save(files.respth, 'elements', 'U', 'K', 'R', 'condition_number', '-append'); 
+save(files.respth, 'elements', 'U', 'K', 'R', '-append'); 
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end

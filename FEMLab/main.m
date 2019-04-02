@@ -1,6 +1,6 @@
 clearvars
 clc
-%close all
+close all
 
 addpath('functions')
 
@@ -18,6 +18,6 @@ gfx.display_mesh(files, 1)
 gfx.display_potentials(files, 1)
 gfx.display_B(files, prob_opt, 1)
 
-% for validation purpose to select circular mesh edge and circular source
-% region in the coil examples
-vld.compare_solutions(files, 100, prob_opt, msh_opt, 1)
+% % for validation purpose to select circular mesh edge and circular source
+% % % region in the coil examples
+% vld.compare_solutions(files, 100, prob_opt, msh_opt, 1)
