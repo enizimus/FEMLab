@@ -19,9 +19,13 @@ if(strcmp(type, 'diag'))
 else
     
     a = 0.3;
+    b = 0.5;
     B = zeros(1,N);
     r = linspace(0,2,N);
     
-    B(r <= a) = mu_0*J*R;
+    B_0 = mu_0*J*R;
+    B(r < a) = B_0;
+    I = r >= a & r <= b;
+    B(I) = B_0*(r(I) - b)/(a-b);
     
 end

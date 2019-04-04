@@ -19,13 +19,13 @@ else
     
     xl = linspace(0, 2, N);
     r = xl;
-    yl = zeros(size(xl));
+    yl = ones(size(xl));
 end
 
 B_exact = vld.calc_exact_B(N, xl, yl, r, prob_opt.valid, msh_opt);
 [B_fem,~,~] = slv.eval_B(files, xl, yl);
 
-abserr = abs(B_exact - B_fem);
+abserr = abs(B_exact - B_fem)./B_exact * 100;
 
 figure
 plot(r, B_exact, 'linewidth', 1.2)
@@ -46,9 +46,9 @@ end
 figure
 p1 = plot(r, abserr, 'linewidth', 1.2);
 grid on
-title({'Absolute error between the exact field and the FEM values', ''})
+title({'Relative error between the exact field and the FEM values', ''})
 xlabel('r')
-ylabel('|B| [T]')
+ylabel('Error [%]')
 xlim([min(r) max(r)])
 legend(p1, ['B-FEM err_sum = ', num2str(sum(abserr(1,:)))], ...
     'interpreter', 'none', 'location', 'southoutside')

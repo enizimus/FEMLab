@@ -56,6 +56,18 @@ classdef Regions
             end
         end
         
+        function params = get_regions_params(obj, regis)
+            % get_regions_keys(obj, type) - returns an array containing the
+            % regions keys, if type == 'num' then it returns the numeric
+            % keys, else it returns the string keys
+            %
+            params = zeros(size(regis));
+            for i_reg = 1:numel(regis)
+                params(i_reg) = obj.get_param(regis(i_reg));
+            end
+            
+        end
+        
         function obj = set_reg_map(obj, keys, vals)
             obj.reg_map = containers.Map(keys, vals);
             obj.reg_map_inv = containers.Map(vals, keys);
@@ -114,6 +126,20 @@ classdef Regions
             if(contains(obj.reg_map(key), 'source'))
                 is_sour = 1;
             end
+        end
+        
+        function sour_regs = get_source_keys(obj)
+            
+            key_arr = obj.get_regions_keys('num');
+            
+            sour_regs = zeros(numel(key_arr),1);
+            for i_key = 1:numel(key_arr)
+                if(obj.is_source(key_arr(i_key)))
+                    sour_regs(i_key) = i_key;
+                end
+            end
+            
+            sour_regs(sour_regs == 0) = [];
         end
         
         function param = get_param(obj, key)
