@@ -1,4 +1,4 @@
-function [U, i_k, i_n] = set_known_u(nodes, nodes_prop, regions_c)
+function [I, i_k, i_n] = set_known_u(nodes, nodes_prop, regions_c)
 I = nodes_prop(nodes);
 U = zeros(3,1);
 i_k = find(I ~= 0);

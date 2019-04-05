@@ -1,8 +1,11 @@
-function [K,R,U,n] = calc_element_RK(fun_K, fun_R, f_K, f_R, nodes, nodes_prop, element, regions_c, elem_tag, A, abc, xe, ye, m, is_sour)
+function [K,R,U,n] = calc_element_RK(U, fun_K, fun_R, f_K, f_R, nodes, nodes_prop, element, regions_c, elem_tag, A, abc, xe, ye, m, is_sour, I)
 
-mu_0 = regions_c.mu_0;
+i_k = find(I ~= 0);
+i_n = 1:3;
+i_n(i_k) = [];
+if(isempty(i_k)), i_k = 1; end
 
-[U, i_k, i_n] = slv.set_known_u([element.nodes], nodes_prop, regions_c);
+mu_0 = 1.2566e-06; %regions_c.mu_0;
 
 if(is_sour) %if region is source
     f = m; % Stromdichte J
@@ -15,7 +18,7 @@ end
 k = [k1 k1];
 
 K = zeros(3,3);
-R_p = zeros(3,1); 
+R_p = zeros(3,1);
 
 for i=1:3
     for j=1:3
