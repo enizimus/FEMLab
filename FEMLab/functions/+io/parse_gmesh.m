@@ -100,8 +100,8 @@ if(1) %files.f_changed)
     element_r = reshape([elements.tags], [2, n_elements])';
     element_r(:,2) = [];
     
-    [triangles, lines, elem_offset,...
-    tag_order_lines, tag_order, n_tri, n_lines] = msh.extract_lines_tris(files, elements, n_elements, element_r);
+    [triangles, ptriangles, lines, elem_offset,...
+    tag_order_lines, tag_order, n_tri, n_lines] = msh.extract_lines_tris(elements, n_elements, element_r);
     [nodes_prop, n_sys] = msh.get_dirichlet_nodes(elements, element_r, n_nodes, regions_c);
     x = [nodes.x]';
     y = [nodes.y]';
@@ -111,7 +111,7 @@ if(1) %files.f_changed)
     save(files.respth, 'regions', 'nodes', 'elements',...
         'n_regions', 'n_nodes', 'n_elements', 'element_r', 'regions_c', ...
         'regparams', 'nodes_prop', 'n_sys', 'triangles', 'lines', 'elem_offset',...
-    'tag_order_lines', 'tag_order', 'n_tri', 'n_lines', 'x', 'y');
+    'tag_order_lines', 'tag_order', 'n_tri', 'n_lines', 'x', 'y', 'ptriangles');
     
     
 else

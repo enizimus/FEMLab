@@ -29,9 +29,9 @@ if(nargin < 2 || isempty(do_print)), do_print = 0; end
 load(files.respth, 'elements', 'nodes', 'n_elements', 'n_nodes', ...
     'regions_c', 'n_regions', 'element_r', ...
     'tag_order_lines', 'tag_order', 'n_tri',...
-    'triangles', 'lines', 'n_lines');
+    'ptriangles', 'lines', 'n_lines');
 
-% ------------ New code, problems with triangles --------------------------
+% ------------ New code, problems with ptriangles --------------------------
 % n_items = regions_c.n_items;
 % rkeys = regions_c.get_regions_keys('num');
 % lgnd = regions_c.get_regions_keys('str');
@@ -52,7 +52,7 @@ load(files.respth, 'elements', 'nodes', 'n_elements', 'n_nodes', ...
 % for i_r = n_items(1)+1:sum(n_items)
 %     colr = regions_c.get_color(rkeys(i_r));
 %     
-%     tris = triangles(I_t(:,i_r), :);
+%     tris = ptriangles(I_t(:,i_r), :);
 %     nt = size(tris,1);
 %     for it = 1:nt
 %     triplot(tris(it,:), [nodes.x], [nodes.y], ...
@@ -79,7 +79,7 @@ i_lgnd = 1;
 figure, hold on
 for i_tri = 1:n_tri
     colr = regions_c.get_color(tag_order(i_tri));
-    hp = triplot(triangles(i_tri, :), [nodes.x], [nodes.y], ...
+    hp = triplot(ptriangles(i_tri, :), [nodes.x], [nodes.y], ...
         'color', colr, ...
         'linewidth', 1.1);
     

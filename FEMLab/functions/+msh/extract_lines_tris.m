@@ -1,5 +1,5 @@
-function [triangles, lines, elem_offset,...
-    tag_order_lines, tag_order, n_tri, n_lines] = extract_lines_tris(files, elements, n_elements, element_r)
+function [triangles, ptriangles, lines, elem_offset,...
+    tag_order_lines, tag_order, n_tri, n_lines] = extract_lines_tris(elements, n_elements, element_r)
 % EXTRACT_LINES_TRIS - extracts the triangles and line elements
 % from the elements structure for easier indexing and usage later
 % appends them to the resulting .mat file
@@ -39,4 +39,4 @@ arr = element_r(i_elem:n_elements);
 [tag_order, I] = sort(arr);
 triangles = [elements(i_elem:n_elements).nodes];
 triangles = reshape(triangles, [3, n_tri])';
-triangles = triangles(I,:);
+ptriangles = triangles(I,:);

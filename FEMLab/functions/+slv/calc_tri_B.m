@@ -12,7 +12,7 @@ nodes_Bc = zeros(n_tri, 2);
 d = 0;
 c = 0.333333333333333;
 if(def.get_prob_type(prob_opt.type) == 2)
-    d = 0.01;
+    d = 0;%0.01;
 end
 
 for i_tri = 1:n_tri

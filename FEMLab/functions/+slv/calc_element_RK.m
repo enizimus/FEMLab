@@ -1,4 +1,4 @@
-function [K,R,U,n] = calc_element_RK(U, fun_K, fun_R, f_K, f_R, nodes, nodes_prop, element, regions_c, elem_tag, A, abc, xe, ye, m, is_sour, I)
+function [K,R,U,n] = calc_element_RK(U, fun_K, fun_R, f_K, f_R, A, abc, xe, ye, m, is_sour, I)
 
 i_k = find(I ~= 0);
 i_n = 1:3;

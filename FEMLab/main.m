@@ -9,8 +9,9 @@ files = io.parse_gmesh();
 [prob_opt, msh_opt] = io.problem_info_ui();
 
 if(1) %files.f_changed)
-    fem.set_up_elements(files, prob_opt)
-    fem.assemble(files)
+    %     fem.set_up_elements(files, prob_opt)
+    %     fem.assemble(files)
+    slv.calc_A(files, prob_opt)
     fem.calc_B(files, prob_opt, msh_opt)
 end
 
@@ -20,4 +21,4 @@ gfx.display_B(files, prob_opt, 0)
 
 % % for validation purpose to select circular mesh edge and circular source
 % % % region in the coil examples
-% vld.compare_solutions(files, 100, prob_opt, msh_opt, 1)
+vld.compare_solutions(files, 100, prob_opt, msh_opt, 1)

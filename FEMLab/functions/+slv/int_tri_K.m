@@ -19,4 +19,4 @@ for i_p = 1:n_p
     I = I + fun(A, k, b, c)*g_data(i_p,3);
 end
 
-I = I * A;
+I = I * A * 2;

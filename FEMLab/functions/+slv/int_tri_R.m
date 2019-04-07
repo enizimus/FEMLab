@@ -17,4 +17,4 @@ for i_p = 1:n_p
     I = I + fun(xv, yv, abc, A)*g_data(i_p,3);
 end
 
-I = f*I*A;
+I = f*I*A* 2;
