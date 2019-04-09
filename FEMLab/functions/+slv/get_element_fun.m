@@ -13,11 +13,12 @@ if(type == type1)
     end
 elseif(type == type2)
     
-    %N = @(abc, r, z) abc(1) + 2*abc(2)*r + abc(3)*z;
-    %f_K = @(A, abc, r, z, k) (k(1)/r*N(abc(1,:),r,z)*N(abc(2,:),r,z)+...
-    %   k(2)*r*z^2*abc(1,3)*abc(2,3))/(4*A^2);
+    N = @(abc, r, z) (abc(1) + abc(2)*r + abc(3)*z);
+    f_K = @(A, abc, r, re, ze, k) k(1)*(N(abc(:,1),re(1),ze(1))*N(abc(:,2),re(2),ze(2)))/(2*A*r)+...
+        k(1)*(N(abc(:,2),re(2),ze(2))*abc(2,2)+N(abc(:,2),re(2),ze(2))*abc(2,1)+abc(2,2)*abc(2,1))/(4*A^2)+...
+        k(2)*r*(abc(3,1)*abc(3,2))/(4*A^2);
     
-    f_K = @(A, k, b, c, r) 0.25*r*(k(1)*b(1)*b(2) + k(2)*c(1)*c(2))/(A^2);
+    %f_K = @(A, k, b, c, r) 0.25*r*(k(1)*b(1)*b(2) + k(2)*c(1)*c(2))/(A^2);
     
     f_R = @(r, z, abc, A) 0.5*r*(abc(1)+abc(2)*r+abc(3)*z)/(A);
     

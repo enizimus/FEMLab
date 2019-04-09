@@ -35,7 +35,7 @@ plot(r, B_fem, 'linewidth', 1.2)
 title({'Comparison : B field exact values and FEM values', ['N = ', num2str(N)]})
 xlabel('r')
 ylabel('|B| [T]')
-legend('B-exact', 'B-FEM', 'location', 'eastoutside')
+legend('B-exact', 'B-FEM', 'B-elefant', 'location', 'eastoutside')
 xlim([min(r) max(r)])
 hold off
 
