@@ -19,7 +19,7 @@ else
     
     xl = linspace(0, 2, N);
     r = xl;
-    yl = ones(size(xl));
+    yl = ones(size(xl))*1.5;
 end
 
 B_exact = vld.calc_exact_B(N, xl, yl, r, prob_opt.valid, msh_opt);
