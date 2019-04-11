@@ -1,6 +1,6 @@
-clearvars
-clc
-close all
+% clearvars
+% clc
+% close all
 
 addpath('functions')
 
@@ -9,15 +9,14 @@ files = io.parse_gmesh();
 [prob_opt, msh_opt] = io.problem_info_ui();
 
 if(1) %files.f_changed)
-    %     fem.set_up_elements(files, prob_opt)
-    %     fem.assemble(files)
+    msh.prep_field_data(files, msh_opt)
     slv.calc_A(files, prob_opt)
     fem.calc_B(files, prob_opt, msh_opt)
+    slv.eval_A(files)
 end
 
-% gfx.display_mesh(files, 1)
+gfx.display(files, prob_opt, 'B', 'quiv')
 gfx.display_potentials(files, 1)
-gfx.display_B(files, prob_opt, 0)
 
 % % for validation purpose to select circular mesh edge and circular source
 % % % region in the coil examples
