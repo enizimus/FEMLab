@@ -20,12 +20,12 @@ p = inputParser;
 addRequired(p, 'files', @isstruct)
 addRequired(p, 'prob_opt', @isstruct)
 addRequired(p, 'plots', checkPlots)
-addOptional(p, 'type', defType, checkTypes)
-addOptional(p, 'axesOn', defAxesOn, @islogical)
-addOptional(p, 'doPrint', defPrint, @islogical)
-addOptional(p, 'printFormat', defFormat, checkFormat)
-addOptional(p, 'fieldLinesOn', defFlineson, @islogical)
-addOptional(p, 'nCont', defNCont, @isnumeric)
+addParameter(p, 'type', defType, checkTypes)
+addParameter(p, 'axesOn', defAxesOn, @islogical)
+addParameter(p, 'saveplot', defPrint, @islogical)
+addParameter(p, 'format', defFormat, checkFormat)
+addParameter(p, 'fieldLinesOn', defFlineson, @islogical)
+addParameter(p, 'nCont', defNCont, @isnumeric)
 
 parse(p, files, prob_opt, plots, varargin{:});
 % ----- End ---------------------------
@@ -38,8 +38,8 @@ end
 
 prob_opt.ncont = p.Results.nCont;
 prob_opt.plots = plots;
-prob_opt.do_print = p.Results.doPrint;
-prob_opt.print_format = p.Results.printFormat;
+prob_opt.do_print = p.Results.saveplot;
+prob_opt.print_format = p.Results.format;
 prob_opt.axes_on = p.Results.axesOn;
 prob_opt.flines_on = p.Results.fieldLinesOn;
 

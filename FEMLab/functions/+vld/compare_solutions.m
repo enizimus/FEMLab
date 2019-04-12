@@ -21,25 +21,25 @@ else
     
     xl = linspace(0, 2, N);
     r = xl;
-    yl = ones(size(xl))*ylims(2)/2;
+    yl = ones(size(xl))*(ylims(2)/2);
 end
 
 B_exact = vld.calc_exact_B(N, xl, yl, r, prob_opt.valid, msh_opt);
 [B_fem,~,~] = slv.eval_B(files, xl, yl);
 B_ef = vld.get_elefant_B('long_solenoid_0515');
 
-abserr_fem = abs(B_exact - B_fem);%./B_exact * 100;
-abserr_elf = abs(B_exact - B_ef);
-
-errsum_fem = sum(abserr_fem);
-errsum_elf = sum(abserr_elf);
+% abserr_fem = abs(B_exact - B_fem);%./B_exact * 100;
+% abserr_elf = abs(B_exact - B_ef);
+% 
+% errsum_fem = sum(abserr_fem);
+% errsum_elf = sum(abserr_elf);
 
 figure
 plot(r, B_exact, 'linewidth', 1.2)
 hold on
 grid on
 plot(r, B_fem, 'linewidth', 1.2)
-plot(r, B_ef, 'linewidth', 1.2)
+% plot(r, B_ef, 'linewidth', 1.2)
 title({'Comparison : B field exact values and FEM values', ['N = ', num2str(N)]})
 xlabel('r')
 ylabel('|B| [T]')
@@ -51,18 +51,18 @@ if(do_print)
     print(files.pltpth_valid1, print_format)
 end
 
-figure
-plot(r, abserr_fem, 'linewidth', 1.2);
-hold on
-grid on
-plot(r, abserr_elf, 'linewidth', 1.2);
-title({'Relative error between the exact field and the FEM values', ''})
-xlabel('r')
-ylabel('Error [%]')
-xlim([min(r) max(r)])
-legend(['B-FEM errsum = ' num2str(errsum_fem)],...
-    ['B-Elefant errsum = ' num2str(errsum_elf)])
-hold off
-if(do_print)
-    print(files.pltpth_valid2, print_format)
-end
+% figure
+% plot(r, abserr_fem, 'linewidth', 1.2);
+% hold on
+% grid on
+% plot(r, abserr_elf, 'linewidth', 1.2);
+% title({'Relative error between the exact field and the FEM values', ''})
+% xlabel('r')
+% ylabel('Error [%]')
+% xlim([min(r) max(r)])
+% legend(['B-FEM errsum = ' num2str(errsum_fem)],...
+%     ['B-Elefant errsum = ' num2str(errsum_elf)])
+% hold off
+% if(do_print)
+%     print(files.pltpth_valid2, print_format)
+% end

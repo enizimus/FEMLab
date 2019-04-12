@@ -4,12 +4,12 @@ load(files.respth, prob_opt.plots, 'X', 'Y');
 
 figure
 surf(X,Y,eval(prob_opt.plots))
-if(prob_opt.flines_on)
-    hold on
-    load(files.respth, 'A')
-    [~, ch] = contour3(X, Y, A, prob_opt.ncont);
-    ch.LineColor = 'k';
-end
+% if(prob_opt.flines_on)
+%     hold on
+%     load(files.respth, 'A')
+%     [~, ch] = contour3(X, Y, A, prob_opt.ncont);
+%     ch.LineColor = 'k';
+% end
 colorbar
 shading interp
 view(2)

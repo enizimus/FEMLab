@@ -1,17 +1,20 @@
-function [prob_opt, msh_opt] = problem_info_ui()
+function [prob_opt, msh_opt] = problem_info_ui(files)
 
-% msh_opt = struct('edge', {'circ'}, 'src', {'circ'}); 
-% prob_opt = struct('type', {'axssym'}, 'int', {1}, 'fieldplt', {{'quiv'}});
-
-prompt = {'Problem type : ','Calculation type : ', 'Validation problem : ', 'Mesh boundary : ', 'Field plot :', 'Source type : '};
-dlgtitle = 'coil.msh options';
-dims = [1 35];
-definput = {'axssym', 'int', 'dsad', 'rect', 'quiv', 'rect'};
-answer = inputdlg(prompt,dlgtitle,dims,definput);
-
-prob_opt.type = answer{1};
-prob_opt.int = strcmp(answer{2}, 'int');
-prob_opt.fieldplt = strsplit(strrep(answer{5},' ', ''), ',');
-prob_opt.valid = answer{3};
-msh_opt.edge = answer{4};
-msh_opt.src =  answer{6};
+vars_list = {'prob_opt', 'msh_opt'};
+if(files.f_changed | ~io.check_if_saved(files, vars_list))
+    prompt = {'Problem type : ','Calculation type : ', 'Validation problem : ', 'Mesh boundary : ', 'Source type : '};
+    dlgtitle = 'coil.msh options';
+    dims = [1 35];
+    definput = {'axssym', 'int', 'dsad', 'rect', 'rect'};
+    answer = inputdlg(prompt,dlgtitle,dims,definput);
+    
+    prob_opt.type = answer{1};
+    prob_opt.int = strcmp(answer{2}, 'int');
+    prob_opt.valid = answer{3};
+    msh_opt.edge = answer{4};
+    msh_opt.src =  answer{5};
+    
+    save(files.respth, 'prob_opt', 'msh_opt', '-append')
+else
+    load(files.respth, 'prob_opt', 'msh_opt')
+end
