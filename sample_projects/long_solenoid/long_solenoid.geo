@@ -5,17 +5,17 @@ Point(1) = {0, 0, 0, 1.0};
 //+
 Point(2) = {0, 2, 0, 1.0};
 //+
-Point(3) = {2, 2, 0, 1.0};
+Point(3) = {4, 2, 0, 1.0};
 //+
-Point(4) = {2, 0, 0, 1.0};
+Point(4) = {4, 0, 0, 1.0};
 //+
-Point(5) = {0.5, 0.5, 0, 1.0};
+Point(5) = {0.5, 0.1, 0, 1.0};
 //+
-Point(6) = {0.3, 0.5, 0, 1.0};
+Point(6) = {0.3, 0.1, 0, 1.0};
 //+
-Point(7) = {0.3, 1.5, 0, 1.0};
+Point(7) = {0.3, 1.9, 0, 1.0};
 //+
-Point(8) = {0.5, 1.5, 0, 1.0};
+Point(8) = {0.5, 1.9, 0, 1.0};
 
 //+
 Line(1) = {7, 6};
@@ -33,6 +33,7 @@ Line(6) = {1, 4};
 Line(7) = {4, 3};
 //+
 Line(8) = {3, 2};
+
 //+
 Curve Loop(1) = {8, 5, 6, 7};
 //+
@@ -44,8 +45,8 @@ Curve Loop(3) = {4, 1, 2, 3};
 //+
 Plane Surface(2) = {3};
 //+
-Physical Curve("dirichlet") = {5,6,7,8};
-//+
-Physical Surface("source") = {2};
+Physical Curve("dirichlet") = {8, 5, 6, 7};
 //+
 Physical Surface("air") = {1};
+//+
+Physical Surface("source") = {2};

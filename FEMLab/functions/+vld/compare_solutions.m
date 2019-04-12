@@ -3,6 +3,8 @@ function compare_solutions(files, N, prob_opt, msh_opt, do_print, print_format)
 if(nargin < 6 || isempty(print_format)), print_format = '-dpng'; end
 if(nargin < 5 || isempty(do_print)), do_print = 0; end
 
+load(files.respth, 'xlims', 'ylims')
+
 if(strcmp(prob_opt.type, 'planar'))
     if(strcmp(msh_opt.edge, 'circ'))
         msh_r = 0.5; % radius of circular mesh
@@ -19,7 +21,7 @@ else
     
     xl = linspace(0, 2, N);
     r = xl;
-    yl = ones(size(xl));
+    yl = ones(size(xl))*ylims(2)/2;
 end
 
 B_exact = vld.calc_exact_B(N, xl, yl, r, prob_opt.valid, msh_opt);

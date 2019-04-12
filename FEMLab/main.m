@@ -1,6 +1,6 @@
-% clearvars
-% clc
-% close all
+clearvars
+clc
+close all
 
 addpath('functions')
 
@@ -15,8 +15,9 @@ if(1) %files.f_changed)
     slv.eval_A(files)
 end
 
+gfx.display(files, prob_opt, 'MSH')
 gfx.display(files, prob_opt, 'B', 'quiv')
-gfx.display_potentials(files, 1)
+gfx.display(files, prob_opt, 'B', 'abs')
 
 % % for validation purpose to select circular mesh edge and circular source
 % % % region in the coil examples

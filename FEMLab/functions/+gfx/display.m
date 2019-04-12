@@ -1,7 +1,7 @@
 function display(files, prob_opt, plots, varargin)
 
 % ----- Input parser settings ----------
-validPlots = {'B', 'A'};
+validPlots = {'B', 'A', 'MSH'};
 validTypes = {'abs', 'quiv', 'cont', 'slice'};
 validFormats = {'-dpng' '-depsc'};
 
@@ -43,8 +43,11 @@ prob_opt.print_format = p.Results.printFormat;
 prob_opt.axes_on = p.Results.axesOn;
 prob_opt.flines_on = p.Results.fieldLinesOn;
 
-gfx.display_wrapper(files, prob_opt)
- 
+if(strcmp(plots, 'MSH'))
+    gfx.display_mesh(files, prob_opt)
+else
+    gfx.display_wrapper(files, prob_opt)
+end
 
 
 

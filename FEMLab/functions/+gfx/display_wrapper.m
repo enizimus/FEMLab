@@ -5,6 +5,7 @@ n_opt = length(prob_opt.fieldplt);
 
 for i_opt = 1:n_opt
     option = prob_opt.fieldplt{i_opt};
+    
     switch(option)
         case('abs')
             gfx.disp_abs(files, prob_opt)

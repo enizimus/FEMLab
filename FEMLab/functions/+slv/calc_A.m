@@ -52,6 +52,6 @@ U_unknown = K\R;
 U(u_unknown) = U_unknown;
 U(u_known) = U_known;
 
-save(files.respth, 'elements', 'U', 'K', 'R', 'tri_area', '-append');
+save(files.respth, 'elements', 'U', 'K', 'R', 'tri_area', 'ABCs', '-append');
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end
