@@ -1,6 +1,7 @@
 function disp_quiv(files, prob_opt)
 
-load(files.respth, 'Bx', 'By', 'X', 'Y');
+field = prob_opt.plots;
+load(files.respth, [field 'x'], [field 'y'], 'X', 'Y');
 
 figure
 if(prob_opt.flines_on)
@@ -10,10 +11,10 @@ if(prob_opt.flines_on)
     ch.LineWidth = 1.1;
     hold on
 end
-quiver(X, Y, Bx, By, 'linewidth', 0.9, 'color', 'b')
+quiver(X, Y, eval([field 'x']), eval([field 'y']), 'linewidth', 0.9, 'color', 'b')
 xlabel(prob_opt.labels.x)
 ylabel(prob_opt.labels.y)
-title('B')
+title(field)
 grid on
 xlim([min(X(:)), max(X(:))])
 ylim([min(Y(:)), max(Y(:))])

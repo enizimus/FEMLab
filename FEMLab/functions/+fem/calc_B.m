@@ -26,12 +26,7 @@ function calc_B(files, prob_opt, msh_opt)
 disp('-Calculating magnetic field ...')
 tic
 
-load(files.respth, 'X', 'Y')
-
 slv.calc_tri_B(files, prob_opt)
 slv.calc_tri_point_B(files)
-[B, Bx, By] = slv.eval_B(files, X, Y);
-save(files.respth, 'B', 'Bx', 'By', '-append')
-
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])

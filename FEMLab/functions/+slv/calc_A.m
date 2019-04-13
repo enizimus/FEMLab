@@ -11,7 +11,7 @@ load(files.respth, 'elements', 'regions_c', 'n_nodes', 'n_elements',...
 [tri_x, tri_y] = msh.get_tri_xy(triangles, x, y, n_tri);
 tri_area = util.calc_tri_area(tri_x, tri_y, n_tri);
 ABCs = slv.calc_abcs(tri_x, tri_y, n_tri, a, b, c);
-[params, is_source] = msh.get_elem_params(element_r, regions_c);
+[elem_params, sour_params] = msh.get_elem_params(prob_opt, element_r, regions_c);
 elems = reshape([elements(n_lines+1:end).nodes], [3 n_elements-n_lines])';
 [Uk, Ik] = slv.setup_known_U(elems, n_tri, nodes_prop, regions_c);
 
@@ -24,7 +24,7 @@ for i_el = n_lines+1:n_elements
 
     [tK, tR, tU, tn] = ...
         slv.calc_element_RK(Uk(i_tri,:)', fun_K, fun_R, f_K, f_R, tri_area(i_tri),abc,...
-        tri_x(i_tri,:), tri_y(i_tri,:), params(i_el), is_source(i_el), Ik(i_tri,:));
+        tri_x(i_tri,:), tri_y(i_tri,:), elem_params(i_el), sour_params(i_el), Ik(i_tri,:));
     
     i_N = elements(i_el).nodes(tn);
     

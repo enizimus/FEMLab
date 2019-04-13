@@ -1,7 +1,12 @@
 classdef Regions
     
     properties
+        
+        % constants :
         mu_0 = 1.2566e-06;
+        eps_0 = 8.854187e-12;
+        
+        % containers :
         regs = containers.Map('KeyType', 'char', 'ValueType', 'double');
         def = containers.Map('KeyType', 'char', 'ValueType', 'double');
         reg_map = containers.Map('KeyType', 'double', 'ValueType', 'char');
@@ -14,6 +19,7 @@ classdef Regions
         n_edges = 0;
         n_faces = 0;
         n_items = [0 0];
+        
     end
     
     methods

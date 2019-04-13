@@ -1,7 +1,7 @@
 function display(files, prob_opt, plots, varargin)
 
 % ----- Input parser settings ----------
-validPlots = {'B', 'A', 'MSH'};
+validPlots = {'B', 'A', 'E', 'MSH'};
 validTypes = {'abs', 'quiv', 'cont', 'slice'};
 validFormats = {'-dpng' '-depsc'};
 

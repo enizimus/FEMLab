@@ -1,15 +1,15 @@
-function [B, Bx, By] = eval_B(files, xp, yp)
+function eval_B(files, X, Y)
 
 load(files.respth, 'triangles', 'x', 'y',...
-                    'Bp', 'Bpx', 'Bpy')
+                    'Bp', 'Bpx', 'Bpy', 'X', 'Y')
 
-n_points = size(xp,1)*size(xp,2);
-B = zeros(size(xp));
-Bx = zeros(size(xp));
-By = zeros(size(xp));
+n_points = size(X,1)*size(X,2);
+B = zeros(size(X));
+Bx = zeros(size(X));
+By = zeros(size(X));
 
 TRI = triangulation(triangles, x, y);
-surr_tri = pointLocation(TRI, xp(:), yp(:));
+surr_tri = pointLocation(TRI, X(:), Y(:));
 
 N = slv.get_funs('formarr');
 
@@ -20,9 +20,9 @@ for i_p = 1:n_points
     ytri = y(I);
     ABC = slv.solve_abc(xtri', ytri');
     
-    N_form = N(xp(i_p), yp(i_p), ABC');
+    N_form = N(X(i_p), Y(i_p), ABC');
     B(i_p) = Bp(I)*N_form;
     Bx(i_p) = Bpx(I)*N_form;
     By(i_p) = Bpy(I)*N_form;
 end
-
+save(files.respth, 'B', 'Bx', 'By', '-append')
