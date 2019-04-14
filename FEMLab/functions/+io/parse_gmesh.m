@@ -34,7 +34,7 @@ files = io.generate_files(file_path, file_name);
 f_info = io.read_finfo(files);
 files.f_changed = io.file_changed(files, f_info);
 
-if(1)%files.f_changed)
+if(files.f_changed)
     
     disp('-Parsing gmesh file ...')
     tic

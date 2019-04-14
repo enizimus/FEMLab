@@ -12,6 +12,11 @@ if(type == type1)
         fun_R = @slv.pre_int_R;
     end
 elseif(type == type2)
-    fun_K = @slv.int_tri_K_as;
-    fun_R = @slv.int_tri_R;
+    if(strcmp(prob_opt.class, 'mstatic'))
+        fun_K = @slv.int_tri_K_as;
+        fun_R = @slv.int_tri_R;
+    else
+        fun_K = @slv.int_tri_K_as;
+        fun_R = @slv.int_tri_R;
+    end
 end

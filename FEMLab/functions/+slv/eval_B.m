@@ -1,7 +1,11 @@
 function eval_B(files, X, Y)
 
 load(files.respth, 'triangles', 'x', 'y',...
-                    'Bp', 'Bpx', 'Bpy', 'X', 'Y')
+                    'Bp', 'Bpx', 'Bpy')
+                
+if(nargin < 2 || (isempty(X) && isempty(Y)))
+    load(files.respth, 'X', 'Y')
+end
 
 n_points = size(X,1)*size(X,2);
 B = zeros(size(X));

@@ -75,5 +75,25 @@ else % electrostatic case validation, uniformly charged sphere
     xl = linspace(0, 1, N);
     yl = xl;
     r = sqrt(xl.^2 + yl.^2);
+    
+    E_exact = vld.calc_exact_E(N, r);
+    E_fem = slv.calc_E(files, )
+    
+    figure
+    plot(r, E_exact, 'linewidth', 1.2)
+    hold on
+    grid on
+    plot(r, E_fem, 'linewidth', 1.2)
+    % plot(r, B_ef, 'linewidth', 1.2)
+    title({'Comparison : B field exact values and FEM values', ['N = ', num2str(N)]})
+    xlabel('r')
+    ylabel('|B| [T]')
+    legend('B-Exact', 'B-FEM', 'B-Elefant', 'location', 'eastoutside')
+    xlim([min(r) max(r)])
+    hold off
+    
+    if(do_print)
+        print(files.pltpth_valid1, print_format)
+    end
 end
 

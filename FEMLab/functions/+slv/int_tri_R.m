@@ -14,7 +14,9 @@ I = 0;
 for i_p = 1:n_p
     xv = x(1)*(1-g_data(i_p,1)-g_data(i_p,2))+x(2)*g_data(i_p,1)+x(3)*g_data(i_p,2);
     yv = y(1)*(1-g_data(i_p,1)-g_data(i_p,2))+y(2)*g_data(i_p,1)+y(3)*g_data(i_p,2);
-    I = I + fun(xv, yv, abc, A)*g_data(i_p,3);
+    
+    fv = fun(xv, yv, abc, A);
+    I = I + fv*g_data(i_p,3);
 end
 
 I = f*I*A*2;

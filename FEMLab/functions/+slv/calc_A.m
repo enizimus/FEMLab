@@ -22,7 +22,7 @@ for i_el = n_lines+1:n_elements
     i_tri = i_el-n_lines;
     abc = reshape(ABCs(i_tri,:,:), [3,3]);
 
-    [tK, tR, tU, tn] = ...
+    [tK, tR, tU, tn] = ... % U, fun_K, fun_R, f_K, f_R, A, abc, xe, ye, k1, f, I)
         slv.calc_element_RK(Uk(i_tri,:)', fun_K, fun_R, f_K, f_R, tri_area(i_tri),abc,...
         tri_x(i_tri,:), tri_y(i_tri,:), elem_params(i_el), sour_params(i_el), Ik(i_tri,:));
     

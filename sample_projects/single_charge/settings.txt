@@ -5,5 +5,5 @@ $EndEdges
 $Faces
 2
 air 2 1 0
-source 2 1 1.602e-18
+source 2 1 10e-7
 $EndFaces

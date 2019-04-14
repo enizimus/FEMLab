@@ -28,7 +28,7 @@ switch(lower(prob_opt.class))
     case {'estatic'}
         k_0 = regions_c.eps_0;
         sour_params(is_source) = elem_params(is_source);
-        elem_params(is_source) = 10e4;
+        elem_params(is_source) = 999999999;
         I = ~(is_dir);
         elem_params(I) = elem_params(I)*k_0; 
     case {'mstatic'}
