@@ -71,9 +71,11 @@ lgd = legend([lines_h, tris_h], lgnd, 'location', 'eastoutside',...
     'interpreter', 'none');
 title(lgd, 'Regions : ')
 warning('on','all')
+xlim([min(x(:)), max(x(:))])
+ylim([min(y(:)), max(y(:))])
 
 if(prob_opt.do_print)
-    print(files.pltpth_pot, prob_opt.print_format)
+    print(files.pltpth_pot, prob_opt.print_format, ['-r' num2str(prob_opt.res)])
 end
 
 

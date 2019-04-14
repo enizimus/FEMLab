@@ -1,4 +1,4 @@
-function eval_E(files, X, Y)
+function [E, Ex, Ey] = eval_E(files, X, Y)
 
 load(files.respth, 'triangles', 'x', 'y',...
                     'Ep', 'Epx', 'Epy')
@@ -29,4 +29,4 @@ for i_p = 1:n_points
     Ex(i_p) = Epx(I)*N_form;
     Ey(i_p) = Epy(I)*N_form;
 end
-save(files.respth, 'E', 'Ex', 'Ey', '-append')
+

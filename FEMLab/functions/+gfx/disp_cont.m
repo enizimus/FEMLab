@@ -11,9 +11,12 @@ title(['|' prob_opt.plots '|'])
 ax = gca;
 ax.XTick = [];
 ax.YTick = [];
+xlim([min(X(:)), max(X(:))])
+ylim([min(Y(:)), max(Y(:))])
 
 if(prob_opt.do_print)
-    print(files.pltpth_pot, prob_opt.print_format)
+    plotpath = eval(['files.pltpth_quiv', prob_opt.plots]);
+    print(plotpath, prob_opt.print_format, ['-r' num2str(prob_opt.res)])
 end
 
 end

@@ -29,16 +29,7 @@ tic
 slv.calc_tri_E(files, prob_opt)
 slv.calc_tri_point_E(files)
 
-disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
+[E, Ex, Ey] = slv.eval_E(files);
+save(files.respth, 'E', 'Ex', 'Ey', '-append')
 
-% function calc_E(files, X, Y)
-% 
-% load(files.respth, 'A', 'X', 'Y')
-% 
-% dh = abs(X(1,1)-X(1,2));
-% 
-% [Ex, Ey] = gradient(A, dh);
-% Ex = -Ex;
-% Ey = -Ey;
-% E = sqrt(Ex.^2 + Ey.^2);
-% save(files.respth, 'E', 'Ex', 'Ey', '-append')
+disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])

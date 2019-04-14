@@ -19,7 +19,7 @@ if(type == type1)
     end
 elseif(type == type2)
     
-    if(strcmp(prob_opt.class, 'mstatic')) % magnetostatic rot-sym case
+    if(strcmp(prob_opt.class, 'Mstatic')) % magnetostatic rot-sym case
        
         N = @(abc, r, z) (abc(1) + abc(2)*r + abc(3)*z);
         

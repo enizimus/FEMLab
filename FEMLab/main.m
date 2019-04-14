@@ -1,4 +1,4 @@
-clearvars
+% clearvars
 clc
 % close all
 
@@ -16,10 +16,8 @@ if(files.f_changed)
     
     if(strcmp(prob_opt.class, 'Mstatic'))
         slv.calc_B(files, prob_opt)
-        slv.eval_B(files)
     else
         slv.calc_E(files, prob_opt)
-        slv.eval_E(files)
     end
     
 end
@@ -30,10 +28,10 @@ if(strcmp(prob_opt.class, 'Mstatic'))
 end
 
 gfx.display(files, prob_opt, 'MSH', 'saveplot', true)
-gfx.display(files, prob_opt, field, 'type', 'quiv', 'saveplot', true, 'ncont', 24)
+gfx.display(files, prob_opt, field, 'type', 'quiv', 'saveplot', true)
 gfx.display(files, prob_opt, field, 'type','abs', 'saveplot', true)
 gfx.display_potentials(files)
 
 % % for validation purpose to select circular mesh edge and circular source
 % % % region in the coil examples
-% vld.compare_solutions(files, 1000, prob_opt, msh_opt, 1)
+%vld.compare_solutions(files, 1000, prob_opt, msh_opt, 1)

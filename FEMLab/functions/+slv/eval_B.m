@@ -1,4 +1,4 @@
-function eval_B(files, X, Y)
+function [B, Bx, By] = eval_B(files, X, Y)
 
 load(files.respth, 'triangles', 'x', 'y',...
                     'Bp', 'Bpx', 'Bpy')
@@ -29,4 +29,4 @@ for i_p = 1:n_points
     Bx(i_p) = Bpx(I)*N_form;
     By(i_p) = Bpy(I)*N_form;
 end
-save(files.respth, 'B', 'Bx', 'By', '-append')
+

@@ -10,7 +10,8 @@ defAxesOn = true;
 defPrint = false;
 defFormat = '-dpng';
 defFlineson = true;
-defNCont = 15;
+defNCont = 24;
+defRes = 300;
 
 checkPlots = @(x) any(validatestring(x, validPlots));
 checkTypes = @(x) any(validatestring(x, validTypes));
@@ -26,6 +27,7 @@ addParameter(p, 'saveplot', defPrint, @islogical)
 addParameter(p, 'format', defFormat, checkFormat)
 addParameter(p, 'fieldLinesOn', defFlineson, @islogical)
 addParameter(p, 'nCont', defNCont, @isnumeric)
+addParameter(p, 'res', defRes, @isnumeric)
 
 parse(p, files, prob_opt, plots, varargin{:});
 % ----- End ---------------------------
@@ -42,6 +44,7 @@ prob_opt.do_print = p.Results.saveplot;
 prob_opt.print_format = p.Results.format;
 prob_opt.axes_on = p.Results.axesOn;
 prob_opt.flines_on = p.Results.fieldLinesOn;
+prob_opt.res = p.Results.res;
 
 if(strcmp(plots, 'MSH'))
     gfx.display_mesh(files, prob_opt)
