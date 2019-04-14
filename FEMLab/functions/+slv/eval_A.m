@@ -9,7 +9,7 @@ A = zeros(size(X));
 TRI = triangulation(triangles, x, y);
 surr_tri = pointLocation(TRI, X(:), Y(:));
 
-N = slv.get_funs('formarr');
+N = slv.get_funs('formfun');
 
 for i_p = 1:n_points
     

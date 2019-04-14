@@ -5,9 +5,9 @@ tic
 load(files.respth, 'elements', 'regions_c', 'n_nodes', 'n_elements',...
     'nodes_prop', 'element_r', 'n_tri', 'n_lines', 'triangles', 'x', 'y')
 
-[f_K, f_R] = slv.get_element_fun(prob_opt);
-[fun_K, fun_R] = slv.get_integral_fun(prob_opt);
-[a,b,c] = slv.get_abc_fun();
+[f_K, f_R] = slv.get_funs('element', prob_opt);
+[fun_K, fun_R] = slv.get_funs('quadrature', prob_opt);
+[a,b,c] = slv.get_funs('abc');
 [tri_x, tri_y] = msh.get_tri_xy(triangles, x, y, n_tri);
 tri_area = util.calc_tri_area(tri_x, tri_y, n_tri);
 ABCs = slv.calc_abcs(tri_x, tri_y, n_tri, a, b, c);

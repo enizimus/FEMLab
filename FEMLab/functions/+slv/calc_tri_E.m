@@ -8,7 +8,7 @@ Ecx = zeros(1,n_tri);
 Ecy = zeros(1,n_tri);
 nodes_Ec = zeros(n_tri, 2);
 
-[f_Ex, f_Ey] = slv.get_E_fun(prob_opt);
+[f_Ex, f_Ey] = slv.get_funs('Efield', prob_opt);
 c = 0.333333333333333;
 
 for i_tri = 1:n_tri

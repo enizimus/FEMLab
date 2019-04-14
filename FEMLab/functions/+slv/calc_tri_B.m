@@ -8,7 +8,7 @@ Bcx = zeros(1,n_tri);
 Bcy = zeros(1,n_tri);
 nodes_Bc = zeros(n_tri, 2);
 
-[f_Bx, f_By] = slv.get_B_fun(prob_opt);
+[f_Bx, f_By] = slv.get_funs('Bfield', prob_opt);
 c = 0.333333333333333;
 
 for i_tri = 1:n_tri
