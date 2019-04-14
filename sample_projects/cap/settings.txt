@@ -1,0 +1,10 @@
+$Edges
+1
+dirichlet 1 DRB 0
+$EndEdges
+$Faces
+3
+air 2 1 0
+source1 2 1 -1.602e-10
+source2 2 1 1.602e-10
+$EndFaces

@@ -1,4 +1,4 @@
-function calc_B(files, prob_opt, msh_opt)
+function calc_B(files, prob_opt)
 % CALC_B - Calculates the magnetic field from the previously calculated
 % potentials. First the magnetic field defined in the middle of the
 % triangle is calculated and from those the field in the triangle nodes.

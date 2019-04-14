@@ -1,6 +1,6 @@
 clearvars
 clc
-close all
+% close all
 
 addpath('functions')
 
@@ -15,11 +15,13 @@ if(files.f_changed)
     slv.eval_A(files)
     
     if(strcmp(prob_opt.class, 'Mstatic'))
-        fem.calc_B(files, prob_opt, msh_opt)
+        slv.calc_B(files, prob_opt, msh_opt)
         slv.eval_B(files)
     else
-        slv.calc_E(files)
+        slv.calc_E(files, prob_opt)
+        slv.eval_E(files)
     end
+    
 end
 
 field = 'E';
