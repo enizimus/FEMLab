@@ -1,6 +1,6 @@
-% clearvars
+clearvars
 clc
-% close all
+close all
 
 addpath('functions')
 
@@ -27,10 +27,11 @@ if(strcmp(prob_opt.class, 'Mstatic'))
     field = 'B';
 end
 
+gfx.display(files, prob_opt, 'POT', 'saveplot', true)
 gfx.display(files, prob_opt, 'MSH', 'saveplot', true)
 gfx.display(files, prob_opt, field, 'type', 'quiv', 'saveplot', true)
 gfx.display(files, prob_opt, field, 'type','abs', 'saveplot', true)
-gfx.display_potentials(files)
+
 
 % % for validation purpose to select circular mesh edge and circular source
 % % % region in the coil examples

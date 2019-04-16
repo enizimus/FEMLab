@@ -1,7 +1,7 @@
 function display(files, prob_opt, plots, varargin)
 
 % ----- Input parser settings ----------
-validPlots = {'B', 'A', 'E', 'MSH'};
+validPlots = {'B', 'A', 'E', 'MSH' 'POT'};
 validTypes = {'abs', 'quiv', 'cont', 'slice'};
 validFormats = {'-dpng' '-depsc'};
 
@@ -11,7 +11,7 @@ defPrint = false;
 defFormat = '-dpng';
 defFlineson = true;
 defNCont = 24;
-defRes = 300;
+defRes = 200;
 
 checkPlots = @(x) any(validatestring(x, validPlots));
 checkTypes = @(x) any(validatestring(x, validTypes));
@@ -48,6 +48,8 @@ prob_opt.res = p.Results.res;
 
 if(strcmp(plots, 'MSH'))
     gfx.display_mesh(files, prob_opt)
+elseif(strcmp(plots, 'POT'))
+    gfx.display_potentials(files)
 else
     gfx.display_wrapper(files, prob_opt)
 end
