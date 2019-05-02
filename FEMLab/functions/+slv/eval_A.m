@@ -1,6 +1,6 @@
 function eval_A(files)
 
-load(files.respth, 'triangles', 'x', 'y', 'U',...
+load(files.respth, 'triangles', 'x', 'y', 'Ap',...
     'X', 'Y')
 
 n_points = size(X,1)*size(X,2);
@@ -19,7 +19,7 @@ for i_p = 1:n_points
     ABC = slv.solve_abc(xtri', ytri');
     
     N_form = N(X(i_p), Y(i_p), ABC');
-    A(i_p) = U(I)'*N_form;
+    A(i_p) = Ap(I)'*N_form;
 end
 
 save(files.respth, 'A', '-append')

@@ -1,6 +1,6 @@
 function calc_tri_E(files, prob_opt)
 
-load(files.respth, 'U', 'triangles', 'nodes', 'n_nodes', 'ABCs')
+load(files.respth, 'Ap', 'triangles', 'nodes', 'n_nodes', 'ABCs')
 
 n_tri = length(triangles);
 Ec = zeros(1,n_tri);
@@ -18,8 +18,8 @@ for i_tri = 1:n_tri
     ABC = slv.solve_abc(x,y);
     nodes_Ec(i_tri, :) = [sum(x)*c, sum(y)*c];
     
-    cEy = f_Ey(U(triangles(i_tri,:)), ABC, nodes_Ec(i_tri, 1), nodes_Ec(i_tri, 2));
-    cEx = f_Ex(U(triangles(i_tri,:)), ABC);
+    cEy = f_Ey(Ap(triangles(i_tri,:)), ABC, nodes_Ec(i_tri, 1), nodes_Ec(i_tri, 2));
+    cEx = f_Ex(Ap(triangles(i_tri,:)), ABC);
     
     Ecx(i_tri) = cEx;
     Ecy(i_tri) = cEy;

@@ -1,13 +1,13 @@
 // Gmsh project created on Wed Apr 03 21:17:37 2019
 SetFactory("OpenCASCADE");
 //+
-Point(1) = {-2, -2, 0, 1.0};
+Point(1) = {-3, -3, 0, 1.0};
 //+
-Point(2) = {-2, 2, 0, 1.0};
+Point(2) = {-3, 3, 0, 1.0};
 //+
-Point(3) = {2, 2, 0, 1.0};
+Point(3) = {3, 3, 0, 1.0};
 //+
-Point(4) = {2, -2, 0, 1.0};
+Point(4) = {3, -3, 0, 1.0};
 //+
 Point(5) = {0, 0, 0, 1.0};
 //+

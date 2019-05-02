@@ -9,6 +9,8 @@ for i_opt = 1:n_opt
     switch(option)
         case('abs')
             gfx.disp_abs(files, prob_opt)
+        case('abstri')
+            gfx.disp_abstri(files, prob_opt)
         case('quiv')
             gfx.disp_quiv(files, prob_opt)
         case('slice')

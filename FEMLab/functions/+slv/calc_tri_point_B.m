@@ -1,11 +1,10 @@
 function calc_tri_point_B(files)
 
-load(files.respth, 'U', 'triangles', 'nodes', 'n_nodes', ...
+load(files.respth, 'triangles', 'nodes', 'n_nodes', ...
     'Bc', 'Bcx', 'Bcy', 'nodes_Bc', 'tri_area')
 
 c_mat = msh.make_connect_mat(triangles, n_nodes);
 
-%Bp = zeros(1, n_nodes);
 Bpx = zeros(1, n_nodes);
 Bpy = zeros(1, n_nodes);
 

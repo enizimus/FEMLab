@@ -7,7 +7,6 @@ load(files.respth, 'elements', 'regions_c', 'n_nodes', 'n_elements',...
 
 [f_K, f_R] = slv.get_funs('element', prob_opt);
 [fun_K, fun_R] = slv.get_funs('quadrature', prob_opt);
-% [a,b,c] = slv.get_funs('abc');
 [tri_x, tri_y] = msh.get_tri_xy(triangles, x, y, n_tri);
 tri_area = util.calc_tri_area(tri_x, tri_y, n_tri);
 ABCs = slv.calc_abcs(tri_x, tri_y, n_tri, tri_area);
@@ -37,7 +36,7 @@ for i_el = n_lines+1:n_elements
     
 end
 
-U = zeros(n_nodes, 1);
+Ap = zeros(n_nodes, 1);
 
 I = any(K,2);
 u_unknown = I;
@@ -49,9 +48,9 @@ K = K(:,I);
 
 U_known = slv.get_known_U(u_known, regions_c);
 U_unknown = K\R;
-U(u_unknown) = U_unknown;
-U(u_known) = U_known;
+Ap(u_unknown) = U_unknown;
+Ap(u_known) = U_known;
 
-save(files.respth, 'elements', 'U', 'K', 'R', 'tri_area', 'ABCs', '-append');
+save(files.respth, 'elements', 'Ap', 'K', 'R', 'tri_area', 'ABCs', '-append');
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end

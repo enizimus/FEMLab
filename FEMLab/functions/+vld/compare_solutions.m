@@ -27,46 +27,52 @@ if(strcmp(prob_opt.class, 'Mstatic'))
     
     B_exact = vld.calc_exact_B(N, xl, yl, r, prob_opt.valid, msh_opt);
     [B_fem,~,~] = slv.eval_B(files, xl, yl);
-%     B_ef = vld.get_elefant_B('long_solenoid_0515');
+    %     B_ef = vld.get_elefant_B('long_solenoid_0515');
     
-%     abserr_fem = abs(B_exact - B_fem);%./B_exact * 100;
-%     abserr_elf = abs(B_exact - B_ef);
-%     
-%     errsum_fem = sum(abserr_fem);
-%     errsum_elf = sum(abserr_elf);
+    %     abserr_fem = abs(B_exact - B_fem);%./B_exact * 100;
+    %     abserr_elf = abs(B_exact - B_ef);
+    %
+    %     errsum_fem = sum(abserr_fem);
+    %     errsum_elf = sum(abserr_elf);
+    
+    rel_err = abs(B_exact - B_fem);%./max(B_exact, B_fem)*100;
     
     figure
+    subplot(2,1,1)
     plot(r, B_exact, 'linewidth', 1.2)
     hold on
     grid on
     plot(r, B_fem, 'linewidth', 1.2)
-%     plot(r, B_ef, 'linewidth', 1.2)
+    %     plot(r, B_ef, 'linewidth', 1.2)
     title({'Comparison : B field exact values and FEM values', ['N = ', num2str(N)]})
     xlabel('r')
     ylabel('|B| [T]')
-    legend('B-Exact', 'B-FEM', 'B-Elefant', 'location', 'eastoutside')
-    xlim([min(r) max(r)])
+    legend('B-Exact', 'B-FEM', 'B-Elefant')%, 'location', 'eastoutside')
+    xlim([min(r) 1])
     hold off
     
-    if(do_print)
-        print(files.pltpth_valid1, print_format)
-    end
+%     if(do_print)
+%         print(files.pltpth_valid1, print_format, '-r300')
+%     end
     
 %     figure
-%     plot(r, abserr_fem, 'linewidth', 1.2);
+subplot(2,1,2)
+    plot(r, rel_err, 'linewidth', 1.2);
 %     hold on
-%     grid on
+    grid on
 %     plot(r, abserr_elf, 'linewidth', 1.2);
-%     title({'Relative error between the exact field and the FEM values', ''})
-%     xlabel('r')
-%     ylabel('Error [%]')
-%     xlim([min(r) max(r)])
-%     legend(['B-FEM errsum = ' num2str(errsum_fem)],...
-%         ['B-Elefant errsum = ' num2str(errsum_elf)])
-%     hold off
-%     if(do_print)
-%         print(files.pltpth_valid2, print_format)
-%     end
+    title({'Absolute error between the exact field and the FEM values', ''})
+    xlabel('r')
+    ylabel('Error [T]')
+    xlim([min(r) 1])
+%     legend(['B-FEM errsum = ' num2str(errsum)]) % ['B-Elefant errsum = ' num2str(errsum_elf)]
+    hold off
+    
+    set(gcf,'Position',[744 495 777 555])
+    
+    if(do_print)
+        print(files.pltpth_valid2, '-dpng', '-r300')
+    end
     
     
     
@@ -93,7 +99,7 @@ else % electrostatic case validation, uniformly charged sphere
     hold off
     
     if(do_print)
-        print(files.pltpth_valid1, print_format)
+        print(files.pltpth_valid1, print_format, '-r300')
     end
 end
 
