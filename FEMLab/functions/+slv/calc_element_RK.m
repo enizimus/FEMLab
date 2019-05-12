@@ -5,16 +5,6 @@ i_n = 1:3;
 i_n(i_k) = [];
 if(isempty(i_k)), i_k = 1; end
 
-% mu_0 = 1.2566e-06; %regions_c.mu_0;
-% 
-% if(is_sour) %if region is source
-%     f = m; % rho (Estatic), J (Mstatic)
-%     k1 = 1/mu_0; % \mu of copper of source
-% else
-%     f = 0;
-%     k1 = 1/(m*mu_0); % 1/(mu_r * mu_0)
-% end
-
 k = [k1 k1];
 
 K = zeros(3,3);

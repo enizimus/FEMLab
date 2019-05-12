@@ -1,6 +1,6 @@
 clearvars
 clc
-% close all
+close all
 
 addpath('functions')
 
@@ -27,15 +27,16 @@ if(strcmp(prob_opt.class, 'Mstatic'))
     field = 'B';
 end
 
+slv.calc_W(files, prob_opt, 1:4)
+
 gfx.display(files, prob_opt, 'MSH', 'saveplot', true)
-gfx.display(files, prob_opt, field, 'type', 'quiv', 'saveplot', true, 'axeson', false, 'format', '-depsc')
-gfx.display(files, prob_opt, field, 'type','abs', 'saveplot', true)
+gfx.display(files, prob_opt, 'B', 'type', 'quiv', 'saveplot', true, 'axeson', false, 'format', '-depsc')
 gfx.display(files, prob_opt, 'B', 'type', 'abstri', 'saveplot', true)
 gfx.display(files, prob_opt, 'B', 'type', 'abs', 'saveplot', true)
 gfx.display(files, prob_opt, 'A', 'type', 'abstri', 'saveplot', true)
 gfx.display(files, prob_opt, 'A', 'type', 'abs', 'saveplot', true)
 
 
-% % for validation purpose to select circular mesh edge and circular source
-% % % region in the coil examples
-% vld.compare_solutions(files, 1000, prob_opt, msh_opt, 1)
+% for validation purpose to select circular mesh edge and circular source
+% region in the coil examples
+% vld.compare_solutions(file s, 1000, prob_opt, msh_opt, 1)
