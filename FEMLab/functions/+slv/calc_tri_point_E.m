@@ -1,6 +1,6 @@
 function calc_tri_point_E(files)
 
-load(files.respth, 'U', 'triangles', 'nodes', 'n_nodes', ...
+load(files.respth, 'triangles', 'nodes', 'n_nodes', ...
     'Ec', 'Ecx', 'Ecy', 'nodes_Ec', 'tri_area')
 
 c_mat = msh.make_connect_mat(triangles, n_nodes);

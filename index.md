@@ -7,3 +7,10 @@ FEMLab is a Matlab tool for numerical calculation of electromagnetic fields empl
 The current version is capable of handling :
 - Electrostatic problems (planar and axissymmetric)
 - Magnetostatic problems (planar and axissymmetric)
+
+For every of the problem types the software will calculate :
+- The vector potential A
+- The Field vector
+- The Energy
+
+## Examples

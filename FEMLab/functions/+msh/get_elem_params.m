@@ -24,19 +24,17 @@ for i_reg = 1:n_reg
     elem_params(I) = key_param(i_reg);
 end
 
+sour_params(is_source) = elem_params(is_source);
+elem_params(is_source) = 1;
+I = ~(is_dir);
+
 switch(lower(prob_opt.class))
     case {'estatic'}
         k_0 = regions_c.eps_0;
-        sour_params(is_source) = elem_params(is_source);
-        elem_params(is_source) = 1;%999999999;
-        I = ~(is_dir);
-        elem_params(I) = elem_params(I)*k_0; 
+        elem_params(I) = elem_params(I)*k_0; % = eps
     case {'mstatic'}
         k_0 = regions_c.mu_0;
-        sour_params(is_source) = elem_params(is_source);
-        elem_params(is_source) = 1;
-        I = ~(is_dir);
-        elem_params(I) = 1./(elem_params(I)*k_0);
+        elem_params(I) = 1./(elem_params(I)*k_0); % = 1/mu
 end
 
 
