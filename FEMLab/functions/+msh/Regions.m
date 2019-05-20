@@ -163,5 +163,27 @@ classdef Regions
             
         end
         
+        function [nums, strs] = get_region_ids(obj)
+            nums = keys(obj.reg_map);
+            strs = values(obj.reg_map);
+        end
+        
+        function show_regions(obj)
+            [nums, strs] = get_region_ids(obj);
+            disp('----- Regions and codes -----')
+            cellfun(@(x,y) disp([x ' [ ' num2str(y) ' ] ']), strs, nums)
+            disp('-----------------------------')
+        end
+        
+        function comb = get_combined_keys(obj)
+            n_items = obj.n_items;
+            [rkeys, comb] = get_region_ids(obj);
+            
+            for i_item = 1:sum(n_items)
+                comb{i_item} = [comb{i_item} ' (' num2str(rkeys{i_item}) ')'];
+            end
+            
+        end
+        
     end
 end

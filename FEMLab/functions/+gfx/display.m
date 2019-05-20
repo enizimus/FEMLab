@@ -11,7 +11,7 @@ defPrint = false;
 defFormat = '-dpng';
 defFlineson = true;
 defNCont = 24;
-defRes = 200;
+defRes = 300;
 
 checkPlots = @(x) any(validatestring(x, validPlots));
 checkTypes = @(x) any(validatestring(x, validTypes));

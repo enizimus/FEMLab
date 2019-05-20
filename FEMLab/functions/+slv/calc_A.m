@@ -51,6 +51,11 @@ U_unknown = K\R;
 Ap(u_unknown) = U_unknown;
 Ap(u_known) = U_known;
 
+% figure;surface(1:size(K,1),size(K,1):-1:1,K,K);colormap(util.bluewhitered);shading flat 
+% eigenvals = eig(full(K));
+% condition_number = max(abs(eigenvals))/min(abs(eigenvals));
+% disp(['Condition Number: ',num2str(condition_number)]);
+
 save(files.respth, 'elements', 'Ap', 'K', 'R', 'tri_area', 'ABCs', '-append');
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
 end

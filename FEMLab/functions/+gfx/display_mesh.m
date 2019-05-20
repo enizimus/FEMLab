@@ -29,7 +29,7 @@ load(files.respth, 'regions_c', 'element_r', 'x', 'y', ...
 warning('off','all')
 n_items = regions_c.n_items;
 rkeys = regions_c.get_regions_keys('num');
-lgnd = regions_c.get_regions_keys('str');
+lgnd = regions_c.get_combined_keys;
 
 figure
 hold on;

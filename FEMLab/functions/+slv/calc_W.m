@@ -26,7 +26,7 @@ else
     int_W = slv.get_funs('Wint');
     fun_W = slv.get_funs('W');
     W = 0;
-    for i_index = 1:n_elems
+    for i_index = 1:length(region_index)
         i_elem = region_index(i_index);
         W = W + int_W(X(i_elem), tri_area(i_elem), elem_params(i_elem), x(triangles(i_elem,:)), fun_W);
     end

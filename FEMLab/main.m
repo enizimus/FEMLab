@@ -24,14 +24,14 @@ end
 
 prob_opt.field = def.get_field(prob_opt.class);
 
-slv.calc_W(files, prob_opt, 1:4)
+slv.calc_W(files, prob_opt, 1:3)
 
-gfx.display(files, prob_opt, 'MSH')
-gfx.display(files, prob_opt, prob_opt.field, 'type', 'quiv', 'axeson', false, 'format', '-depsc')
-gfx.display(files, prob_opt, prob_opt.field, 'type', 'abstri')
-gfx.display(files, prob_opt, prob_opt.field, 'type', 'abs')
-gfx.display(files, prob_opt, 'A', 'type', 'abstri')
-gfx.display(files, prob_opt, 'A', 'type', 'abs')
+gfx.display(files, prob_opt, 'MSH', 'saveplot', true)
+gfx.display(files, prob_opt, prob_opt.field, 'type', 'quiv', 'saveplot', true)
+gfx.display(files, prob_opt, prob_opt.field, 'type', 'abstri', 'saveplot', true)
+gfx.display(files, prob_opt, prob_opt.field, 'type', 'abs', 'saveplot', true)
+gfx.display(files, prob_opt, 'A', 'type', 'abstri', 'saveplot', true)
+gfx.display(files, prob_opt, 'A', 'type', 'abs', 'saveplot', true)
 
 
 % for validation purpose to select circular mesh edge and circular source
