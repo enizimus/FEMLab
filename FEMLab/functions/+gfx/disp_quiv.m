@@ -25,7 +25,7 @@ if(~prob_opt.axes_on)
     ax.YTick = [];
 end
 
-set(gca,'visible','off')
+% set(gca,'visible','off')
 
 if(prob_opt.do_print)
     plotpath = eval(['files.pltpth_quiv', prob_opt.plots]);

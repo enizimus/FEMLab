@@ -24,10 +24,10 @@ end
 
 prob_opt.field = def.get_field(prob_opt.class);
 
-slv.calc_W(files, prob_opt, 1:3)
+slv.calc_W(files, prob_opt, 1:4)
 
 gfx.display(files, prob_opt, 'MSH', 'saveplot', true)
-gfx.display(files, prob_opt, prob_opt.field, 'type', 'quiv', 'saveplot', true)
+gfx.display(files, prob_opt, prob_opt.field, 'type', 'quiv',  'saveplot', true)
 gfx.display(files, prob_opt, prob_opt.field, 'type', 'abstri', 'saveplot', true)
 gfx.display(files, prob_opt, prob_opt.field, 'type', 'abs', 'saveplot', true)
 gfx.display(files, prob_opt, 'A', 'type', 'abstri', 'saveplot', true)
