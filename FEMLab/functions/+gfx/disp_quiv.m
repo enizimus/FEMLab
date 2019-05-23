@@ -24,9 +24,7 @@ if(~prob_opt.axes_on)
     ax.XTick = [];
     ax.YTick = [];
 end
-
 % set(gca,'visible','off')
-
 if(prob_opt.do_print)
     plotpath = eval(['files.pltpth_quiv', prob_opt.plots]);
     print(plotpath, prob_opt.print_format, ['-r' num2str(prob_opt.res)])
