@@ -32,8 +32,14 @@ else
     end
     W = W*2*pi;
 end
-
 disp(['W = ' num2str(W)])
+
+% R = 0.001;
+% A_sour = R^2*pi;
+% J = regions_c.get_param('source');
+% I = A_sour*J;
+% L = 2*W/(I^2);
+% disp(['L = ' num2str(L)])
 
 save(files.respth, 'W', '-append')
 

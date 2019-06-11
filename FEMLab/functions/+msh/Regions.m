@@ -156,7 +156,7 @@ classdef Regions
                         param(i) = obj.regs(obj.reg_map(key(i)));
                     end
                 end
-            elseif(isstring(key) && isKey(obj.regs, key))
+            elseif(ischar(key) && isKey(obj.regs, key))
                 param = obj.regs(key);
             end
             

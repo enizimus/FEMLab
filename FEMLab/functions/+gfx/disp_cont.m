@@ -3,16 +3,20 @@ function disp_cont(files, prob_opt)
 load(files.respth, prob_opt.plots, 'X', 'Y');
 
 figure
-contour(X, Y, eval(prob_opt.plots), prob_opt.ncont);
+contourf(X, Y, eval(prob_opt.plots), prob_opt.ncont);
 colorbar
 xlabel(prob_opt.labels.x)
 ylabel(prob_opt.labels.y)
 title(['|' prob_opt.plots '|'])
-ax = gca;
-ax.XTick = [];
-ax.YTick = [];
+
 xlim([min(X(:)), max(X(:))])
 ylim([min(Y(:)), max(Y(:))])
+
+if(~prob_opt.axes_on)
+    ax = gca;
+    ax.XTick = [];
+    ax.YTick = [];
+end
 
 if(prob_opt.do_print)
     plotpath = eval(['files.pltpth_quiv', prob_opt.plots]);

@@ -24,16 +24,13 @@ end
 
 prob_opt.field = def.get_field(prob_opt.class);
 
-slv.calc_W(files, prob_opt, 1:3)
+slv.calc_W(files, prob_opt, 1:4)
 
 gfx.display(files, prob_opt, 'MSH', 'saveplot', true)
-gfx.display(files, prob_opt, prob_opt.field, 'type', 'quiv', 'saveplot', true)
+gfx.display(files, prob_opt, prob_opt.field, 'type', 'quiv',  'saveplot', true)
 gfx.display(files, prob_opt, prob_opt.field, 'type', 'abstri', 'saveplot', true)
 gfx.display(files, prob_opt, prob_opt.field, 'type', 'abs', 'saveplot', true)
 gfx.display(files, prob_opt, 'A', 'type', 'abstri', 'saveplot', true)
 gfx.display(files, prob_opt, 'A', 'type', 'abs', 'saveplot', true)
-
-
-% for validation purpose to select circular mesh edge and circular source
-% region in the coil examples
-% vld.compare_solutions(files, 1000, prob_opt, msh_opt, 1)
+gfx.display(files, prob_opt, 'E', 'type', 'flines', 'ncont', 20)
+gfx.display(files, prob_opt, 'E', 'type', 'slice')

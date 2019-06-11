@@ -17,5 +17,7 @@ for i_opt = 1:n_opt
             gfx.disp_slice(files, prob_opt)
         case('cont')
             gfx.disp_cont(files, prob_opt)
+        case{'flines'}
+            gfx.disp_flines(files, prob_opt)
     end
 end
