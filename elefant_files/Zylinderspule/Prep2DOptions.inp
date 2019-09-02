@@ -1,0 +1,25 @@
+           1   !  flagPlot
+           0   !  flagPlotStructure
+           0   !  flagPlotFB
+           1   !  flagPlotFE
+           1   !  flagPlotBC
+           1   !  flagPlotMat
+           1   !  flagPlotQ
+           1   !  iFarbStructure
+           2   !  iSStrStructure
+           1   !  iFarbGrid
+           1   !  iSStrGrid
+           1   !  iLineStyleGrid
+           2   !  iFarbME
+           1   !  iSStrME
+           1   !  iLineStyleME
+          10   !  iFarbFE
+           1   !  iSStrFE
+           1   !  iLineStyleFE
+           4   !  nPoly
+           5   !  Farbe Randbedingungen
+           2   !  Strichstaerke Dir. BC
+           7   !  Farbe Material
+           2   !  Farbe Quellen
+           2   !  Strichstaerke Quellen
+           8   !  Farbe leitfaehige Bereiche

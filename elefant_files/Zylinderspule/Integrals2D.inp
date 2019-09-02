@@ -1,0 +1,9 @@
+           1  ! 0/1=Surface/Volume Integral
+           1  ! Integrale Groesse
+           1  ! lSelectedDomainItem
+ 'Material01                                                              '
+           0  ! lLoopItem
+           0  ! lCoilLoopItem
+           0  ! lMEEdgeItem
+           0  ! lCylindricalSurfaceItem
+  6.770062969207599E-318  0.000000000000000E+000  ! dummy

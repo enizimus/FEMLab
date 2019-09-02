@@ -1,0 +1,7 @@
+           9  ! Total current given
+  0.1000000      0.1000000      ! average and max. material variation
+   1.000000      ! delta_I
+   1000000.      ! J_test for all conductors
+  0.4000000               0  ! initial weighting factor, type of weighting
+   1.000000      ! weighting factor for J_test
+           0    ! flagPer; 0/1=nein/ja

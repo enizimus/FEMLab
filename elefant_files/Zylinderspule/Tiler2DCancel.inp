@@ -1,0 +1,86 @@
+        1600  ! VersionNumber*1000
+ 'Problem001                                                              '
+ '                                                                        '
+ '                                                                        '
+  0.000000000000000E+000  0.000000000000000E+000  ! origin shift (x,y)
+           1  ! problem type
+           0  ! 0/1=plane/axisymetric geometry
+           5  ! number gridelements horizontal
+           5  ! number gridelements vertical
+  0.000000000000000E+000   ! Xlu
+  0.000000000000000E+000   ! Ylu
+  1.000000000000000E-002   ! DeltaX 1
+  1.000000000000000E-002
+  1.000000000000000E-002
+  1.000000000000000E-002
+  1.000000000000000E-002
+  1.000000000000000E-002   ! DeltaY 1
+  1.000000000000000E-002
+  1.000000000000000E-002
+  1.000000000000000E-002
+  1.000000000000000E-002
+  0.500000000000000        ! AnzugsfaktorX 1
+  0.500000000000000     
+  0.500000000000000     
+  0.500000000000000     
+  0.500000000000000     
+  0.500000000000000        ! AnzugsfaktorY 1
+  0.500000000000000     
+  0.500000000000000     
+  0.500000000000000     
+  0.500000000000000     
+           3   ! UnterteilungX 1
+           3
+           3
+           3
+           3
+           3   ! UnterteilungY 1
+           3
+           3
+           3
+           3
+           0   ! lMovedGridLines
+           0   ! lRotatedGridLines
+           0   ! lMovedGridRegions
+           0   ! lRotatedGridRegions
+           0   ! Anzahl der DeleteItems
+           0           0           0           0   ! flagFarBoundary
+           0   ! flagFarBCircle
+          10  0.500000000000000        ! factorFarBDistance, distanceFarB
+           3           5   ! FE sub divison far boundary
+  0.350000000000000       0.350000000000000        ! shift factor far boundary
+           1   ! 1/0 = ferner rand isotrop/anisotrop
+   1.00000000000000       1.000000000000000E+035  0.000000000000000E+000
+  0.000000000000000E+000
+           1    ! enableMatFB
+           0   ! 0/1=Mat linear/nichtlinear
+           1           1   ! kennlinie easy  kennlinie hard
+           0   ! lCircleItem
+           0  ! lHalfCircleItem
+           0  ! lQuarterCircleItem
+           0   ! lOvalItem
+           0   ! lRoundedItem
+           0   ! lSpecialRoundedItem
+           0   ! lLargeCircleItem
+           0   ! lKalotteItem
+           0   ! lRingItem
+           0  ! lCRing1Item
+           0   ! dummy für weiteres special object
+           0   ! dummy für weiteres special object
+           0   ! dummy für weiteres special object
+           0   ! dummy für weiteres special object
+           0   ! dummy für weiteres special object
+           0   ! DirBC 1
+  0.000000000000000E+000  0.000000000000000E+000   ! Value,Phase/TimeFunc. down
+           0   ! DirBC 2
+  0.000000000000000E+000  0.000000000000000E+000   ! Value,Phase/TimeFunc. right
+           0   ! DirBC 3
+  0.000000000000000E+000  0.000000000000000E+000   ! Value,Phase/TimeFunc. up
+           0   ! DirBC 4
+  0.000000000000000E+000  0.000000000000000E+000   ! Value,Phase/TimeFunc. left
+           0           0           0           0  ! periodic/aperiodic BC1-BC4
+           0   ! lSpecialBCItem
+           0   ! lMaterialItem
+   50.0000000000000        ! Frequenz
+           0   ! lSourceItem
+           0  ! regions for integration

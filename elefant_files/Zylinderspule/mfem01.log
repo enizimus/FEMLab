@@ -1,0 +1,19 @@
+****** Input of Macroelement Structure ******
+ 
+ ANZAHL DER FINITEN ELEMENTE : 9369
+ HOECHSTE KNOTENNUMMER : 41752
+ HOECHSTE KNOTENNUMMER RENUMERIERT : 28480
+ 
+****** Input of Boundary Conditions ******
+ 
+****** Input of Materials ******
+ 
+****** Input of Sources ******
+
+****** MFEM01: Solution - Front solver - linear ******
+ 
+Frontwidth:     262
+ 
+ Macroelement  1057  von  1057 Macroelements
+
+ Rechenzeit :     0.609 sec
