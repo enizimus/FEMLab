@@ -31,11 +31,11 @@
            1  ! 30) isstrli
            1  ! 31) ifarbli
   0.0000000E+00  ! 32) linienwert-anfang
-  4.1191300E-10  ! 33) linienwert-ende
+  4.1755224E-10  ! 33) linienwert-ende
            1  ! 34) ifaplot
            3  ! 35) ieinfa
-  1.1236146E-11  ! 36) fhi-wert-anfang
-  4.3784727E-05  ! 37) fhi-wert-ende
+  1.0255911E-11  ! 36) fhi-wert-anfang
+  4.2902877E-05  ! 37) fhi-wert-ende
           24  ! 38) lfarben
            0  ! 39) isubj
   0.0000000E+00  ! 40) xlus

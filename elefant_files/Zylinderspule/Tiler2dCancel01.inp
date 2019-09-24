@@ -5,7 +5,7 @@
   0.000000000000000E+000  0.000000000000000E+000
            3
            1
-          30
+          31
           25
   0.000000000000000E+000   ! Xlu
   0.000000000000000E+000   ! Ylu
@@ -14,6 +14,7 @@
   1.000000000000000E-003
   1.000000000000000E-003
   1.000000000000000E-003
+  2.000000000000000E-004
   2.000000000000000E-003
   1.000000000000000E-003
   1.000000000000000E-003
@@ -44,27 +45,28 @@
   1.000000000000000E-003
   1.000000000000000E-003
   1.000000000000000E-003
-  1.000000000000000E-003
-  1.000000000000000E-003
+  1.500000000000000E-003
+  1.750000000000000E-003
   2.000000000000000E-003
-  1.000000000000000E-003
+  5.000000000000000E-004
   2.000000000000000E-003
-  1.000000000000000E-003
+  5.000000000000000E-004
   2.000000000000000E-003
-  1.000000000000000E-003
+  5.000000000000000E-004
   2.000000000000000E-003
-  1.000000000000000E-003
+  5.000000000000000E-004
   2.000000000000000E-003
-  1.000000000000000E-003
+  5.000000000000000E-004
   2.000000000000000E-003
-  1.000000000000000E-003
-  1.000000000000000E-003
+  1.750000000000000E-003
+  1.500000000000000E-003
   1.000000000000000E-003
   1.000000000000000E-003
   1.000000000000000E-003
   1.000000000000000E-003
   1.000000000000000E-003
   0.500000000000000        ! AnzugsfaktorX 1
+  0.500000000000000     
   0.500000000000000     
   0.500000000000000     
   0.500000000000000     
@@ -124,6 +126,7 @@
            3
            3
            3
+           1
            6
            3
            3
@@ -154,8 +157,8 @@
            3
            3
            3
-           3
-           3
+           4
+           5
            6
            3
            6
@@ -167,8 +170,8 @@
            6
            3
            6
-           3
-           3
+           5
+           4
            3
            3
            3
@@ -188,15 +191,160 @@
            1    ! enableMatFB
            0   ! 0/1=Mat linear/nichtlinear
            1           1   ! kennlinie easy  kennlinie hard
-           1   ! lCircleItem
+           6   ! lCircleItem
  'CircleObject001'
            1  ! EnableCircle
-           6           8  ! gitter
+           7           8  ! gitter
            1           1  ! EnableInner/OuterRegion
            1  ! anzahl der kreise
  'Region01'
  '' ! ConductorName
-  9.000000000000000E-004  6.000000000000000E-003  8.000000000000000E-003
+  9.000000000000000E-004  6.200000000000000E-003  9.250000000000000E-003
+           3  0.500000000000000       ! unt/anzf-kreisregionen
+           1  ! EnableMatCircle
+   1.00000000000000       1.000000000000000E+035  0.000000000000000E+000
+  0.000000000000000E+000
+   1.00000000000000         ! Stacking factor
+           0    ! linear/nichtlinear
+           1           1    ! kennliniennummern
+           1  ! EnableQCircle Region
+           1  ! flagTotalCurrent
+           0  ! flagMassiveConductor
+  1.000000000000000E-002  0.000000000000000E+000  ! volume source
+  0.000000000000000E+000  0.000000000000000E+000  ! dummy applied voltage
+           0  ! multiconductor enabled
+           0  ! multiconductor type
+           0  ! dummy coil number
+  0.000000000000000E+000  0.000000000000000E+000  ! total current
+           2  0.500000000000000       ! unt/anzf-innerster kreis
+           0           0  ! EnableBCCircle
+           1           1           0  ! BCType1,BCType2 (1/2=V/Q given),dummy
+  0.000000000000000E+000  0.000000000000000E+000  0.000000000000000E+000
+  0.000000000000000E+000  ! BCCircle (Value1,Phase/TF1,Value2,Phase/TF2)
+ 'CircleObject002'
+           1  ! EnableCircle
+           7          10  ! gitter
+           1           1  ! EnableInner/OuterRegion
+           1  ! anzahl der kreise
+ 'Region01'
+ '' ! ConductorName
+  9.000000000000000E-004  6.200000000000000E-003  1.175000000000000E-002
+           3  0.500000000000000       ! unt/anzf-kreisregionen
+           1  ! EnableMatCircle
+   1.00000000000000       1.000000000000000E+035  0.000000000000000E+000
+  0.000000000000000E+000
+   1.00000000000000         ! Stacking factor
+           0    ! linear/nichtlinear
+           1           1    ! kennliniennummern
+           1  ! EnableQCircle Region
+           1  ! flagTotalCurrent
+           0  ! flagMassiveConductor
+  1.000000000000000E-002  0.000000000000000E+000  ! volume source
+  0.000000000000000E+000  0.000000000000000E+000  ! dummy applied voltage
+           0  ! multiconductor enabled
+           0  ! multiconductor type
+           0  ! dummy coil number
+  0.000000000000000E+000  0.000000000000000E+000  ! total current
+           2  0.500000000000000       ! unt/anzf-innerster kreis
+           0           0  ! EnableBCCircle
+           1           1           0  ! BCType1,BCType2 (1/2=V/Q given),dummy
+  0.000000000000000E+000  0.000000000000000E+000  0.000000000000000E+000
+  0.000000000000000E+000  ! BCCircle (Value1,Phase/TF1,Value2,Phase/TF2)
+ 'CircleObject003'
+           1  ! EnableCircle
+           7          12  ! gitter
+           1           1  ! EnableInner/OuterRegion
+           1  ! anzahl der kreise
+ 'Region01'
+ '' ! ConductorName
+  9.000000000000000E-004  6.200000000000000E-003  1.425000000000000E-002
+           3  0.500000000000000       ! unt/anzf-kreisregionen
+           1  ! EnableMatCircle
+   1.00000000000000       1.000000000000000E+035  0.000000000000000E+000
+  0.000000000000000E+000
+   1.00000000000000         ! Stacking factor
+           0    ! linear/nichtlinear
+           1           1    ! kennliniennummern
+           1  ! EnableQCircle Region
+           1  ! flagTotalCurrent
+           0  ! flagMassiveConductor
+  1.000000000000000E-002  0.000000000000000E+000  ! volume source
+  0.000000000000000E+000  0.000000000000000E+000  ! dummy applied voltage
+           0  ! multiconductor enabled
+           0  ! multiconductor type
+           0  ! dummy coil number
+  0.000000000000000E+000  0.000000000000000E+000  ! total current
+           2  0.500000000000000       ! unt/anzf-innerster kreis
+           0           0  ! EnableBCCircle
+           1           1           0  ! BCType1,BCType2 (1/2=V/Q given),dummy
+  0.000000000000000E+000  0.000000000000000E+000  0.000000000000000E+000
+  0.000000000000000E+000  ! BCCircle (Value1,Phase/TF1,Value2,Phase/TF2)
+ 'CircleObject004'
+           1  ! EnableCircle
+           7          14  ! gitter
+           1           1  ! EnableInner/OuterRegion
+           1  ! anzahl der kreise
+ 'Region01'
+ '' ! ConductorName
+  9.000000000000000E-004  6.200000000000000E-003  1.675000000000000E-002
+           3  0.500000000000000       ! unt/anzf-kreisregionen
+           1  ! EnableMatCircle
+   1.00000000000000       1.000000000000000E+035  0.000000000000000E+000
+  0.000000000000000E+000
+   1.00000000000000         ! Stacking factor
+           0    ! linear/nichtlinear
+           1           1    ! kennliniennummern
+           1  ! EnableQCircle Region
+           1  ! flagTotalCurrent
+           0  ! flagMassiveConductor
+  1.000000000000000E-002  0.000000000000000E+000  ! volume source
+  0.000000000000000E+000  0.000000000000000E+000  ! dummy applied voltage
+           0  ! multiconductor enabled
+           0  ! multiconductor type
+           0  ! dummy coil number
+  0.000000000000000E+000  0.000000000000000E+000  ! total current
+           2  0.500000000000000       ! unt/anzf-innerster kreis
+           0           0  ! EnableBCCircle
+           1           1           0  ! BCType1,BCType2 (1/2=V/Q given),dummy
+  0.000000000000000E+000  0.000000000000000E+000  0.000000000000000E+000
+  0.000000000000000E+000  ! BCCircle (Value1,Phase/TF1,Value2,Phase/TF2)
+ 'CircleObject005'
+           1  ! EnableCircle
+           7          16  ! gitter
+           1           1  ! EnableInner/OuterRegion
+           1  ! anzahl der kreise
+ 'Region01'
+ '' ! ConductorName
+  9.000000000000000E-004  6.200000000000000E-003  1.925000000000000E-002
+           3  0.500000000000000       ! unt/anzf-kreisregionen
+           1  ! EnableMatCircle
+   1.00000000000000       1.000000000000000E+035  0.000000000000000E+000
+  0.000000000000000E+000
+   1.00000000000000         ! Stacking factor
+           0    ! linear/nichtlinear
+           1           1    ! kennliniennummern
+           1  ! EnableQCircle Region
+           1  ! flagTotalCurrent
+           0  ! flagMassiveConductor
+  1.000000000000000E-002  0.000000000000000E+000  ! volume source
+  0.000000000000000E+000  0.000000000000000E+000  ! dummy applied voltage
+           0  ! multiconductor enabled
+           0  ! multiconductor type
+           0  ! dummy coil number
+  0.000000000000000E+000  0.000000000000000E+000  ! total current
+           2  0.500000000000000       ! unt/anzf-innerster kreis
+           0           0  ! EnableBCCircle
+           1           1           0  ! BCType1,BCType2 (1/2=V/Q given),dummy
+  0.000000000000000E+000  0.000000000000000E+000  0.000000000000000E+000
+  0.000000000000000E+000  ! BCCircle (Value1,Phase/TF1,Value2,Phase/TF2)
+ 'CircleObject006'
+           1  ! EnableCircle
+           7          18  ! gitter
+           1           1  ! EnableInner/OuterRegion
+           1  ! anzahl der kreise
+ 'Region01'
+ '' ! ConductorName
+  9.000000000000000E-004  6.200000000000000E-003  2.175000000000001E-002
            3  0.500000000000000       ! unt/anzf-kreisregionen
            1  ! EnableMatCircle
    1.00000000000000       1.000000000000000E+035  0.000000000000000E+000
@@ -259,7 +407,7 @@
  'Region_Surface01                                  '
            1  ! 0 or 1...RegionIntegral; 2...SurfaceIntegral
            1
-           1           5           7          19
+           1           6           7          19
  'Coil_01                                                     '
  'Coil_02                                                     '
  'Coil_03                                                     '
