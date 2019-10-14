@@ -1,10 +1,10 @@
-function I = adj_mat(triangles, n_tri, n_nodes)
+function I = adj_mat(triangles, nTris, n_nodes)
 
 I = false(n_nodes, n_nodes);
 
 for node = 1:n_nodes
     
-    for i_tri = 1:n_tri
+    for i_tri = 1:nTris
         tri = triangles(i_tri,:);
         L = tri == node;
         if(any(L))

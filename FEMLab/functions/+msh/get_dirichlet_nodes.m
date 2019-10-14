@@ -1,8 +1,8 @@
-function [dir_nodes, n_sys] = get_dirichlet_nodes(elements, element_r, n_nodes, regions_c)
+function [dir_nodes, n_sys] = get_dirichlet_nodes(elements, elemsRegion, n_nodes, sRegions)
 dir_nodes = zeros(1,n_nodes);
-codes = regions_c.dir_codes;
+codes = sRegions.dir_codes;
 for i=1:length(codes)
-    indices = find( element_r == codes(i) );
+    indices = find( elemsRegion == codes(i) );
     for i_el=indices
         dir_nodes([elements(i_el).nodes]) = codes(i);
     end

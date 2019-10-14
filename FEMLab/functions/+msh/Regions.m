@@ -18,18 +18,18 @@ classdef Regions
         colrs = [61, 210, 1, 32];
         n_edges = 0;
         n_faces = 0;
-        n_items = [0 0];
+        nItems = [0 0];
         
     end
     
     methods
         
-        function obj = Regions(keys, vals, id, n_items)
+        function obj = Regions(keys, vals, id, nItems)
             obj.regs = containers.Map(keys, vals);
             obj.def = containers.Map(keys, id);
-            obj.n_edges = n_items(1);
-            obj.n_faces = n_items(2);
-            obj.n_items = n_items;
+            obj.n_edges = nItems(1);
+            obj.n_faces = nItems(2);
+            obj.nItems = nItems;
             obj = fill_color_map(obj);
         end
         
@@ -49,8 +49,8 @@ classdef Regions
             
         end
         
-        function key_arr = get_regions_keys(obj, type)
-            % get_regions_keys(obj, type) - returns an array containing the
+        function key_arr = getRegionKeys(obj, type)
+            % getRegionKeys(obj, type) - returns an array containing the
             % regions keys, if type == 'num' then it returns the numeric
             % keys, else it returns the string keys
             %
@@ -63,7 +63,7 @@ classdef Regions
         end
         
         function params = get_regions_params(obj, regis)
-            % get_regions_keys(obj, type) - returns an array containing the
+            % getRegionKeys(obj, type) - returns an array containing the
             % regions keys, if type == 'num' then it returns the numeric
             % keys, else it returns the string keys
             %
@@ -104,7 +104,7 @@ classdef Regions
             end
         end
         
-        function color = get_color(obj, key)
+        function color = getColor(obj, key)
             if(isnumeric(key) && isKey(obj.reg_map, key))
                 color = obj.colors(obj.reg_map(key));
             elseif(~isnumeric(key) && isKey(obj.colors, key))
@@ -136,7 +136,7 @@ classdef Regions
         
         function sour_regs = get_source_keys(obj)
             
-            key_arr = obj.get_regions_keys('num');
+            key_arr = obj.getRegionKeys('num');
             
             sour_regs = zeros(numel(key_arr),1);
             for iKey = 1:numel(key_arr)
@@ -175,12 +175,12 @@ classdef Regions
             disp('-----------------------------')
         end
         
-        function comb = get_combined_keys(obj)
-            n_items = obj.n_items;
-            [rkeys, comb] = get_region_ids(obj);
+        function comb = getComboKeys(obj)
+            nItems = obj.nItems;
+            [regKeys, comb] = get_region_ids(obj);
             
-            for i_item = 1:sum(n_items)
-                comb{i_item} = [comb{i_item} ' (' num2str(rkeys{i_item}) ')'];
+            for i_item = 1:sum(nItems)
+                comb{i_item} = [comb{i_item} ' (' num2str(regKeys{i_item}) ')'];
             end
             
         end

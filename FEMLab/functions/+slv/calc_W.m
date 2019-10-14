@@ -2,20 +2,20 @@ function calc_W(files, optProb, region)
 
 field_str = [optProb.field, 'c'];
 
-load(files.respth, field_str, 'elements', 'n_lines', 'regions_c', ...
-    'element_r', 'tri_area', 'triangles')
+load(files.respth, field_str, 'elements', 'nLines', 'sRegions', ...
+    'elemsRegion', 'tri_area', 'triangles')
 
 X = eval(field_str);
-[elem_params, ~] = msh.get_elem_params(optProb, element_r, regions_c);
+[elem_params, ~] = msh.get_elem_params(optProb, elemsRegion, sRegions);
 
-region_index = false(size(element_r));
+region_index = false(size(elemsRegion));
 for i_reg = 1:length(region)
-    temp_index = element_r == region(i_reg);
+    temp_index = elemsRegion == region(i_reg);
     region_index = region_index | temp_index;
 end
 
-region_index = region_index(n_lines+1:end);
-elem_params = elem_params(n_lines+1:end);
+region_index = region_index(nLines+1:end);
+elem_params = elem_params(nLines+1:end);
 n_elems = length(region_index);
 
 if(def.isPlanar(optProb.type))
@@ -36,7 +36,7 @@ disp(['W = ' num2str(W)])
 
 % R = 0.001;
 % A_sour = R^2*pi;
-% J = regions_c.get_param('source');
+% J = sRegions.get_param('source');
 % I = A_sour*J;
 % L = 2*W/(I^2);
 % disp(['L = ' num2str(L)])

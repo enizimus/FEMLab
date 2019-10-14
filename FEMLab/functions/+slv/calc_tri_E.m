@@ -2,16 +2,16 @@ function calc_tri_E(files, optProb)
 
 load(files.respth, 'Ap', 'triangles', 'nodes', 'n_nodes', 'ABCs')
 
-n_tri = length(triangles);
-Ec = zeros(1,n_tri);
-Ecx = zeros(1,n_tri);
-Ecy = zeros(1,n_tri);
-nodes_Ec = zeros(n_tri, 2);
+nTris = length(triangles);
+Ec = zeros(1,nTris);
+Ecx = zeros(1,nTris);
+Ecy = zeros(1,nTris);
+nodes_Ec = zeros(nTris, 2);
 
 [f_Ex, f_Ey] = slv.get_funs('Efield', optProb);
 c = 0.333333333333333;
 
-for i_tri = 1:n_tri
+for i_tri = 1:nTris
     
     x = [nodes(triangles(i_tri,:)).x];
     y = [nodes(triangles(i_tri,:)).y];

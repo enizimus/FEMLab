@@ -10,12 +10,12 @@ y = [nodes.y];
 xc = nodes_Bc(:,1);
 yc = nodes_Bc(:,2);
 clear nodes_Bc
-n_tri = size(triangles,1);
-B = zeros(n_tri,1);
-Bx = zeros(n_tri,1);
-By = zeros(n_tri,1);
+nTris = size(triangles,1);
+B = zeros(nTris,1);
+Bx = zeros(nTris,1);
+By = zeros(nTris,1);
 
-for i_tri = 1:n_tri
+for i_tri = 1:nTris
     I = triangles(i_tri,:);
     ABC = slv.solve_abc(x(I),y(I));
     %[ABC, ~] = slv.calc_abc(nodes, I);

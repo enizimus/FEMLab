@@ -1,7 +1,7 @@
 function p_tris = find_tris(triangles, nodes, xp, yp)
 
 epsilon = def.get('triangle_area_eps');
-n_tri = size(triangles, 1);
+nTris = size(triangles, 1);
 n_points = size(xp,1)*size(xp,2);
 p_tris = zeros(size(xp));
 for i_p = 1:n_points
@@ -13,7 +13,7 @@ for i_p = 1:n_points
         
         p_tris(i_p) = p_tris(i_p-1);
     else
-        for i_tri=1:n_tri
+        for i_tri=1:nTris
             x = [nodes(triangles(i_tri, :)).x];
             y = [nodes(triangles(i_tri, :)).y];
             

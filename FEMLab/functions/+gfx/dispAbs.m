@@ -1,4 +1,4 @@
-function disp_abs(files, optProb)
+function dispAbs(files, optProb)
 
 load(files.respth, optProb.plots, 'X', 'Y');
 
@@ -13,15 +13,15 @@ title(['|' optProb.plots '|'])
 xlim([min(X(:)), max(X(:))])
 ylim([min(Y(:)), max(Y(:))])
 
-if(~optProb.axes_on)
+if(~optProb.axesOn)
     ax = gca;
     ax.XTick = [];
     ax.YTick = [];
 end
 
-if(optProb.do_print)
+if(optProb.doPrint)
     plotpath = eval(['files.pltpth_abs', optProb.plots]);
-    print(plotpath, optProb.print_format, ['-r' num2str(optProb.res)])
+    print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 
 end

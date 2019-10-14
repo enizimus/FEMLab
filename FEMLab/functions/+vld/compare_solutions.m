@@ -1,7 +1,7 @@
-function compare_solutions(files, N, optProb, mshType, do_print, print_format)
+function compare_solutions(files, N, optProb, mshType, doPrint, printFormat)
 
-if(nargin < 6 || isempty(print_format)), print_format = '-dpng'; end
-if(nargin < 5 || isempty(do_print)), do_print = 0; end
+if(nargin < 6 || isempty(printFormat)), printFormat = '-dpng'; end
+if(nargin < 5 || isempty(doPrint)), doPrint = 0; end
 
 load(files.respth, 'xlims', 'ylims')
 
@@ -51,8 +51,8 @@ if(strcmp(optProb.class, 'Mstatic'))
     xlim([min(r) 1])
     hold off
     
-%     if(do_print)
-%         print(files.pltpth_valid1, print_format, '-r300')
+%     if(doPrint)
+%         print(files.pltpth_valid1, printFormat, '-r300')
 %     end
     
 %     figure
@@ -70,7 +70,7 @@ subplot(2,1,2)
     
     set(gcf,'Position',[744 495 777 555])
     
-    if(do_print)
+    if(doPrint)
         print(files.pltpth_valid2, '-dpng', '-r300')
     end
     
@@ -98,8 +98,8 @@ else % electrostatic case validation, uniformly charged sphere
     xlim([min(r) max(r)])
     hold off
     
-    if(do_print)
-        print(files.pltpth_valid1, print_format, '-r300')
+    if(doPrint)
+        print(files.pltpth_valid1, printFormat, '-r300')
     end
 end
 

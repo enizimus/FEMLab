@@ -39,18 +39,18 @@ else
     optProb.fieldplt = p.Results.type;
 end
 
-optProb.ncont = p.Results.nCont;
+optProb.nCont = p.Results.nCont;
 optProb.plots = plots;
-optProb.do_print = p.Results.saveplot;
-optProb.print_format = p.Results.format;
-optProb.axes_on = p.Results.axesOn;
-optProb.flines_on = p.Results.fieldLinesOn;
+optProb.doPrint = p.Results.saveplot;
+optProb.printFormat = p.Results.format;
+optProb.axesOn = p.Results.axesOn;
+optProb.flinesOn = p.Results.fieldLinesOn;
 optProb.res = p.Results.res;
 
 if(strcmp(plots, 'MSH'))
-    gfx.display_mesh(files, optProb)
+    gfx.dispMesh(files, optProb)
 else
-    gfx.display_wrapper(files, optProb)
+    gfx.wrappDisp(files, optProb)
 end
 
 

@@ -1,4 +1,4 @@
-function [x,y] = get_non_rep(x, y)
+function [x,y] = getNonRepeating(x, y)
 
 M = [x', y'];
 len = length(x);

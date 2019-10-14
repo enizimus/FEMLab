@@ -92,26 +92,26 @@ if(files.f_changed)
     reg_vals = {regions.name};
     reg_keys = [regions.tag];
     
-    [settings, n_items] = io.read_settings(file_path);
+    [settings, nItems] = io.read_settings(file_path);
     [regnames, regparams, ids] = msh.extract_kvi(settings);
-    regions_c = msh.Regions(regnames, regparams, ids, n_items);
-    regions_c = regions_c.set_reg_map(reg_keys, reg_vals);
+    sRegions = msh.Regions(regnames, regparams, ids, nItems);
+    sRegions = sRegions.set_reg_map(reg_keys, reg_vals);
     
-    element_r = reshape([elements.tags], [2, n_elements])';
-    element_r(:,2) = [];
+    elemsRegion = reshape([elements.tags], [2, n_elements])';
+    elemsRegion(:,2) = [];
     
     [triangles, ptriangles, lines, elem_offset,...
-        tag_order_lines, tag_order, n_tri, n_lines] = msh.extract_lines_tris(elements, n_elements, element_r);
-    [nodes_prop, n_sys] = msh.get_dirichlet_nodes(elements, element_r, n_nodes, regions_c);
+        tag_order_lines, tag_order, nTris, nLines] = msh.extract_lines_tris(elements, n_elements, elemsRegion);
+    [nodes_prop, n_sys] = msh.get_dirichlet_nodes(elements, elemsRegion, n_nodes, sRegions);
     x = [nodes.x]';
     y = [nodes.y]';
     
     fclose(fid);
     
     save(files.respth, 'regions', 'nodes', 'elements',...
-        'n_regions', 'n_nodes', 'n_elements', 'element_r', 'regions_c', ...
+        'n_regions', 'n_nodes', 'n_elements', 'elemsRegion', 'sRegions', ...
         'regparams', 'nodes_prop', 'n_sys', 'triangles', 'lines', 'elem_offset',...
-        'tag_order_lines', 'tag_order', 'n_tri', 'n_lines', 'x', 'y', 'ptriangles');
+        'tag_order_lines', 'tag_order', 'nTris', 'nLines', 'x', 'y', 'ptriangles');
     
 else
     disp('-Files not changed since last parse')

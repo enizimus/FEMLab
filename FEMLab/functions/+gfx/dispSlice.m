@@ -1,4 +1,4 @@
-function disp_slice(files, optProb)
+function dispSlice(files, optProb)
 
 field = optProb.plots;
 load(files.respth, [field 'x'], [field 'y'], 'X', 'Y');
@@ -21,8 +21,8 @@ ylim([min(Y(:)), max(Y(:))])
 % figure
 % gfx.ext.even_stream_line(X, Y, Bx, By, 1, 3, 'Color', 'b', 'LineWidth', 0.2);
 
-if(optProb.do_print)
+if(optProb.doPrint)
     plotpath = eval(['files.pltpth_slice', optProb.plots]);
-    print(plotpath, optProb.print_format, ['-r' num2str(optProb.res)])
+    print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 end

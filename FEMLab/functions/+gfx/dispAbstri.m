@@ -1,4 +1,4 @@
-function disp_abstri(files, optProb)
+function dispAbstri(files, optProb)
 
 var = [optProb.plots, 'p'];
 load(files.respth, var, 'triangles', 'x', 'y')
@@ -16,15 +16,15 @@ view(2)
 xlim([min(x(:)), max(x(:))])
 ylim([min(y(:)), max(y(:))])
 
-if(~optProb.axes_on)
+if(~optProb.axesOn)
     ax = gca;
     ax.XTick = [];
     ax.YTick = [];
 end
 
-if(optProb.do_print)
+if(optProb.doPrint)
     plotpath = eval(['files.pltpth_abstri', optProb.plots]);
-    print(plotpath, optProb.print_format, ['-r' num2str(optProb.res)])
+    print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 
 end

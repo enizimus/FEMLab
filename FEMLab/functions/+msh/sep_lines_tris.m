@@ -1,13 +1,13 @@
-function [I_l, I_t] = sep_lines_tris(n_items, element_r, rkeys, n_tri, n_lines)
+function [I_l, I_t] = sep_lines_tris(nItems, elemsRegion, regKeys, nTris, nLines)
 
-I_l = false(n_lines, n_items(1));
-I_t = false(n_tri, n_items(2));
+I_l = false(nLines, nItems(1));
+I_t = false(nTris, nItems(2));
 
-for i_r = 1:n_items(1)
-    I_l(:, i_r) = element_r(1:n_lines) == rkeys(i_r);
+for iReg = 1:nItems(1)
+    I_l(:, iReg) = elemsRegion(1:nLines) == regKeys(iReg);
 end
 
-for i_r = n_items(1)+1:sum(n_items)
-    I_t(:, i_r) = element_r(n_lines+1:n_lines+n_tri) == rkeys(i_r);
+for iReg = nItems(1)+1:sum(nItems)
+    I_t(:, iReg) = elemsRegion(nLines+1:nLines+nTris) == regKeys(iReg);
 end
     

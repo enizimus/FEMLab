@@ -31,14 +31,14 @@ n_tags = length(tags);
 while(is_parsing)
     line = io.get_line(fid);
     if(strcmp(line, tags{i_tag}))
-        n_items = str2double(io.get_line(fid));
-        n_it(i_tag) = n_items;
-        val_cell = cell(n_items, 1);
-        for i=1:n_items
+        nItems = str2double(io.get_line(fid));
+        n_it(i_tag) = nItems;
+        val_cell = cell(nItems, 1);
+        for i=1:nItems
             val_cell(i) = {io.get_line(fid)};
         end
         parsed_data(i_tag).val_cell = val_cell;
-        parsed_data(i_tag).n_items = n_items;
+        parsed_data(i_tag).nItems = nItems;
         
         end_tag = strrep(tags{i_tag}, '$', '$End');
         while(~strcmp(io.get_line(fid), end_tag))
@@ -51,7 +51,7 @@ end
 
 i_reg = 1;
 for i_tag = 1:n_tags
-    for i_item = 1:parsed_data(i_tag).n_items
+    for i_item = 1:parsed_data(i_tag).nItems
         parts = strsplit(parsed_data(i_tag).val_cell{i_item});
         settings(i_reg).name = parts{1};
         settings(i_reg).id = str2double(parts{2});
