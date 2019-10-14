@@ -1,19 +1,19 @@
-function compare_solutions(files, N, prob_opt, msh_opt, do_print, print_format)
+function compare_solutions(files, N, optProb, mshType, do_print, print_format)
 
 if(nargin < 6 || isempty(print_format)), print_format = '-dpng'; end
 if(nargin < 5 || isempty(do_print)), do_print = 0; end
 
 load(files.respth, 'xlims', 'ylims')
 
-if(strcmp(prob_opt.class, 'Mstatic'))
-    if(strcmp(prob_opt.type, 'planar'))
-        if(strcmp(msh_opt.edge, 'circ'))
+if(strcmp(optProb.class, 'Mstatic'))
+    if(strcmp(optProb.type, 'planar'))
+        if(strcmp(mshType.edge, 'circ'))
             msh_r = 0.5; % radius of circular mesh
             phi = pi/4;
             r = linspace(0, msh_r, N);
             xl = r*cos(phi);
             yl = r*sin(phi);
-        elseif(strcmp(msh_opt.edge, 'rect'))
+        elseif(strcmp(mshType.edge, 'rect'))
             xl = linspace(0, 1, N);
             yl = xl;
             r = sqrt(xl.^2 + yl.^2);
@@ -25,7 +25,7 @@ if(strcmp(prob_opt.class, 'Mstatic'))
         yl = ones(size(xl))*(ylims(2)/2);
     end
     
-    B_exact = vld.calc_exact_B(N, xl, yl, r, prob_opt.valid, msh_opt);
+    B_exact = vld.calc_exact_B(N, xl, yl, r, optProb.valid, mshType);
     [B_fem,~,~] = slv.eval_B(files, xl, yl);
     %     B_ef = vld.get_elefant_B('long_solenoid_0515');
     

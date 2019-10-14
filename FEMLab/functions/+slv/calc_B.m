@@ -1,13 +1,13 @@
-function calc_B(files, prob_opt)
+function calc_B(files, optProb)
 % CALC_B - Calculates the magnetic field from the previously calculated
 % potentials. First the magnetic field defined in the middle of the
 % triangle is calculated and from those the field in the triangle nodes.
 %
-% Syntax:  calc_B(files, prob_opt)
+% Syntax:  calc_B(files, optProb)
 %
 % Inputs:
 %    files - struct containing file and result paths
-%    prob_opt - struct containing information about the problem ( the
+%    optProb - struct containing information about the problem ( the
 %    problem can be 'planar' or 'axissymetric')
 %
 % Outputs:
@@ -26,7 +26,7 @@ function calc_B(files, prob_opt)
 disp('-Calculating magnetic field ...')
 tic
 
-slv.calc_tri_B(files, prob_opt)
+slv.calc_tri_B(files, optProb)
 slv.calc_tri_point_B(files)
 
 [B, Bx, By] = slv.eval_B(files);

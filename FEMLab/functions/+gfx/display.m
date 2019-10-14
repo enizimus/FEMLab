@@ -1,4 +1,4 @@
-function display(files, prob_opt, plots, varargin)
+function display(files, optProb, plots, varargin)
 
 % ----- Input parser settings ----------
 validPlots = {'B', 'A', 'E', 'MSH' 'POT'};
@@ -20,7 +20,7 @@ checkFormat = @(x) any(validatestring(x, validFormats));
 
 p = inputParser;
 addRequired(p, 'files', @isstruct)
-addRequired(p, 'prob_opt', @isstruct)
+addRequired(p, 'optProb', @isstruct)
 addRequired(p, 'plots', checkPlots)
 addParameter(p, 'type', defType, checkTypes)
 addParameter(p, 'axesOn', defAxesOn, @islogical)
@@ -30,27 +30,27 @@ addParameter(p, 'fieldLinesOn', defFlineson, @islogical)
 addParameter(p, 'nCont', defNCont, @isnumeric)
 addParameter(p, 'res', defRes, @isnumeric)
 
-parse(p, files, prob_opt, plots, varargin{:});
+parse(p, files, optProb, plots, varargin{:});
 % ----- End ---------------------------
 
 if(~iscell(p.Results.type))
-    prob_opt.fieldplt = {p.Results.type};
+    optProb.fieldplt = {p.Results.type};
 else
-    prob_opt.fieldplt = p.Results.type;
+    optProb.fieldplt = p.Results.type;
 end
 
-prob_opt.ncont = p.Results.nCont;
-prob_opt.plots = plots;
-prob_opt.do_print = p.Results.saveplot;
-prob_opt.print_format = p.Results.format;
-prob_opt.axes_on = p.Results.axesOn;
-prob_opt.flines_on = p.Results.fieldLinesOn;
-prob_opt.res = p.Results.res;
+optProb.ncont = p.Results.nCont;
+optProb.plots = plots;
+optProb.do_print = p.Results.saveplot;
+optProb.print_format = p.Results.format;
+optProb.axes_on = p.Results.axesOn;
+optProb.flines_on = p.Results.fieldLinesOn;
+optProb.res = p.Results.res;
 
 if(strcmp(plots, 'MSH'))
-    gfx.display_mesh(files, prob_opt)
+    gfx.display_mesh(files, optProb)
 else
-    gfx.display_wrapper(files, prob_opt)
+    gfx.display_wrapper(files, optProb)
 end
 
 

@@ -1,23 +1,23 @@
-function display_wrapper(files, prob_opt)
+function display_wrapper(files, optProb)
 
-prob_opt.labels = def.get_labels(prob_opt);
-n_opt = length(prob_opt.fieldplt);
+optProb.labels = def.getLabels(optProb);
+n_opt = length(optProb.fieldplt);
 
-for i_opt = 1:n_opt
-    option = prob_opt.fieldplt{i_opt};
+for iOpt = 1:n_opt
+    option = optProb.fieldplt{iOpt};
     
     switch(option)
         case('abs')
-            gfx.disp_abs(files, prob_opt)
+            gfx.disp_abs(files, optProb)
         case('abstri')
-            gfx.disp_abstri(files, prob_opt)
+            gfx.disp_abstri(files, optProb)
         case('quiv')
-            gfx.disp_quiv(files, prob_opt)
+            gfx.disp_quiv(files, optProb)
         case('slice')
-            gfx.disp_slice(files, prob_opt)
+            gfx.disp_slice(files, optProb)
         case('cont')
-            gfx.disp_cont(files, prob_opt)
+            gfx.disp_cont(files, optProb)
         case{'flines'}
-            gfx.disp_flines(files, prob_opt)
+            gfx.disp_flines(files, optProb)
     end
 end

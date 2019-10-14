@@ -1,6 +1,6 @@
-function labels = get_labels(prob_opt)
+function labels = getLabels(optProb)
 labels = struct();
-type = def.get_prob_type(prob_opt.type);
+type = def.getProbType(optProb.type);
 switch(type)
     case(1)
         labels.x = 'x';

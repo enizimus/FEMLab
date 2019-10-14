@@ -1,4 +1,4 @@
-function B = calc_exact_B(N, x, y, r_c, type, msh_opt)
+function B = calc_exact_B(N, x, y, r_c, type, mshType)
 
 R = 0.2;
 mu_0 = 1.257e-6;
@@ -7,9 +7,9 @@ J = 10e-3;
 if(strcmp(type, 'diag'))
     B = zeros(1,N);
     
-    if(strcmp(msh_opt.src, 'circ'))
+    if(strcmp(mshType.src, 'circ'))
         r = r_c > R; 
-    elseif(strcmp(msh_opt.src, 'rect'))
+    elseif(strcmp(mshType.src, 'rect'))
         r = (x > R) & (y > R);
     end
     

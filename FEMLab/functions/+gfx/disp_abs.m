@@ -1,27 +1,27 @@
-function disp_abs(files, prob_opt)
+function disp_abs(files, optProb)
 
-load(files.respth, prob_opt.plots, 'X', 'Y');
+load(files.respth, optProb.plots, 'X', 'Y');
 
 figure
-surf(X,Y,eval(prob_opt.plots))
+surf(X,Y,eval(optProb.plots))
 colorbar
 shading interp
 view(2)
-xlabel(prob_opt.labels.x)
-ylabel(prob_opt.labels.y)
-title(['|' prob_opt.plots '|'])
+xlabel(optProb.labels.x)
+ylabel(optProb.labels.y)
+title(['|' optProb.plots '|'])
 xlim([min(X(:)), max(X(:))])
 ylim([min(Y(:)), max(Y(:))])
 
-if(~prob_opt.axes_on)
+if(~optProb.axes_on)
     ax = gca;
     ax.XTick = [];
     ax.YTick = [];
 end
 
-if(prob_opt.do_print)
-    plotpath = eval(['files.pltpth_abs', prob_opt.plots]);
-    print(plotpath, prob_opt.print_format, ['-r' num2str(prob_opt.res)])
+if(optProb.do_print)
+    plotpath = eval(['files.pltpth_abs', optProb.plots]);
+    print(plotpath, optProb.print_format, ['-r' num2str(optProb.res)])
 end
 
 end

@@ -37,10 +37,10 @@ classdef Regions
             codes = [];
             i_codes = 1;
             keys_c = keys(obj.regs);
-            n_keys = length(keys_c);
-            for i_key = 1:n_keys
-                if(contains(keys_c{i_key}, 'dirichlet'))
-                    codes(i_codes) = obj.reg_map_inv(keys_c{i_key});
+            nKeys = length(keys_c);
+            for iKey = 1:nKeys
+                if(contains(keys_c{iKey}, 'dirichlet'))
+                    codes(i_codes) = obj.reg_map_inv(keys_c{iKey});
                     i_codes = i_codes + 1;
                 end
             end
@@ -85,20 +85,20 @@ classdef Regions
         end
         
         function obj = fill_color_map(obj)
-            n_keys = length(obj.regs);
+            nKeys = length(obj.regs);
             keys_c = keys(obj.regs);
             i_clr = 1;
-            for i_key = 1:n_keys
+            for iKey = 1:nKeys
                 clr_set = 0;
                 for i_pred = 1:3
-                    if(contains(keys_c(i_key), obj.predef_keys(i_pred)))
-                        obj.colors(keys_c{i_key}) = obj.predef_colors{i_pred}/255;
+                    if(contains(keys_c(iKey), obj.predef_keys(i_pred)))
+                        obj.colors(keys_c{iKey}) = obj.predef_colors{i_pred}/255;
                         clr_set = 1;
                         break;
                     end
                 end
                 if(~clr_set)
-                    obj.colors(keys_c{i_key}) = util.clr(obj.colrs(i_clr))/255;
+                    obj.colors(keys_c{iKey}) = util.clr(obj.colrs(i_clr))/255;
                     i_clr = i_clr + 1;
                 end
             end
@@ -139,9 +139,9 @@ classdef Regions
             key_arr = obj.get_regions_keys('num');
             
             sour_regs = zeros(numel(key_arr),1);
-            for i_key = 1:numel(key_arr)
-                if(obj.is_source(key_arr(i_key)))
-                    sour_regs(i_key) = i_key;
+            for iKey = 1:numel(key_arr)
+                if(obj.is_source(key_arr(iKey)))
+                    sour_regs(iKey) = iKey;
                 end
             end
             

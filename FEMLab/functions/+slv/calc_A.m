@@ -1,16 +1,16 @@
-function calc_A(files, prob_opt)
+function calc_A(files, optProb)
 disp('-Setting up element matrices and calculating A')
 tic
 
 load(files.respth, 'elements', 'regions_c', 'n_nodes', 'n_elements',...
     'nodes_prop', 'element_r', 'n_tri', 'n_lines', 'triangles', 'x', 'y')
 
-[f_K, f_R] = slv.get_funs('element', prob_opt);
-[fun_K, fun_R] = slv.get_funs('quadrature', prob_opt);
+[f_K, f_R] = slv.get_funs('element', optProb);
+[fun_K, fun_R] = slv.get_funs('quadrature', optProb);
 [tri_x, tri_y] = msh.get_tri_xy(triangles, x, y, n_tri);
 tri_area = util.calc_tri_area(tri_x, tri_y, n_tri);
 ABCs = slv.calc_abcs(tri_x, tri_y, n_tri, tri_area);
-[elem_params, sour_params] = msh.get_elem_params(prob_opt, element_r, regions_c);
+[elem_params, sour_params] = msh.get_elem_params(optProb, element_r, regions_c);
 elems = reshape([elements(n_lines+1:end).nodes], [3 n_elements-n_lines])';
 [Uk, Ik] = slv.setup_known_U(elems, n_tri, nodes_prop, regions_c);
 

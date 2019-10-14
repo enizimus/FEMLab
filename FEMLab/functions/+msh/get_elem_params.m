@@ -1,4 +1,4 @@
-function [elem_params, sour_params] = get_elem_params(prob_opt, element_r, regions_c)
+function [elem_params, sour_params] = get_elem_params(optProb, element_r, regions_c)
 
 elem_params = zeros(size(element_r));
 sour_params = zeros(size(element_r));
@@ -28,7 +28,7 @@ sour_params(is_source) = elem_params(is_source);
 elem_params(is_source) = 1;
 I = ~(is_dir);
 
-switch(lower(prob_opt.class))
+switch(lower(optProb.class))
     case {'estatic'}
         k_0 = regions_c.eps_0;
         elem_params(I) = elem_params(I)*k_0; % = eps

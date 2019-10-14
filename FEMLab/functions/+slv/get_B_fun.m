@@ -1,7 +1,7 @@
-function [f_Bx, f_By] = get_B_fun(prob_opt)
+function [f_Bx, f_By] = get_B_fun(optProb)
 
-[type1, type2] = def.get_prob_type_vals();
-type = def.get_prob_type(prob_opt.type);
+[type1, type2] = def.getProbTypeVals();
+type = def.getProbType(optProb.type);
 
 if(type == type1) % planar case
     f_Bx = @(A, ABC) A'*ABC(2,:)';

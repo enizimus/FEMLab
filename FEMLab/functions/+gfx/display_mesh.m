@@ -1,4 +1,4 @@
-function display_mesh(files, prob_opt)
+function display_mesh(files, optProb)
 % DISPLAY_MESH - plots the mesh and saves it in the specified format
 %
 % Syntax:  display_mesh(files, do_print, print_format)
@@ -66,7 +66,7 @@ for i_l = 1:n_items(1)
     
 end
 
-title([files.file_name, '.msh'], 'interpreter', 'none')
+title([files.fileName, '.msh'], 'interpreter', 'none')
 lgd = legend([lines_h, tris_h], lgnd, 'location', 'eastoutside',...
     'interpreter', 'none');
 title(lgd, 'Regions : ')
@@ -74,8 +74,8 @@ warning('on','all')
 xlim([min(x(:)), max(x(:))])
 ylim([min(y(:)), max(y(:))])
 
-if(prob_opt.do_print)
-    print(files.pltpth_mesh, prob_opt.print_format, ['-r' num2str(prob_opt.res)])
+if(optProb.do_print)
+    print(files.pltpth_mesh, optProb.print_format, ['-r' num2str(optProb.res)])
 end
 
 

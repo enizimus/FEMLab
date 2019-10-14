@@ -1,10 +1,10 @@
-function [f_K, f_R] = get_element_fun(prob_opt)
+function [f_K, f_R] = get_element_fun(optProb)
 
-[type1, type2] = def.get_prob_type_vals();
-type = def.get_prob_type(prob_opt.type);
+[type1, type2] = def.getProbTypeVals();
+type = def.getProbType(optProb.type);
 
 if(type == type1)
-    if(prob_opt.int == 1) % magnetostatic & electrostatic planar case for integration
+    if(optProb.int == 1) % magnetostatic & electrostatic planar case for integration
         
         f_K = @(A, k, b, c) 0.25*(k(1)*b(1)*b(2) + k(2)*c(1)*c(2))/(A^2);
         
@@ -19,7 +19,7 @@ if(type == type1)
     end
 elseif(type == type2)
     
-    if(def.is_mstatic(prob_opt.class)) % magnetostatic rot-sym case
+    if(def.isMstatic(optProb.class)) % magnetostatic rot-sym case
        
         N = @(abc, r, z) (abc(1) + abc(2)*r + abc(3)*z);
         

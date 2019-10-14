@@ -1,13 +1,13 @@
-function calc_E(files, prob_opt)
+function calc_E(files, optProb)
 % CALC_E - Calculates the electric field from the previously calculated
 % potentials. First the electric field defined in the middle of the
 % triangle is calculated and from those the field in the triangle nodes.
 %
-% Syntax:  calc_E(files, prob_opt)
+% Syntax:  calc_E(files, optProb)
 %
 % Inputs:
 %    files - struct containing file and result paths
-%    prob_opt - struct containing information about the problem ( the
+%    optProb - struct containing information about the problem ( the
 %    problem can be 'planar' or 'axissymetric')
 %
 % Outputs:
@@ -26,7 +26,7 @@ function calc_E(files, prob_opt)
 disp('-Calculating electric field ...')
 tic
 
-slv.calc_tri_E(files, prob_opt)
+slv.calc_tri_E(files, optProb)
 slv.calc_tri_point_E(files)
 
 [E, Ex, Ey] = slv.eval_E(files);

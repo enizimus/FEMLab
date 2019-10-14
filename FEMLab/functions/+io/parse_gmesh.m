@@ -26,11 +26,11 @@ function files = parse_gmesh()
 % email: eniz.m@outlook.com
 % Feb 2019
 
-def.read_defs();
+def.defRead();
 
-[file_name, file_path] = uigetfile('*.msh', 'Select mesh file');
-file_name = strrep(file_name, '.msh', '');
-files = io.generate_files(file_path, file_name);
+[fileName, file_path] = uigetfile('*.msh', 'Select mesh file');
+fileName = strrep(fileName, '.msh', '');
+files = io.generate_files(file_path, fileName);
 f_info = io.read_finfo(files);
 files.f_changed = io.file_changed(files, f_info);
 

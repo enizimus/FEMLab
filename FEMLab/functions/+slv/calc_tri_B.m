@@ -1,4 +1,4 @@
-function calc_tri_B(files, prob_opt)
+function calc_tri_B(files, optProb)
 
 load(files.respth, 'Ap', 'triangles', 'nodes', 'n_nodes', 'ABCs')
 
@@ -8,7 +8,7 @@ Bcx = zeros(1,n_tri);
 Bcy = zeros(1,n_tri);
 nodes_Bc = zeros(n_tri, 2);
 
-[f_Bx, f_By] = slv.get_funs('Bfield', prob_opt);
+[f_Bx, f_By] = slv.get_funs('Bfield', optProb);
 c = 0.333333333333333;
 
 for i_tri = 1:n_tri

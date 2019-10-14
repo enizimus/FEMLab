@@ -1,3 +1,3 @@
-function isrot = is_rotsym(ttype)
+function isrot = isRotsym(ttype)
 
 isrot = strcmp(lower(ttype), 'rotsym');

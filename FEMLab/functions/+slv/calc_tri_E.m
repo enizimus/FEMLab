@@ -1,4 +1,4 @@
-function calc_tri_E(files, prob_opt)
+function calc_tri_E(files, optProb)
 
 load(files.respth, 'Ap', 'triangles', 'nodes', 'n_nodes', 'ABCs')
 
@@ -8,7 +8,7 @@ Ecx = zeros(1,n_tri);
 Ecy = zeros(1,n_tri);
 nodes_Ec = zeros(n_tri, 2);
 
-[f_Ex, f_Ey] = slv.get_funs('Efield', prob_opt);
+[f_Ex, f_Ey] = slv.get_funs('Efield', optProb);
 c = 0.333333333333333;
 
 for i_tri = 1:n_tri

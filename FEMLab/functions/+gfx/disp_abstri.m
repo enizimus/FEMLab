@@ -1,6 +1,6 @@
-function disp_abstri(files, prob_opt)
+function disp_abstri(files, optProb)
 
-var = [prob_opt.plots, 'p'];
+var = [optProb.plots, 'p'];
 load(files.respth, var, 'triangles', 'x', 'y')
 val = reshape(eval(var), [length(eval(var)), 1]);
 tri = triangulation(triangles, x, y, val);
@@ -8,23 +8,23 @@ tri = triangulation(triangles, x, y, val);
 figure
 trisurf(tri)
 colorbar
-title(['|', prob_opt.plots,'|'])
+title(['|', optProb.plots,'|'])
 xlabel('x')
 ylabel('y')
-zlabel(prob_opt.plots)
+zlabel(optProb.plots)
 view(2)
 xlim([min(x(:)), max(x(:))])
 ylim([min(y(:)), max(y(:))])
 
-if(~prob_opt.axes_on)
+if(~optProb.axes_on)
     ax = gca;
     ax.XTick = [];
     ax.YTick = [];
 end
 
-if(prob_opt.do_print)
-    plotpath = eval(['files.pltpth_abstri', prob_opt.plots]);
-    print(plotpath, prob_opt.print_format, ['-r' num2str(prob_opt.res)])
+if(optProb.do_print)
+    plotpath = eval(['files.pltpth_abstri', optProb.plots]);
+    print(plotpath, optProb.print_format, ['-r' num2str(optProb.res)])
 end
 
 end
