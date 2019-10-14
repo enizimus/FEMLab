@@ -1,4 +1,4 @@
-function [U, I] = setBoolKnownPot(triangles, nTris, nodeProps, sRegions)
+function [U, I] = setKnownPot(triangles, nTris, nodeProps, sRegions)
 
 I = reshape(nodeProps(triangles(:)), [nTris, 3]);
 U = zeros(size(I));
