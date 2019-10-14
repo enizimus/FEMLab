@@ -10,7 +10,7 @@
 %       - the string "print_color_list' if you want to print the color list, e.g. clr('print_color_list');
 %
 % OUTPUT
-%   clr_rgb = [R G B] is the code for the color in RGB scale                                        
+%   clr_rgb = [vecR G B] is the code for the color in RGB scale                                        
 %   clr_str = color name                                                                            
 %   clr_id  = color number                                                                          
 %
@@ -311,7 +311,7 @@ if isempty(CLR)
     if ischar(id_clr)
         id_clr = lower(id_clr);
         if strcmp(id_clr,'print_color_list')
-            fprintf('\n  R   G   B   name \n ---------------------------- \n');
+            fprintf('\n  vecR   G   B   name \n ---------------------------- \n');
             for j = 1:n
                 fprintf(' %03d %03d %03d %s\n',color_list{j,1},color_list{j,2},color_list{j,3},color_list{j,4});
             end

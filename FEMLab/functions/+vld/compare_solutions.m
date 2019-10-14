@@ -26,7 +26,7 @@ if(strcmp(optProb.class, 'Mstatic'))
     end
     
     B_exact = vld.calc_exact_B(N, xl, yl, r, optProb.valid, mshType);
-    [B_fem,~,~] = slv.eval_B(files, xl, yl);
+    [B_fem,~,~] = slv.evalB(files, xl, yl);
     %     B_ef = vld.get_elefant_B('long_solenoid_0515');
     
     %     abserr_fem = abs(B_exact - B_fem);%./B_exact * 100;
@@ -83,7 +83,7 @@ else % electrostatic case validation, uniformly charged sphere
     r = sqrt(xl.^2 + yl.^2);
     
     E_exact = vld.calc_exact_E(N, r);
-    E_fem = slv.calc_E(files);
+    E_fem = slv.calcE(files);
     
     figure
     plot(r, E_exact, 'linewidth', 1.2)

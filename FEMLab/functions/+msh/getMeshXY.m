@@ -9,9 +9,9 @@ switch edgeType
         phi = linspace(0,2*pi,npoints);
         r = linspace(0,rmax,npoints);
         
-        [R,PHI] = meshgrid(r,phi);
-        X = R.*cos(PHI);
-        Y = R.*sin(PHI);
+        [vecR,PHI] = meshgrid(r,phi);
+        X = vecR.*cos(PHI);
+        Y = vecR.*sin(PHI);
         
     case defType(2)
         

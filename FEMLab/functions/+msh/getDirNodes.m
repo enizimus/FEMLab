@@ -3,8 +3,8 @@ dir_nodes = zeros(1,nNodes);
 codes = sRegions.codesDir;
 for i=1:length(codes)
     indices = find( elemsRegion == codes(i) );
-    for i_el=indices
-        dir_nodes([elements(i_el).nodes]) = codes(i);
+    for iElem=indices
+        dir_nodes([elements(iElem).nodes]) = codes(i);
     end
 end
 nSys = sum(dir_nodes == 0);

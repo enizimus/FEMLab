@@ -11,20 +11,20 @@ files = io.parseGmesh();
 if(files.filesModified)
     
     msh.prepFieldData(files, mshType)
-    slv.calc_A(files, optProb)
-    slv.eval_A(files)
+    slv.calcA(files, optProb)
+    slv.evalA(files)
     
     if(strcmp(optProb.class, 'Mstatic'))
-        slv.calc_B(files, optProb)
+        slv.calcB(files, optProb)
     else
-        slv.calc_E(files, optProb)
+        slv.calcE(files, optProb)
     end
     
 end
 
 optProb.field = def.getField(optProb.class);
 
-slv.calc_W(files, optProb, 1:4)
+slv.calcW(files, optProb, 1:4)
 
 gfx.display(files, optProb, 'MSH', 'saveplot', true)
 gfx.display(files, optProb, optProb.field, 'type', 'quiv',  'saveplot', true)
