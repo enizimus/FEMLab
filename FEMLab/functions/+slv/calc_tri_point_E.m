@@ -3,7 +3,7 @@ function calc_tri_point_E(files)
 load(files.respth, 'triangles', 'nodes', 'nNodes', ...
     'Ec', 'Ecx', 'Ecy', 'nodes_Ec', 'tri_area')
 
-c_mat = msh.make_connect_mat(triangles, nNodes);
+c_mat = msh.matConn(triangles, nNodes);
 
 %Bp = zeros(1, nNodes);
 Epx = zeros(1, nNodes);

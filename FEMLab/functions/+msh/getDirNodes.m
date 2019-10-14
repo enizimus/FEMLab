@@ -1,6 +1,6 @@
 function [dir_nodes, nSys] = getDirNodes(elements, elemsRegion, nNodes, sRegions)
 dir_nodes = zeros(1,nNodes);
-codes = sRegions.dir_codes;
+codes = sRegions.codesDir;
 for i=1:length(codes)
     indices = find( elemsRegion == codes(i) );
     for i_el=indices

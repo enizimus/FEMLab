@@ -23,9 +23,9 @@ function [triangles, ptriangles, lines, elemOffset,...
 % email: eniz.m@outlook.com
 % Mar 2019
 
-i_elem = 1;
-while(elements(i_elem).type ~= 2), i_elem = i_elem + 1; end
-elemOffset = i_elem;
+iElem = 1;
+while(elements(iElem).type ~= 2), iElem = iElem + 1; end
+elemOffset = iElem;
 
 nLines = elemOffset-1;
 lines = [elements(1:nLines).nodes];
@@ -34,9 +34,9 @@ arr = elemsRegion(1:nLines);
 [tagOrderLines, I] = sort(arr);
 lines = lines(I,:);
 
-nTris = nElems-i_elem+1;
-arr = elemsRegion(i_elem:nElems);
+nTris = nElems-iElem+1;
+arr = elemsRegion(iElem:nElems);
 [tagOrderTris, I] = sort(arr);
-triangles = [elements(i_elem:nElems).nodes];
+triangles = [elements(iElem:nElems).nodes];
 triangles = reshape(triangles, [3, nTris])';
 ptriangles = triangles(I,:);

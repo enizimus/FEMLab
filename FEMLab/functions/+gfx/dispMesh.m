@@ -28,7 +28,7 @@ load(files.respth, 'sRegions', 'elemsRegion', 'x', 'y', ...
 
 warning('off','all')
 nItems = sRegions.nItems;
-regKeys = sRegions.getRegionKeys('num');
+regKeys = sRegions.getKeysReg('num');
 legnd = sRegions.getComboKeys;
 
 figure

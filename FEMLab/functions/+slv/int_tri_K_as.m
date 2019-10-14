@@ -13,10 +13,10 @@ b = [abc(2,i),abc(2,j)];
 c = [abc(3,i),abc(3,j)];
 
 I = 0;
-for i_p = 1:n_p
-    rv = r(1)*(1-g_data(i_p,1)-g_data(i_p,2))+r(2)*g_data(i_p,1)+r(3)*g_data(i_p,2);
-    zv = z(1)*(1-g_data(i_p,1)-g_data(i_p,2))+z(2)*g_data(i_p,1)+z(3)*g_data(i_p,2);
-    I = I + fun(A, abc(:,[i j]), rv, zv, k)*g_data(i_p,3); %r([i,j]), z([i,j]), k), (A, k, b, c, rv)
+for iPt = 1:n_p
+    rv = r(1)*(1-g_data(iPt,1)-g_data(iPt,2))+r(2)*g_data(iPt,1)+r(3)*g_data(iPt,2);
+    zv = z(1)*(1-g_data(iPt,1)-g_data(iPt,2))+z(2)*g_data(iPt,1)+z(3)*g_data(iPt,2);
+    I = I + fun(A, abc(:,[i j]), rv, zv, k)*g_data(iPt,3); %r([i,j]), z([i,j]), k), (A, k, b, c, rv)
 end
 
 I = I * A * 2;

@@ -7,10 +7,10 @@ load(files.respth, 'elements', 'sRegions', 'nNodes', 'nElems',...
 
 [f_K, f_R] = slv.get_funs('element', optProb);
 [fun_K, fun_R] = slv.get_funs('quadrature', optProb);
-[tri_x, tri_y] = msh.get_tri_xy(triangles, x, y, nTris);
-tri_area = util.calc_tri_area(tri_x, tri_y, nTris);
-ABCs = slv.calc_abcs(tri_x, tri_y, nTris, tri_area);
-[elem_params, sour_params] = msh.get_elem_params(optProb, elemsRegion, sRegions);
+[xTri, yTri] = msh.getTriXY(triangles, x, y, nTris);
+tri_area = util.calc_tri_area(xTri, yTri, nTris);
+ABCs = slv.calc_abcs(xTri, yTri, nTris, tri_area);
+[paramsElem, paramsSour] = msh.getElemParams(optProb, elemsRegion, sRegions);
 elems = reshape([elements(nLines+1:end).nodes], [3 nElems-nLines])';
 [Uk, Ik] = slv.setup_known_U(elems, nTris, nodeProps, sRegions);
 
@@ -18,12 +18,12 @@ K = spalloc(nNodes, nNodes, 6*nNodes);
 R = zeros(nNodes,1);
 
 for i_el = nLines+1:nElems
-    i_tri = i_el-nLines;
-    abc = reshape(ABCs(i_tri,:,:), [3,3]);
+    iTri = i_el-nLines;
+    abc = reshape(ABCs(iTri,:,:), [3,3]);
 
     [tK, tR, tU, tn] = ... % U, fun_K, fun_R, f_K, f_R, A, abc, xe, ye, k1, f, I)
-        slv.calc_element_RK(Uk(i_tri,:)', fun_K, fun_R, f_K, f_R, tri_area(i_tri),abc,...
-        tri_x(i_tri,:), tri_y(i_tri,:), elem_params(i_el), sour_params(i_el), Ik(i_tri,:));
+        slv.calc_element_RK(Uk(iTri,:)', fun_K, fun_R, f_K, f_R, tri_area(iTri),abc,...
+        xTri(iTri,:), yTri(iTri,:), paramsElem(i_el), paramsSour(i_el), Ik(iTri,:));
     
     i_N = elements(i_el).nodes(tn);
     

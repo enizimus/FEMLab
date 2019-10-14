@@ -4,7 +4,7 @@ U = zeros(3,1);
 i_k = find(I ~= 0);
 i_n = 1:3;
 i_n(i_k) = [];
-U(i_k) = sRegions.get_param(I(i_k));
+U(i_k) = sRegions.getParam(I(i_k));
 
 if(isempty(i_k)), i_k = 1; end
 

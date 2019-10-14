@@ -12,10 +12,10 @@ n_p = 7;
 W_0 = 0.5*B^2*mu;
 
 I = 0;
-for i_p = 1:n_p
-    rv = r(1)*(1-g_data(i_p,1)-g_data(i_p,2))+r(2)*g_data(i_p,1)+r(3)*g_data(i_p,2);
-%   zv = z(1)*(1-g_data(i_p,1)-g_data(i_p,2))+z(2)*g_data(i_p,1)+z(3)*g_data(i_p,2);
-    I = I + rv * g_data(i_p,3); 
+for iPt = 1:n_p
+    rv = r(1)*(1-g_data(iPt,1)-g_data(iPt,2))+r(2)*g_data(iPt,1)+r(3)*g_data(iPt,2);
+%   zv = z(1)*(1-g_data(iPt,1)-g_data(iPt,2))+z(2)*g_data(iPt,1)+z(3)*g_data(iPt,2);
+    I = I + rv * g_data(iPt,3); 
 end
 
 I = W_0 * I * A * 2;

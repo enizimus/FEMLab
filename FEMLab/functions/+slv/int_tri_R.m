@@ -11,12 +11,12 @@ n_p = size(g_data, 1);
 %det_J = calc_detJ(x,y);
 
 I = 0;
-for i_p = 1:n_p
-    xv = x(1)*(1-g_data(i_p,1)-g_data(i_p,2))+x(2)*g_data(i_p,1)+x(3)*g_data(i_p,2);
-    yv = y(1)*(1-g_data(i_p,1)-g_data(i_p,2))+y(2)*g_data(i_p,1)+y(3)*g_data(i_p,2);
+for iPt = 1:n_p
+    xv = x(1)*(1-g_data(iPt,1)-g_data(iPt,2))+x(2)*g_data(iPt,1)+x(3)*g_data(iPt,2);
+    yv = y(1)*(1-g_data(iPt,1)-g_data(iPt,2))+y(2)*g_data(iPt,1)+y(3)*g_data(iPt,2);
     
     fv = fun(xv, yv, abc, A);
-    I = I + fv*g_data(i_p,3);
+    I = I + fv*g_data(iPt,3);
 end
 
 I = f*I*A*2;

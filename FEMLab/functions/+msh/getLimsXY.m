@@ -1,4 +1,4 @@
-function [xlims, ylims] = get_xy_lims(files)
+function [xlims, ylims] = getLimsXY(files)
 
 load(files.respth, 'x', 'y');
 xlims = [min(x), max(x)];

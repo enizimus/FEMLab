@@ -13,10 +13,10 @@ b = [abc(2,i),abc(2,j)];
 c = [abc(3,i),abc(3,j)];
 
 I = 0;
-for i_p = 1:n_p
-    %     xv = x(1)*(1-g_data(i_p,1)-g_data(i_p,2))+x(2)*g_data(i_p,1)+x(3)*g_data(i_p,2);
-    %     yv = y(1)*(1-g_data(i_p,1)-g_data(i_p,2))+y(2)*g_data(i_p,1)+y(3)*g_data(i_p,2);
-    I = I + fun(A, k, b, c)*g_data(i_p,3);
+for iPt = 1:n_p
+    %     xv = x(1)*(1-g_data(iPt,1)-g_data(iPt,2))+x(2)*g_data(iPt,1)+x(3)*g_data(iPt,2);
+    %     yv = y(1)*(1-g_data(iPt,1)-g_data(iPt,2))+y(2)*g_data(iPt,1)+y(3)*g_data(iPt,2);
+    I = I + fun(A, k, b, c)*g_data(iPt,3);
 end
 
 I = I * A * 2;

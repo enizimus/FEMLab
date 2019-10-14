@@ -17,12 +17,12 @@ for i_node = nNodes:-1:1
     %nodes(i_node).z = matNodes(i_node, 4);
 end
 
-for i_elem = nElems:-1:1
-    elements(i_elem).type = matElements(i_elem, 2);
-    elements(i_elem).nTags = matElements(i_elem, 3);
-    i_tags = 3+elements(i_elem).nTags;
-    elements(i_elem).tags = matElements(i_elem,...
-        4:3+elements(i_elem).nTags);
-    i_end = size(matElements, 2) - 2 + elements(i_elem).type;
-    elements(i_elem).nodes = matElements(i_elem, i_tags+1:i_end);
+for iElem = nElems:-1:1
+    elements(iElem).type = matElements(iElem, 2);
+    elements(iElem).nTags = matElements(iElem, 3);
+    i_tags = 3+elements(iElem).nTags;
+    elements(iElem).tags = matElements(iElem,...
+        4:3+elements(iElem).nTags);
+    i_end = size(matElements, 2) - 2 + elements(iElem).type;
+    elements(iElem).nodes = matElements(iElem, i_tags+1:i_end);
 end

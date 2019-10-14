@@ -7,7 +7,7 @@ if(nargin < 2 || (isempty(X) && isempty(Y)))
     load(files.respth, 'X', 'Y')
 end
 
-n_points = size(X,1)*size(X,2);
+nPts = size(X,1)*size(X,2);
 E = zeros(size(X));
 Ex = zeros(size(X));
 Ey = zeros(size(X));
@@ -17,16 +17,16 @@ surr_tri = pointLocation(TRI, X(:), Y(:));
 
 N = slv.get_funs('formfun');
 
-for i_p = 1:n_points
+for iPt = 1:nPts
     
-    I = triangles(surr_tri(i_p), :);
+    I = triangles(surr_tri(iPt), :);
     xtri = x(I);
     ytri = y(I);
     ABC = slv.solve_abc(xtri', ytri');
     
-    N_form = N(X(i_p), Y(i_p), ABC');
-    E(i_p) = Ep(I)*N_form;
-    Ex(i_p) = Epx(I)*N_form;
-    Ey(i_p) = Epy(I)*N_form;
+    N_form = N(X(iPt), Y(iPt), ABC');
+    E(iPt) = Ep(I)*N_form;
+    Ex(iPt) = Epx(I)*N_form;
+    Ey(iPt) = Epy(I)*N_form;
 end
 

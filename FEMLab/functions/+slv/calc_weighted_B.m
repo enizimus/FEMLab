@@ -15,14 +15,14 @@ B = zeros(nTris,1);
 Bx = zeros(nTris,1);
 By = zeros(nTris,1);
 
-for i_tri = 1:nTris
-    I = triangles(i_tri,:);
+for iTri = 1:nTris
+    I = triangles(iTri,:);
     ABC = slv.solve_abc(x(I),y(I));
     %[ABC, ~] = slv.calc_abc(nodes, I);
-    N_form = N(xc(i_tri), yc(i_tri), ABC');
-    B(i_tri) = Bp(I)*N_form;
-    Bx(i_tri) = Bpx(I)*N_form;
-    By(i_tri) = Bpy(I)*N_form;
+    N_form = N(xc(iTri), yc(iTri), ABC');
+    B(iTri) = Bp(I)*N_form;
+    Bx(iTri) = Bpx(I)*N_form;
+    By(iTri) = Bpy(I)*N_form;
 end
 
 save(files.respth, 'B', 'Bx', 'By', '-append')

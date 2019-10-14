@@ -1,4 +1,4 @@
-function [I_l, I_t] = sep_lines_tris(nItems, elemsRegion, regKeys, nTris, nLines)
+function [I_l, I_t] = separateLT(nItems, elemsRegion, regKeys, nTris, nLines)
 
 I_l = false(nLines, nItems(1));
 I_t = false(nTris, nItems(2));

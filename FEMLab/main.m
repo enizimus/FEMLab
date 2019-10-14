@@ -10,7 +10,7 @@ files = io.parseGmesh();
 
 if(files.filesModified)
     
-    msh.prep_field_data(files, mshType)
+    msh.prepFieldData(files, mshType)
     slv.calc_A(files, optProb)
     slv.eval_A(files)
     
