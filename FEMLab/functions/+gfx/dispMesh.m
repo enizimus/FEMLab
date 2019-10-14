@@ -75,7 +75,7 @@ xlim([min(x(:)), max(x(:))])
 ylim([min(y(:)), max(y(:))])
 
 if(optProb.doPrint)
-    print(files.pltpth_mesh, optProb.printFormat, ['-r' num2str(optProb.res)])
+    print(files.pltpthMesh, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 
 

@@ -1,6 +1,6 @@
 function calc_tri_B(files, optProb)
 
-load(files.respth, 'Ap', 'triangles', 'nodes', 'n_nodes', 'ABCs')
+load(files.respth, 'Ap', 'triangles', 'nodes', 'nNodes', 'ABCs')
 
 nTris = length(triangles);
 Bc = zeros(1,nTris);

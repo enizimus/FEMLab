@@ -1,4 +1,4 @@
-function cText = read_file(fileName)
+function cText = readFile(fileName)
 fid = fopen(fileName,'r');
 k = 0;
 while true

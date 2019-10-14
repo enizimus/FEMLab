@@ -4,11 +4,11 @@ close all
 
 addpath('functions')
 
-files = io.parse_gmesh();
+files = io.parseGmesh();
 
-[optProb, mshType] = io.problem_info_ui(files);
+[optProb, mshType] = io.problemUI(files);
 
-if(files.f_changed)
+if(files.filesModified)
     
     msh.prep_field_data(files, mshType)
     slv.calc_A(files, optProb)

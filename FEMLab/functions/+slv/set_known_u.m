@@ -1,5 +1,5 @@
-function [I, i_k, i_n] = set_known_u(nodes, nodes_prop, sRegions)
-I = nodes_prop(nodes);
+function [I, i_k, i_n] = set_known_u(nodes, nodeProps, sRegions)
+I = nodeProps(nodes);
 U = zeros(3,1);
 i_k = find(I ~= 0);
 i_n = 1:3;

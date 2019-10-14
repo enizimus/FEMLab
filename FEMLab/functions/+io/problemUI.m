@@ -1,7 +1,7 @@
-function [optProb, mshType] = problem_info_ui(files)
+function [optProb, mshType] = problemUI(files)
 
-vars_list = {'optProb', 'mshType'};
-if(files.f_changed | ~io.check_if_saved(files, vars_list))
+varList = {'optProb', 'mshType'};
+if(files.filesModified | ~io.isSaved(files, varList))
     prompt = {'Problem class', 'Problem type : ','Calculation type : ', 'Validation problem : ', 'Mesh boundary : ', 'Source type : '};
     dlgtitle = 'coil.msh options';
     dims = [1 35];

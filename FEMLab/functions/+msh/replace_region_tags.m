@@ -1,13 +1,13 @@
-function element_regions = replace_region_tags(elements, n_elements, replace_tags)
+function element_regions = replace_region_tags(elements, nElems, replace_tags)
 
 dirichlet_dim = 1;
 neumann_dim = 2;
 source_dim = 3;
 others_dim = 4;
 
-element_regions = zeros(1, n_elements);
+element_regions = zeros(1, nElems);
 i_elem = 1;
-while(i_elem <= n_elements)
+while(i_elem <= nElems)
     if(any(elements(i_elem).tags(1) == replace_tags(1,:)))
         element_regions(i_elem) = dirichlet_dim;
     elseif(any(elements(i_elem).tags(1) == replace_tags(2,:)))

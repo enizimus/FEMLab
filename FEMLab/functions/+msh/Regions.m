@@ -68,13 +68,13 @@ classdef Regions
             % keys, else it returns the string keys
             %
             params = zeros(size(regis));
-            for i_reg = 1:numel(regis)
-                params(i_reg) = obj.get_param(regis(i_reg));
+            for iReg = 1:numel(regis)
+                params(iReg) = obj.get_param(regis(iReg));
             end
             
         end
         
-        function obj = set_reg_map(obj, keys, vals)
+        function obj = setRegMap(obj, keys, vals)
             obj.reg_map = containers.Map(keys, vals);
             obj.reg_map_inv = containers.Map(vals, keys);
             obj = get_dirichlet_codes(obj);
@@ -179,8 +179,8 @@ classdef Regions
             nItems = obj.nItems;
             [regKeys, comb] = get_region_ids(obj);
             
-            for i_item = 1:sum(nItems)
-                comb{i_item} = [comb{i_item} ' (' num2str(regKeys{i_item}) ')'];
+            for iItem = 1:sum(nItems)
+                comb{iItem} = [comb{iItem} ' (' num2str(regKeys{iItem}) ')'];
             end
             
         end

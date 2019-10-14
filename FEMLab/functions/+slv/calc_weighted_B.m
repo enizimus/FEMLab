@@ -1,6 +1,6 @@
 function calc_weighted_B(files)
 
-load(files.respth, 'U', 'triangles', 'nodes', 'n_nodes', ...
+load(files.respth, 'U', 'triangles', 'nodes', 'nNodes', ...
     'nodes_Bc', 'Bp', 'Bpx', 'Bpy')
 
 N = slv.get_funs('formarr');

@@ -1,6 +1,6 @@
-function [U, I] = setup_known_U(triangles, nTris, nodes_prop, sRegions)
+function [U, I] = setup_known_U(triangles, nTris, nodeProps, sRegions)
 
-I = reshape(nodes_prop(triangles(:)), [nTris, 3]);
+I = reshape(nodeProps(triangles(:)), [nTris, 3]);
 U = zeros(size(I));
 keys_U = unique(I);
 keys_U(keys_U == 0) = [];

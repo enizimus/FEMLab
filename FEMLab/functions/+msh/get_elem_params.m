@@ -19,9 +19,9 @@ end
 for i_dir = 1:n_dir
     is_dir(elemsRegion == dir_keys(i_dir)) = true;
 end
-for i_reg = 1:n_reg
-    I = elemsRegion == key_arr(i_reg);
-    elem_params(I) = key_param(i_reg);
+for iReg = 1:n_reg
+    I = elemsRegion == key_arr(iReg);
+    elem_params(I) = key_param(iReg);
 end
 
 sour_params(is_source) = elem_params(is_source);

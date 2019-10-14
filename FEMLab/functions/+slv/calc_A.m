@@ -2,8 +2,8 @@ function calc_A(files, optProb)
 disp('-Setting up element matrices and calculating A')
 tic
 
-load(files.respth, 'elements', 'sRegions', 'n_nodes', 'n_elements',...
-    'nodes_prop', 'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y')
+load(files.respth, 'elements', 'sRegions', 'nNodes', 'nElems',...
+    'nodeProps', 'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y')
 
 [f_K, f_R] = slv.get_funs('element', optProb);
 [fun_K, fun_R] = slv.get_funs('quadrature', optProb);
@@ -11,13 +11,13 @@ load(files.respth, 'elements', 'sRegions', 'n_nodes', 'n_elements',...
 tri_area = util.calc_tri_area(tri_x, tri_y, nTris);
 ABCs = slv.calc_abcs(tri_x, tri_y, nTris, tri_area);
 [elem_params, sour_params] = msh.get_elem_params(optProb, elemsRegion, sRegions);
-elems = reshape([elements(nLines+1:end).nodes], [3 n_elements-nLines])';
-[Uk, Ik] = slv.setup_known_U(elems, nTris, nodes_prop, sRegions);
+elems = reshape([elements(nLines+1:end).nodes], [3 nElems-nLines])';
+[Uk, Ik] = slv.setup_known_U(elems, nTris, nodeProps, sRegions);
 
-K = spalloc(n_nodes, n_nodes, 6*n_nodes);
-R = zeros(n_nodes,1);
+K = spalloc(nNodes, nNodes, 6*nNodes);
+R = zeros(nNodes,1);
 
-for i_el = nLines+1:n_elements
+for i_el = nLines+1:nElems
     i_tri = i_el-nLines;
     abc = reshape(ABCs(i_tri,:,:), [3,3]);
 
@@ -36,7 +36,7 @@ for i_el = nLines+1:n_elements
     
 end
 
-Ap = zeros(n_nodes, 1);
+Ap = zeros(nNodes, 1);
 
 I = any(K,2);
 u_unknown = I;

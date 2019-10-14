@@ -1,19 +1,19 @@
 function calc_tri_point_B(files)
 
-load(files.respth, 'triangles', 'nodes', 'n_nodes', ...
+load(files.respth, 'triangles', 'nodes', 'nNodes', ...
     'Bc', 'Bcx', 'Bcy', 'nodes_Bc', 'tri_area')
 
-c_mat = msh.make_connect_mat(triangles, n_nodes);
+c_mat = msh.make_connect_mat(triangles, nNodes);
 
-Bpx = zeros(1, n_nodes);
-Bpy = zeros(1, n_nodes);
+Bpx = zeros(1, nNodes);
+Bpy = zeros(1, nNodes);
 
-area_sum = zeros(1, n_nodes);
-for i_node = 1:n_nodes
+area_sum = zeros(1, nNodes);
+for i_node = 1:nNodes
 area_sum(i_node) = 1/sum(tri_area(c_mat(i_node,:)));
 end
 
-for i_node = 1:n_nodes
+for i_node = 1:nNodes
     Bpx(i_node) = Bcx(c_mat(i_node,:))*tri_area(c_mat(i_node,:));
     Bpy(i_node) = Bcy(c_mat(i_node,:))*tri_area(c_mat(i_node,:));
 end

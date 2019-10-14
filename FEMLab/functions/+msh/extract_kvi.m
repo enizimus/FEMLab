@@ -1,4 +1,4 @@
-function [keys, values, ids] = extract_kvi(settings)
+function [keys, values, ids] = extractKvi(settings)
 
 n_sett = length(settings);
 keys = cell(n_sett,1);

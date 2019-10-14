@@ -9,8 +9,8 @@ X = eval(field_str);
 [elem_params, ~] = msh.get_elem_params(optProb, elemsRegion, sRegions);
 
 region_index = false(size(elemsRegion));
-for i_reg = 1:length(region)
-    temp_index = elemsRegion == region(i_reg);
+for iReg = 1:length(region)
+    temp_index = elemsRegion == region(iReg);
     region_index = region_index | temp_index;
 end
 

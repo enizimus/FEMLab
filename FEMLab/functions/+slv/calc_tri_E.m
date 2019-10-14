@@ -1,6 +1,6 @@
 function calc_tri_E(files, optProb)
 
-load(files.respth, 'Ap', 'triangles', 'nodes', 'n_nodes', 'ABCs')
+load(files.respth, 'Ap', 'triangles', 'nodes', 'nNodes', 'ABCs')
 
 nTris = length(triangles);
 Ec = zeros(1,nTris);
