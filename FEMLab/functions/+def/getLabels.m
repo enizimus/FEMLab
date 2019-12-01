@@ -1,6 +1,6 @@
 function labels = getLabels(optProb)
 labels = struct();
-type = def.getProbType(optProb.type);
+type = def.getProbType(optProb.symmetry);
 switch(type)
     case(1)
         labels.x = 'x';

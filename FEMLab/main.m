@@ -14,7 +14,7 @@ if(files.filesModified)
     slv.calcA(files, optProb)
     slv.evalA(files)
     
-    if(strcmp(optProb.class, 'Mstatic'))
+    if(strcmp(optProb.problemClass, 'Mstatic'))
         slv.calcB(files, optProb)
     else
         slv.calcE(files, optProb)
@@ -22,7 +22,7 @@ if(files.filesModified)
     
 end
 
-optProb.field = def.getField(optProb.class);
+optProb.field = def.getField(optProb.problemClass);
 
 slv.calcW(files, optProb, 1:4)
 

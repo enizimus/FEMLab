@@ -1,10 +1,10 @@
 function [hFunElemK, hFunElemR] = getElementFun(optProb)
 
 [type1, type2] = def.getProbTypeVals();
-type = def.getProbType(optProb.type);
+type = def.getProbType(optProb.symmetry);
 
-if(type == type1)
-    if(optProb.int == 1) % magnetostatic & electrostatic planar case for integration
+if(def.isPlanar(optProb.symmetry))
+    if(def.isInt(optProb.computation)) % magnetostatic & electrostatic planar case for integration
         
         hFunElemK = @(A, k, b, c) 0.25*(k(1)*b(1)*b(2) + k(2)*c(1)*c(2))/(A^2);
         
@@ -17,9 +17,9 @@ if(type == type1)
         hFunElemR = @(f,A) f*A*0.333333333333333;                             
     
     end
-elseif(type == type2)
+elseif(def.isRotsym(optProb.symmetry))
     
-    if(def.isMstatic(optProb.class)) % magnetostatic rot-sym case
+    if(def.isMstatic(optProb.problemClass)) % magnetostatic rot-sym case
        
         N = @(abc, r, z) (abc(1) + abc(2)*r + abc(3)*z);
         
@@ -30,7 +30,7 @@ elseif(type == type2)
         
         hFunElemR = @(r, z, abc, A) 0.5*r*(abc(1)+abc(2)*r+abc(3)*z)/(A);
         
-    else % electrostatic rot-sym case
+    elseif(def.isEstatic(optProb.problemClass)) % electrostatic rot-sym case
         
         hFunElemK = @(A, abc, r, ~, k) 0.25*r*(k(1)*abc(2,1)*abc(2,2) + k(2)*abc(3,1)*abc(3,2))/(A^2);
         

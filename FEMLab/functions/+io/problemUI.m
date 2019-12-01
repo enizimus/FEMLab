@@ -8,9 +8,9 @@ if(files.filesModified | ~io.isSaved(files, varList))
     definput = {'Estatic', 'axssym', 'int', 'dsad', 'rect', 'rect'};
     answer = inputdlg(prompt,dlgtitle,dims,definput);
     
-    optProb.class = answer{1};
-    optProb.type = answer{2};
-    optProb.int = strcmp(answer{3}, 'int');
+    optProb.problemClass = answer{1};
+    optProb.symmetry = answer{2};
+    optProb.computation = strcmp(answer{3}, 'int');
     optProb.valid = answer{4};
     mshType.edge = answer{5};
     mshType.src =  answer{6};

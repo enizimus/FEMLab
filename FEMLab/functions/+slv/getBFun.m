@@ -1,7 +1,7 @@
 function [hFunBx, hFunBy] = getBFun(optProb)
 
 [type1, type2] = def.getProbTypeVals();
-type = def.getProbType(optProb.type);
+type = def.getProbType(optProb.symmetry);
 
 if(type == type1) % planar case
     hFunBx = @(A, ABC) A'*ABC(2,:)';

@@ -1,3 +1,10 @@
-function isrot = isRotsym(ttype)
+function isrot = isRotsym(type)
 
-isrot = strcmp(lower(ttype), 'rotsym');
+cases = {'axis', 'Axis', 'ASym', 'Axis symmetric', ...
+    'Axis symmetry'};
+switch type
+    case cases
+        isrot = 1;
+    otherwise
+        isrot = 0;
+end

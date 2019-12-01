@@ -1,9 +1,9 @@
-function [X,Y] = getMeshXY(mshType,xlims,ylims,npoints)
+function [X,Y] = getMeshXY(options,xlims,ylims,npoints)
 
-defType = def.getEdgeOpts();
-edgeType = def.assignEdgeOpts(mshType.edge);
-switch edgeType
-    case defType(1)
+circTypes = {'Circular', 'Circ'};
+rectTypes = {'Rectangular', 'Rect'};
+switch options.edgeType
+    case circTypes
         
         rmax = sum(abs(xlims))/2 - 0.05;
         phi = linspace(0,2*pi,npoints);
@@ -13,7 +13,7 @@ switch edgeType
         X = vecR.*cos(PHI);
         Y = vecR.*sin(PHI);
         
-    case defType(2)
+    case rectTypes
         
         x = linspace(xlims(1),xlims(2),npoints);
         y = linspace(ylims(1),ylims(2),npoints);

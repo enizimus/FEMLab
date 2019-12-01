@@ -1,3 +1,9 @@
 function ism = isMstatic(pclass)
-
-ism = strcmp(lower(pclass), 'mstatic');
+mstatic = {'mstatic', 'Magnetostatic', 'Magstat'};
+switch pclass
+    case mstatic
+        ism = 1;
+    otherwise
+        ism = 0;
+end
+%ism = strcmp(lower(pclass), 'mstatic');

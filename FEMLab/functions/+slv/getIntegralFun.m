@@ -1,21 +1,18 @@
 function [hFunQuadK, hFunQuadR] = getIntegralFun(optProb)
 
-[type1, type2] = def.getProbTypeVals();
-type = def.getProbType(optProb.type);
-
-if(type == type1)
-    if(optProb.int == 1)
+if(def.isPlanar(optProb.symmetry))
+    if(def.isInt(optProb.computation))
         hFunQuadK = @slv.integrateK;
         hFunQuadR = @slv.integrateR;
     else
         hFunQuadK = @slv.preintK;
         hFunQuadR = @slv.preintR;
     end
-elseif(type == type2)
-    if(strcmp(optProb.class, 'mstatic'))
+elseif(def.isRotsym(optProb.symmetry))
+    if(def.isMstatic(optProb.problemClass))   %strcmp(optProb.problemClass, 'mstatic'))
         hFunQuadK = @slv.integrateKas;
         hFunQuadR = @slv.integrateR;
-    else
+    elseif(def.isEstatic(optProb.problemClass))
         hFunQuadK = @slv.integrateKas;
         hFunQuadR = @slv.integrateR;
     end

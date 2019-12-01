@@ -18,7 +18,7 @@ regionIndex = regionIndex(nLines+1:end);
 paramsElem = paramsElem(nLines+1:end);
 nElems = length(regionIndex);
 
-if(def.isPlanar(optProb.type))
+if(def.isPlanar(optProb.symmetry))
     W = 0.5*paramsElem(regionIndex)'.*X(regionIndex).^2*areaTri(regionIndex);
 else
     regionIndex = find(regionIndex);

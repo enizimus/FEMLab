@@ -1,7 +1,8 @@
 function type = getProbType(typeStr)
 
-type2 = {'axissymetric', 'rotationsymetric', 'axssym', 'rotsym', '2', 'as'};
-type1 = {'planar', 'plane', 'pl', 'p', '1'};
+type2 = {'axissymetric', 'rotationsymetric', 'axssym', 'rotsym', '2', 'as',...
+    'axis symmetric'};
+type1 = {'planar', 'plane', 'pl', 'p', '1', 'plane symmetric'};
 
 switch(lower(typeStr))
     case(type1)

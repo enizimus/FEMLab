@@ -28,7 +28,7 @@ paramsSour(isSource) = paramsElem(isSource);
 paramsElem(isSource) = 1;
 I = ~(isDir);
 
-switch(lower(optProb.class))
+switch(lower(optProb.problemClass))
     case {'estatic'}
         k_0 = sRegions.eps_0;
         paramsElem(I) = paramsElem(I)*k_0; % = eps

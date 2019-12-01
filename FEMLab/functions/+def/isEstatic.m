@@ -1,3 +1,8 @@
 function ise = isEstatic(pclass)
-
-ise = strcmp(lower(pclass), 'estatic');
+estatic = {'estatic', 'Electrostatic', 'Elstat'};
+switch pclass
+    case estatic
+        ise = 1;
+    otherwise
+        ise = 0;
+end

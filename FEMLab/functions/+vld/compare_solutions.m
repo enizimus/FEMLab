@@ -5,8 +5,8 @@ if(nargin < 5 || isempty(doPrint)), doPrint = 0; end
 
 load(files.respth, 'xlims', 'ylims')
 
-if(strcmp(optProb.class, 'Mstatic'))
-    if(strcmp(optProb.type, 'planar'))
+if(strcmp(optProb.problemClass, 'Mstatic'))
+    if(strcmp(optProb.symmetry, 'planar'))
         if(strcmp(mshType.edge, 'circ'))
             msh_r = 0.5; % radius of circular mesh
             phi = pi/4;
