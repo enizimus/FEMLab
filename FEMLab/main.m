@@ -12,7 +12,7 @@ if(files.filesModified)
     
     msh.prepFieldData(files, mshType)
     slv.calcA(files, optProb)
-    slv.evalA(files)
+    slv.evalA(files)                                    
     
     if(strcmp(optProb.problemClass, 'Mstatic'))
         slv.calcB(files, optProb)

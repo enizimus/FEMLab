@@ -22,7 +22,7 @@ ylim([min(Y(:)), max(Y(:))])
 % gfx.ext.even_stream_line(X, Y, Bx, By, 1, 3, 'Color', 'b', 'LineWidth', 0.2);
 
 if(optProb.doPrint)
-    plotpath = eval(['files.pltpth_slice', optProb.plots]);
+    plotpath = eval(['files.pltpthSlice', optProb.plots]);
     print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 end

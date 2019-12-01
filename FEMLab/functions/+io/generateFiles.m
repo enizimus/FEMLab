@@ -8,6 +8,7 @@ files.mshFile = [filePath, fileName, '.msh'];
 files.results = [filePath, 'results\'];
 files.finfo = [files.results, 'finfo.mat'];
 files.setfile = [filePath, 'settings.mat'];
+files.settxtfile = [filePath, 'settings.txt'];
 files.respth = [files.results, fileName];
 files.pltpth = [filePath, 'plots\'];
 files.pltpthMesh = [files.pltpth, fileName, '_mesh'];

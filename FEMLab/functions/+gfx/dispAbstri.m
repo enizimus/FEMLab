@@ -23,7 +23,7 @@ if(~optProb.axesOn)
 end
 
 if(optProb.doPrint)
-    plotpath = eval(['files.pltpth_abstri', optProb.plots]);
+    plotpath = eval(['files.pltpthAbstri', optProb.plots]);
     print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 

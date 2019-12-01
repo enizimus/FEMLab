@@ -18,6 +18,6 @@ if(~optProb.axesOn)
     ax.YTick = [];
 end
 if(optProb.doPrint)
-    plotpath = eval(['files.pltpth_flines', optProb.plots]);
+    plotpath = eval(['files.pltpthFlines', optProb.plots]);
     print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
 end

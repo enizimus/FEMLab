@@ -26,7 +26,7 @@ if(~optProb.axesOn)
 end
 % set(gca,'visible','off')
 if(optProb.doPrint)
-    plotpath = eval(['files.pltpth_quiv', optProb.plots]);
+    plotpath = eval(['files.pltpthQuiv', optProb.plots]);
     print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 end

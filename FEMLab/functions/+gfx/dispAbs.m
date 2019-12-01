@@ -20,7 +20,7 @@ if(~optProb.axesOn)
 end
 
 if(optProb.doPrint)
-    plotpath = eval(['files.pltpth_abs', optProb.plots]);
+    plotpath = eval(['files.pltpthAbs', optProb.plots]);
     print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 
