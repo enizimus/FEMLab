@@ -4,9 +4,6 @@ close all
 
 addpath('functions')
 
-app = FEMLabApp;
-app.initComponents();
-
 files = io.parseGmesh();
 
 [optProb, mshType] = io.problemUI(files);
