@@ -1,4 +1,4 @@
-function dispMesh(files, optProb)
+function dispMeshUI(files, optProb)
 % dispMesh - plots the mesh and saves it in the specified format
 %
 % Syntax:  dispMesh(files, doPrint, printFormat)
@@ -76,8 +76,7 @@ xlim([min(x(:)), max(x(:))])
 ylim([min(y(:)), max(y(:))])
 
 if(optProb.doPrint)
-    saveas(f,files.pltpthMesh,'png')
-    %print(files.pltpthMesh, optProb.printFormat, ['-r' num2str(optProb.res)])
+    print(files.pltpthMesh, optProb.printFormat, ['-r' num2str(optProb.res)])
 end
 
 
