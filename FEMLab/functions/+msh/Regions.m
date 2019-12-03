@@ -80,6 +80,14 @@ classdef Regions
             obj = getDirCodes(obj);
         end
         
+        function obj = setRegDef(obj, keys, vals)
+            obj.def = containers.Map(keys, vals);
+        end
+        
+        function obj = setRegRegs(obj, keys, vals)
+            obj.regs = containers.Map(keys, vals);
+        end
+        
         function code = getRegCode(obj, region)
             code = obj.rMapInv(region);
         end
