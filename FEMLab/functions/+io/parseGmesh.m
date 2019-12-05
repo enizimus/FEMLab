@@ -88,29 +88,10 @@ if(files.filesModified)
     [regions, nodes, elements] = util.mat2struct(regionNames, regionIds, nRegions,...
         matNodes, nNodes, matElements, nElems);
     
-    regionVals = {regions.name};
-    regionKeys = [regions.tag];
-    
-    [settings, nItems] = io.readSettings(filePath);
-    [regNames, regParams, ids] = msh.extractKvi(settings);
-    sRegions = msh.Regions(regNames, regParams, ids, nItems);
-    sRegions = sRegions.setRegMap(regionKeys, regionVals);
-    
-    elemsRegion = reshape([elements.tags], [2, nElems])';
-    elemsRegion(:,2) = [];
-    
-    [triangles, ptriangles, lines, elemOffset,...
-        tagOrderLines, tagOrderTris, nTris, nLines] = msh.extractLT(elements, nElems, elemsRegion);
-    [nodeProps, nSys] = msh.getDirNodes(elements, elemsRegion, nNodes, sRegions);
-    x = [nodes.x]';
-    y = [nodes.y]';
-    
     fclose(fid);
     
-    save(files.respth, 'regions', 'nodes', 'elements',...
-        'nRegions', 'nNodes', 'nElems', 'elemsRegion', 'sRegions', ...
-        'regParams', 'nodeProps', 'nSys', 'triangles', 'lines', 'elemOffset',...
-        'tagOrderLines', 'tagOrderTris', 'nTris', 'nLines', 'x', 'y', 'ptriangles');
+    save(files.respth, 'regions', 'nodes', 'elements', ...
+        'nRegions', 'nNodes', 'nElems')
     
 else
     disp('-Files not changed since last parse')
