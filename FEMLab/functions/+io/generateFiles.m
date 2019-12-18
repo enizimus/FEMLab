@@ -8,6 +8,7 @@ files.mshFile = [filePath, fileName, '.msh'];
 files.results = [filePath, 'results\'];
 files.finfo = [files.results, 'finfo.mat'];
 files.setfile = [filePath, 'settings.mat'];
+files.regfile = [filePath, 'regions.txt'];
 files.settxtfile = [filePath, 'settings.txt'];
 files.respth = [files.results, fileName];
 files.pltpth = [filePath, 'plots\'];
@@ -31,7 +32,8 @@ files.pltpthContA = [files.pltpth, fileName, '_contA'];
 files.pltpthAbstriA = [files.pltpth, fileName, '_abstriA'];
 files.pltpth_valid1 = [files.pltpth, fileName, '_validation_comp'];
 files.pltpth_valid2 = [files.pltpth, fileName, '_validation_error'];
-files.filesModified = 1;
+files.filesModified = true;
+files.regionsReady = false;
 
 if(exist(files.pltpth, 'dir') ~= 7)
     mkdir(files.pltpth)

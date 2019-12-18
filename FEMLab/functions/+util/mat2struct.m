@@ -1,14 +1,17 @@
 function [regions, nodes, elements] = mat2struct(regionNames, regionIds, nRegions, matNodes, nNodes, matElements, nElems)
 
-regions = struct('dim', {}, 'tag', {}, 'name', {});
+regions = struct('dim', {}, 'id', {}, 'name', {});
 nodes = struct('x', {}, 'y', {}, 'z', {});
 elements = struct('type', {}, 'nTags',...
     {}, 'tags', {}, 'nodes', {}, 'matK', {}, 'vecR', {}, 'U', {}, 'n', {});
 
 for i_region = nRegions:-1:1
     regions(i_region).dim = regionIds(i_region, 1);
-    regions(i_region).tag = regionIds(i_region, 2);
+    regions(i_region).id = regionIds(i_region, 2);
     regions(i_region).name = regionNames{i_region};
+    regions(i_region).spec = 'MAT';
+    regions(i_region).matProp = 0;
+    regions(i_region).srcProp = 0;
 end
 
 for iNode = nNodes:-1:1

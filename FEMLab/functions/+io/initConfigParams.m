@@ -4,20 +4,27 @@ load(files.respth, 'regions', 'nElems', 'elements', 'nNodes', 'nodes')
 
 [~, filePath] = io.getMeshFile(projPath, projName);
 
-regionVals = {regions.name};
-regionKeys = [regions.tag];
+if(~(exist(files.regfile, 'file')==2))
+    % Initializes a regions setup file with current regions from mesh file 
+    io.generateRegionsFile(files, regions);
+end
 
-[settings, nItems] = io.readSettings(filePath);
-[regNames, regParams, ids] = msh.extractKvi(settings);
-sRegions = msh.Regions(regNames, regParams, ids, nItems);
-sRegions = sRegions.setRegMap(regionKeys, regionVals);
+open(files.regfile)
 
-elemsRegion = reshape([elements.tags], [2, nElems])';
-elemsRegion(:,2) = [];
+% If new project started with no region setup file this function will
+% create a new one and read it, if a file already exists it will just read
+% the file and give it back.
+[regSet, nRegSets] = io.readRegions(files);
+
+% save(files.respth, 'regSet', 'nRegSets', '-append');
+
+% Nova funkcija da odradi ekstrakciju
+elemsRegion = msh.getElemRegions(elements, nElems, regSet);
+[nodeProps, nSys] = msh.getPrescribedNodes(elements, elemsRegion, nNodes, regSet);
 
 [triangles, ptriangles, lines, elemOffset,...
     tagOrderLines, tagOrderTris, nTris, nLines] = msh.extractLT(elements, nElems, elemsRegion);
-[nodeProps, nSys] = msh.getDirNodes(elements, elemsRegion, nNodes, sRegions);
+
 x = [nodes.x]';
 y = [nodes.y]';
 

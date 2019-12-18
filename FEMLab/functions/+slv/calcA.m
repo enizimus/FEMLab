@@ -10,7 +10,9 @@ load(files.respth, 'elements', 'sRegions', 'nNodes', 'nElems',...
 [xTri, yTri] = msh.getTriXY(triangles, x, y, nTris);
 areaTri = util.calcAreaTri(xTri, yTri, nTris);
 ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri);
+
 [paramsElem, paramsSour] = msh.getElemParams(optProb, elemsRegion, sRegions);
+
 elems = reshape([elements(nLines+1:end).nodes], [3 nElems-nLines])';
 [Uk, Ik] = slv.setKnownPot(elems, nTris, nodeProps, sRegions);
 

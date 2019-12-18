@@ -3,7 +3,8 @@ $Edges
 dirichlet 1 DRB 0
 $EndEdges
 $Faces
-2
+3
 air 2 1 0
-source 2 1 10e-3
+source1 2 1 -1e-6
+source2 2 1 1e-6
 $EndFaces

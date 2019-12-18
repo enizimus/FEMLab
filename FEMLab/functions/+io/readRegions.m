@@ -1,26 +1,28 @@
-function [settings, nIt] = readSettings(filePath)
-% settings.txt format :
-%       %Faces (id = 2)
-%           [name] [id] [material mu_0] [J]
-%       %Edges (id = 1)
-%           [name] [id] [DRB/NRB/SRC] [VAL]
+function [regions, nIt] = readRegions(files)
+% regions.txt format :
+%       %Faces
+%           [name] [spec] [material prop] [src prop]
+%       %Edges 
+%           [name] [spec] [material prop] [src prop]
 %
-%       where : - J   : Current density
+%       where :
+%               - spec : [DRB/NRB/SRC/MAT]
+%               - J   : Current density
 %               - DRB : Dirichlet boundary condition
 %               - NRB : Neumann boundary condition
 %               - SRC : Source
-%               - VAL : Value of selected DRB/NRB/SRC
+%               - val : Value of selected DRB/NRB/SRC/MAT
+%
+%               - material prop : describes the material in question an
+%                                 example is eps_r for electrostatic case.
+%               - src prop : gives the value of the source property of the
+%                             current region 
 
+inputFile = files.regfile;
 
-inputFile = [filePath, 'settings.txt'];
+fid = fopen(inputFile);
 
-if(exist(inputFile, 'file')==2)
-    fid = fopen(inputFile);
-else
-    error(['Setting file not found at : ', inputFile])
-end
-
-settings = struct();
+regions = struct();
 dataParsed = struct();
 tags = {'$Edges', '$Faces'};
 nIt = zeros(size(tags));
@@ -53,10 +55,12 @@ iReg = 1;
 for iTag = 1:nTags
     for iItem = 1:dataParsed(iTag).nItems
         parts = strsplit(dataParsed(iTag).cValues{iItem});
-        settings(iReg).name = parts{1};
-        settings(iReg).id = str2double(parts{2});
-        settings(iReg).reg = parts{3};
-        settings(iReg).sour = str2double(parts{4});
+        regions(iReg).id = str2double(parts{1});
+        regions(iReg).name = parts{2};
+        regions(iReg).spec = parts{3};
+        regions(iReg).specnum = io.mapRegions(parts{3});
+        regions(iReg).matProp = str2double(parts{4});
+        regions(iReg).srcProp = str2double(parts{5});
         iReg = iReg + 1;
     end
 end
