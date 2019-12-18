@@ -1,4 +1,4 @@
-function [prescNodes, nSys] = getPrescribedNodes(elements, elemsRegion, nNodes, regSet)
+function [prescNodes, nSys] = getPrescribedNodes(elements, elemsRegion, nNodes)
 % Returns an array containing the id of the boundary condition prescribed
 % onto the node, the conditions can be (DRB = 1, NRB = 2);
 %
