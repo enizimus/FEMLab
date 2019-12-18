@@ -1,4 +1,4 @@
-function [prescNodes, nSys] = getPrescribedNodes(elements, elemsRegion, nNodes)
+function [prescNodes, nSys] = getPrescribedNodes(elements, elemsTag, nNodes)
 % Returns an array containing the id of the boundary condition prescribed
 % onto the node, the conditions can be (DRB = 1, NRB = 2);
 %
@@ -9,7 +9,7 @@ function [prescNodes, nSys] = getPrescribedNodes(elements, elemsRegion, nNodes)
 prescNodes = zeros(1,nNodes);
 ids = [1,2]; % these are the dirichlet and neuman id's
 for i=1:length(ids)
-    indices = find( elemsRegion == ids(i) );
+    indices = find( elemsTag == ids(i) );
     for iElem=indices
         prescNodes([elements(iElem).nodes]) = ids(i);
     end

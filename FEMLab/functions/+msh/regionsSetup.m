@@ -8,19 +8,17 @@ load(files.respth, 'regions', 'nElems', 'elements', 'nNodes', 'nodes')
 % the file and give it back.
 [regSet, nRegSets] = io.readRegions(files);
 
-% save(files.respth, 'regSet', 'nRegSets', '-append');
-
 % Nova funkcija da odradi ekstrakciju
-elemsRegion = msh.getElemRegions(elements, nElems, regSet);
+[elemsRegion, elemsTag] = msh.getElemRegions(elements, nElems, regSet);
 
-[prescNodes, nSys] = msh.getPrescribedNodes(elements, elemsRegion, nNodes);
+[prescNodes, nSys] = msh.getPrescribedNodes(elements, elemsTag, nNodes);
 
 [triangles, ptriangles, lines, elemOffset,...
-    tagOrderLines, tagOrderTris, nTris, nLines] = msh.extractLT(elements, nElems, elemsRegion);
+    regsLines, regsTris, nTris, nLines] = msh.extractLT(elements, nElems, elemsRegion);
 
 x = [nodes.x]';
 y = [nodes.y]';
 
-save(files.respth, 'elemsRegion', 'regSet', ...
+save(files.respth, 'elemsRegion', 'regSet', 'bRegions', 'elemsTag', ...
     'prescNodes', 'nSys', 'triangles', 'lines', 'elemOffset',...
-    'tagOrderLines', 'tagOrderTris', 'nTris', 'nLines', 'x', 'y', 'ptriangles', '-append');
+    'regsLines', 'regsTris', 'nTris', 'nLines', 'x', 'y', 'ptriangles', '-append');

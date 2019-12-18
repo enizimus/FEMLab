@@ -1,40 +1,24 @@
-function [paramsElem, paramsSour] = getElemParams(optProb, elemsRegion, sRegions)
+function [matParams, srcParams] = getElemParams(optProb, elemsRegion, regSet)
 
-paramsElem = zeros(size(elemsRegion));
-paramsSour = zeros(size(elemsRegion));
-isSource = false(size(elemsRegion));
-isDir = false(size(elemsRegion));
+matParams = zeros(size(elemsRegion));
+srcParams = zeros(size(elemsRegion));
 
-keysDir = sRegions.codesDir;
-keysSour = sRegions.getKeysSour();
-keysArr = sRegions.getKeysReg('num');
-keysParam = sRegions.getParamsReg(keysArr);
-nReg = length(keysArr);
-nSour = length(keysSour);
-nDir = length(keysDir);
+nRegions = length(regSet);
 
-for iSour = 1:nSour
-    isSource(elemsRegion == keysSour(iSour)) = true;
+for iReg = 1:nRegions
+    I = elemsRegion == regSet(iReg).id;
+    matParams(I) = regSet(iReg).matProp;
+    srcParams(I) = regSet(iReg).srcProp;
 end
-for iDir = 1:nDir
-    isDir(elemsRegion == keysDir(iDir)) = true;
-end
-for iReg = 1:nReg
-    I = elemsRegion == keysArr(iReg);
-    paramsElem(I) = keysParam(iReg);
-end
-
-paramsSour(isSource) = paramsElem(isSource);
-paramsElem(isSource) = 1;
-I = ~(isDir);
 
 switch(lower(optProb.problemClass))
     case {'estatic'}
         k_0 = sRegions.eps_0;
-        paramsElem(I) = paramsElem(I)*k_0; % = eps
+        matParams = matParams*k_0; % = eps
     case {'mstatic'}
+        I = matParams ~= 0;
         k_0 = sRegions.mu_0;
-        paramsElem(I) = 1./(paramsElem(I)*k_0); % = 1/mu
+        matParams(I) = 1./(matParams(I)*k_0); % = 1/mu
 end
 
 

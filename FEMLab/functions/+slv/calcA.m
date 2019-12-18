@@ -2,8 +2,8 @@ function calcA(files, optProb)
 disp('-Setting up element matrices and calculating A')
 tic
 
-load(files.respth, 'elements', 'sRegions', 'nNodes', 'nElems',...
-    'nodeProps', 'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y')
+load(files.respth, 'elements', 'regSet', 'nNodes', 'nElems', 'elemsTag', ...
+    'prescNodes', 'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y')
 
 [hFunElemK, hFunElemR] = slv.getFuns('element', optProb);
 [hFunQuadK, hFunQuadR] = slv.getFuns('quadrature', optProb);
@@ -11,10 +11,10 @@ load(files.respth, 'elements', 'sRegions', 'nNodes', 'nElems',...
 areaTri = util.calcAreaTri(xTri, yTri, nTris);
 ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri);
 
-[paramsElem, paramsSour] = msh.getElemParams(optProb, elemsRegion, sRegions);
+[matParams, srcParams] = msh.getElemParams(optProb, elemsRegion, setReg);
 
 elems = reshape([elements(nLines+1:end).nodes], [3 nElems-nLines])';
-[Uk, Ik] = slv.setKnownPot(elems, nTris, nodeProps, sRegions);
+[Uk, Ik] = slv.setKnownPot(elems, nTris, prescNodes, setReg);
 
 matK = spalloc(nNodes, nNodes, 6*nNodes);
 vecR = zeros(nNodes,1);
@@ -25,7 +25,7 @@ for iElem = nLines+1:nElems
 
     [tK, tR, tU, tn] = ... % U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I)
         slv.calcElementMats(Uk(iTri,:)', hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, areaTri(iTri),abc,...
-        xTri(iTri,:), yTri(iTri,:), paramsElem(iElem), paramsSour(iElem), Ik(iTri,:));
+        xTri(iTri,:), yTri(iTri,:), matParams(iElem), srcParams(iElem), Ik(iTri,:));
     
     iN = elements(iElem).nodes(tn);
     
