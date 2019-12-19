@@ -27,43 +27,42 @@ load(files.respth, 'regSet', 'elemsRegion', 'x', 'y', ...
     'nTris', 'ptriangles', 'lines', 'nLines');
 
 warning('off','all')
-[nEdgeElems, nFaceElems] = msh.getItemNums(regSet);
-[legnd, regKeys] = msh.getComboKeys(regSet);
+nItems = length(regSet);
+regKeys = sRegions.getKeysReg('num');
+legnd = sRegions.getComboKeys;
 
 f = figure;
-if(optProb.hideFig)
-    set(f, 'visible', 'off')
-end
+set(f, 'visible', 'off')
 hold on;
 
 elemTriangles = elemsRegion(nLines+1:end);
 elemLines = elemsRegion(1:nLines);
-hTris = gobjects(1, nFaceElems);
-hLines = gobjects(1, nEdgeElems);
+hTris = gobjects(1, nItems(2));
+hLines = gobjects(1, nItems(1));
 
 ih = 1;
-for iReg = nEdgeElems + 1:(nEdgeElems + nFaceElems)
+for iReg = nItems(1)+1:sum(nItems)
     
-    clr = msh.getColor(files, regSet(iReg));
+    colr = sRegions.getColor(regKeys(iReg));
     
     tris = ptriangles(elemTriangles == regKeys(iReg),:);
     TRI = triangulation(tris,x,y);
     
-    hTris(ih) = triplot(TRI, 'color', clr);
+    hTris(ih) = triplot(TRI, 'color', colr);
     ih = ih + 1;
     
 end
 
 ih = 1;
-for iLine = 1:nEdgeElems
+for iLine = 1:nItems(1)
     
-    clr = msh.getColor(files, regSet(iLine));
+    colr = sRegions.getColor(regKeys(iLine));
     I = lines(elemLines == regKeys(iLine), :);
     xl = x(I);
     yl = y(I);
     
     [xl,yl] = util.getNonRepeating(xl,yl);
-    hLines(ih) = plot(xl, yl, 'linewidth', 1.2, 'color', clr);
+    hLines(ih) = plot(xl, yl, 'linewidth', 1.2, 'color', colr);
     ih = ih + 1;
     
 end

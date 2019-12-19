@@ -13,7 +13,6 @@ defFormat = '-dpng';
 defFlineson = true;
 defNCont = 24;
 defRes = 200;
-defHide = false;
 
 checkPlots = @(x) any(validatestring(x, validPlots));
 checkTypes = @(x) any(validatestring(x, validTypes));
@@ -30,7 +29,6 @@ addParameter(p, 'format', defFormat, checkFormat)
 addParameter(p, 'fieldLinesOn', defFlineson, @islogical)
 addParameter(p, 'nCont', defNCont, @isnumeric)
 addParameter(p, 'res', defRes, @isnumeric)
-addParameter(p, 'hideFig', defHide, @islogical)
 
 parse(p, files, optProb, plots, varargin{:});
 % ----- End ---------------------------
@@ -48,7 +46,6 @@ optProb.printFormat = p.Results.format;
 optProb.axesOn = p.Results.axesOn;
 optProb.flinesOn = p.Results.fieldLinesOn;
 optProb.res = p.Results.res;
-optProb.hideFig = p.Results.hideFig;
 
 if(strcmp(plots, 'MSH'))
     gfx.dispMesh(files, optProb)
