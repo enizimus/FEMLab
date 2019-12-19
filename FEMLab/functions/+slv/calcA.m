@@ -3,7 +3,8 @@ disp('-Setting up element matrices and calculating A')
 tic
 
 load(files.respth, 'elements', 'regSet', 'nNodes', 'nElems', 'elemsTag', ...
-    'prescNodes', 'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y')
+    'prescNodes', 'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y', ...
+    'const')
 
 [hFunElemK, hFunElemR] = slv.getFuns('element', optProb);
 [hFunQuadK, hFunQuadR] = slv.getFuns('quadrature', optProb);
@@ -11,10 +12,12 @@ load(files.respth, 'elements', 'regSet', 'nNodes', 'nElems', 'elemsTag', ...
 areaTri = util.calcAreaTri(xTri, yTri, nTris);
 ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri);
 
-[matParams, srcParams] = msh.getElemParams(optProb, elemsRegion, setReg);
+[matParams, srcParams] = msh.getElemParams(optProb, elemsRegion, regSet, const);
 
 elems = reshape([elements(nLines+1:end).nodes], [3 nElems-nLines])';
-[Uk, Ik] = slv.setKnownPot(elems, nTris, prescNodes, setReg);
+
+% ---- Good until here ---- %
+[Uk, Ik] = slv.setKnownPot(elems, nTris, prescNodes, regSet);
 
 matK = spalloc(nNodes, nNodes, 6*nNodes);
 vecR = zeros(nNodes,1);
@@ -48,7 +51,7 @@ vecR = vecR(I);
 I = any(matK,1);
 matK = matK(:,I);
 
-PotKnown = slv.getKnownPot(bKnownPot, sRegions);
+PotKnown = slv.getKnownPot(bKnownPot, prescNodes, regSet);
 PotUnknown = matK\vecR;
 Ap(bUnknownPot) = PotUnknown;
 Ap(bKnownPot) = PotKnown;

@@ -23,11 +23,11 @@ function dispMesh(files, optProb)
 % email: eniz.m@outlook.com
 % Mar 2019
 
-load(files.respth, 'sRegions', 'elemsRegion', 'x', 'y', ...
+load(files.respth, 'regSet', 'elemsRegion', 'x', 'y', ...
     'nTris', 'ptriangles', 'lines', 'nLines');
 
 warning('off','all')
-nItems = sRegions.nItems;
+nItems = length(regSet);
 regKeys = sRegions.getKeysReg('num');
 legnd = sRegions.getComboKeys;
 

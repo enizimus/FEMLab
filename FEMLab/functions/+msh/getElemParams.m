@@ -1,4 +1,4 @@
-function [matParams, srcParams] = getElemParams(optProb, elemsRegion, regSet)
+function [matParams, srcParams] = getElemParams(optProb, elemsRegion, regSet, const)
 
 matParams = zeros(size(elemsRegion));
 srcParams = zeros(size(elemsRegion));
@@ -12,12 +12,12 @@ for iReg = 1:nRegions
 end
 
 switch(lower(optProb.problemClass))
-    case {'estatic'}
-        k_0 = sRegions.eps_0;
+    case {'electrostatic'}
+        k_0 = const.eps_0;
         matParams = matParams*k_0; % = eps
-    case {'mstatic'}
+    case {'magnetostatic'}
         I = matParams ~= 0;
-        k_0 = sRegions.mu_0;
+        k_0 = const.mu_0;
         matParams(I) = 1./(matParams(I)*k_0); % = 1/mu
 end
 
