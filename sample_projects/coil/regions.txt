@@ -1,1 +1,1 @@
-$Edges11 dirichlet DRB 0 0$EndEdges$Faces22 source SRC 1 1e-33 air MAT 1 0$EndFaces
+$Edges11 Dirichlet DRB 0 0$EndEdges$Faces22 Source SRC 1 1e-33 Air MAT 1 0$EndFaces

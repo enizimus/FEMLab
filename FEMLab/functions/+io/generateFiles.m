@@ -5,6 +5,7 @@ files = struct();
 files.fileName = fileName;
 files.filePath = filePath;
 files.mshFile = [filePath, fileName, '.msh'];
+files.geoFile = [filePath, fileName, '.geo'];
 files.results = [filePath, 'results\'];
 files.finfo = [files.results, 'finfo.mat'];
 files.setfile = [filePath, 'settings.mat'];

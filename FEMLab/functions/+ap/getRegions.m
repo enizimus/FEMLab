@@ -1,4 +1,4 @@
-function sRegions = getRegions(files)
+function regSet = getRegions(files)
 
-load(files.respth, 'sRegions')
+load(files.respth, 'regSet')
 
