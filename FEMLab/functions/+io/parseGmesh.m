@@ -1,4 +1,4 @@
-function files = parseGmesh(projPath, projName)
+function files = parseGmesh(files)
 % PARSE_GMESH - reads the .msh file and extracts the data into a
 % more suitable format for further calculations
 %
@@ -27,9 +27,8 @@ function files = parseGmesh(projPath, projName)
 % Feb 2019
 
 def.defRead();
-[fileName, filePath] = io.getMeshFile(projPath, projName);
-fileName = strrep(fileName, '.msh', '');
-files = io.generateFiles(filePath, fileName);
+%[fileName, filePath] = io.getMeshFile(projPath, projName);
+%fileName = strrep(fileName, '.msh', '');
 fileInfo = io.readFInfo(files);
 files.filesModified = io.isFileModified(files, fileInfo);
 

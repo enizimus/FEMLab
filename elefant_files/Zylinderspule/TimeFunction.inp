@@ -1,7 +1,0 @@
-           1  ! number of time functions
-         100  ! number of time steps
-  1.000000000000000E-003  ! delta-time
- "Polyline01                                                            "
-           1  ! time function type
-           1  ! number of polygon values
-  0.000000000000000E+000  0.000000000000000E+000  ! time, value

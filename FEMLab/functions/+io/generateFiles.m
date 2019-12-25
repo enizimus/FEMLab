@@ -2,6 +2,10 @@ function files = generateFiles(filePath, fileName)
 
 files = struct();
 
+if(filePath(end) ~= '\')
+    filePath = [filePath, '\'];
+end
+
 files.fileName = fileName;
 files.filePath = filePath;
 files.mshFile = [filePath, fileName, '.msh'];

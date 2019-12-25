@@ -1,1 +1,0 @@
-$Edges11 Dirichlet DRB 0 0$EndEdges$Faces32 Air MAT 1 03 Q1 SRC 1 -10e-64 Q2 SRC 1 10e-6$EndFaces
