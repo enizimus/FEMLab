@@ -6,6 +6,8 @@ if(filePath(end) ~= '\')
     filePath = [filePath, '\'];
 end
 
+files.mesh = [fileName, '.msh'];
+files.geo = [fileName, '.geo'];
 files.fileName = fileName;
 files.filePath = filePath;
 files.mshFile = [filePath, fileName, '.msh'];
