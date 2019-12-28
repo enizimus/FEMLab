@@ -5,7 +5,6 @@ load(files.respth, 'triangles', 'nodes', 'nNodes', ...
 
 matConnect = msh.matConn(triangles, nNodes);
 
-%Bp = zeros(1, nNodes);
 Epx = zeros(1, nNodes);
 Epy = zeros(1, nNodes);
 
