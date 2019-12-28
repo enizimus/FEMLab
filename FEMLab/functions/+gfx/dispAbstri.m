@@ -1,5 +1,9 @@
 function dispAbstri(files, optProb)
 
+if(optProb.plots == 'V')
+    optProb.plots = 'A';
+end
+
 var = [optProb.plots, 'p'];
 load(files.respth, var, 'triangles', 'x', 'y')
 val = reshape(eval(var), [length(eval(var)), 1]);

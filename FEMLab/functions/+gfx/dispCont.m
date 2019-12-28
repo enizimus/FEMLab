@@ -1,5 +1,9 @@
 function dispCont(files, optProb)
 
+if(optProb.plots == 'V')
+    optProb.plots = 'A';
+end
+
 load(files.respth, optProb.plots, 'X', 'Y');
 
 figure
