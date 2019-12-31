@@ -14,8 +14,8 @@ load(files.respth, 'regions', 'nElems', 'elements', 'nNodes', 'nodes')
 [triangles, ptriangles, lines, elemOffset,...
     regsLines, regsTris, nTris, nLines] = msh.extractLT(elements, nElems, elemsRegion);
 
-x = [nodes.x]';
-y = [nodes.y]';
+x = nodes(:,1);
+y = nodes(:,2);
 
 save(files.respth, 'elemsRegion', 'regSet', 'elemsTag', ...
     'prescNodes', 'nSys', 'triangles', 'lines', 'elemOffset',...

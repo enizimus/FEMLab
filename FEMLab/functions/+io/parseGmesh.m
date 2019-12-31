@@ -25,7 +25,7 @@ function files = parseGmesh(files)
 % Author: Eniz Museljic
 % email: eniz.m@outlook.com
 % Feb 2019
-
+tic
 def.defRead();
 %[fileName, filePath] = io.getMeshFile(projPath, projName);
 %fileName = strrep(fileName, '.msh', '');
@@ -40,6 +40,7 @@ if(files.filesModified)
     io.generateFInfo(files);
     inputFile = files.mshFile;
     fid = fopen(inputFile);
+    content = fileread(inputFile);
     
     reading = true;
     nLine = 0;
@@ -83,7 +84,7 @@ if(files.filesModified)
             reading = false;
         end
     end
-    
+    toc
     [regions, nodes, elements] = util.mat2struct(regionNames, regionIds, nRegions,...
         matNodes, nNodes, matElements, nElems);
     
