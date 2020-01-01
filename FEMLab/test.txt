@@ -1,3 +1,0 @@
-1 1 "dirichlet"
-2 2 "air"
-2 3 "source"
