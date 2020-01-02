@@ -20,6 +20,7 @@ matK = spalloc(nNodes, nNodes, 6*nNodes);
 vecR = zeros(nNodes, 1);
 
 for iElem = nLines+1:nElems
+    
     iTri = iElem-nLines;
     abc = reshape(ABCs(iTri,:,:), [3,3]);
 
@@ -31,10 +32,6 @@ for iElem = nLines+1:nElems
     
     matK(iN, iN) = matK(iN, iN) + tK(tn, tn);
     vecR(iN) = vecR(iN) + tR(tn);
-    
-    %elements(iElem).matK = tK(tn, tn);
-    %elements(iElem).vecR = tR(tn);
-    %elements(iElem).U = tU;
     
 end
 

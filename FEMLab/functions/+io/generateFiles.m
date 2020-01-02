@@ -49,3 +49,7 @@ end
 if(exist(files.results, 'dir') ~= 7)
     mkdir(files.results)
 end
+
+if(exist([files.respth, '.mat'], 'file') ~= 2)
+    save(files.respth, 'fileName')
+end

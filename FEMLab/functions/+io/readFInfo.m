@@ -1,9 +1,23 @@
-function fileInfo = readFInfo(files)
+function info = readFInfo(files, opt)
 
 if(exist(files.finfo, 'file') ~= 2)
-    fileInfo = struct();
-    fileInfo.date = '';
-    fileInfo.setDate = '';
+    
+    mshDate = '';
+    regDate = '';
+    info = '';
+    
+    save(files.finfo, 'mshDate', 'regDate')
+    
 else
-    load(files.finfo, 'fileInfo');
+    
+    switch(opt)
+        
+        case 'MSH'
+            load(files.finfo, 'mshDate');
+            info = mshDate;
+        case 'REG'
+            load(files.finfo, 'regDate');
+            info = regDate;
+    end
+    
 end

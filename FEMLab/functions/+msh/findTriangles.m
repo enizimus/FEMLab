@@ -1,6 +1,7 @@
 function ptTris = findTriangles(triangles, nodes, xp, yp)
 
-epsilon = def.get('triangle_area_eps');
+epsilon = 1e-5; 
+
 nTris = size(triangles, 1);
 nPts = size(xp,1)*size(xp,2);
 ptTris = zeros(size(xp));

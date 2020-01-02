@@ -37,4 +37,4 @@ triangles = sElements.nodes(elemOffset:end, [1 : form.nTriNodes]);
 
 arr = elemsRegion(elemOffset:nElems);
 [tagOrderTris, I] = sort(arr);
-ptriangles = triangles(I,:);
+ptriangles = triangles(I,:); % used for plotting! -> ptriangles

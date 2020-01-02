@@ -1,4 +1,0 @@
-prob_types :: 1 2
-plt_defs :: 1 2 3 4 
-msh_edge_types :: 1 2
-triangle_area_eps :: 1e-5

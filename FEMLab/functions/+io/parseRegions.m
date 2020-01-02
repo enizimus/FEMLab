@@ -1,4 +1,4 @@
-function [regions, nIt] = readRegions(files)
+function parseRegions(files)
 % regions.txt format :
 %       %Faces
 %           [name] [spec] [material prop] [src prop]
@@ -22,7 +22,7 @@ inputFile = files.regfile;
 
 fid = fopen(inputFile);
 
-regions = struct();
+regSet = struct();
 dataParsed = struct();
 tags = {'$Edges', '$Faces'};
 nIt = zeros(size(tags));
@@ -55,17 +55,18 @@ iReg = 1;
 for iTag = 1:nTags
     for iItem = 1:dataParsed(iTag).nItems
         parts = strsplit(dataParsed(iTag).cValues{iItem});
-        regions(iReg).id = str2double(parts{1});
-        regions(iReg).name = parts{2};
-        regions(iReg).spec = parts{3};
-        regions(iReg).specnum = io.mapRegions(parts{3});
-        regions(iReg).matProp = str2double(parts{4});
-        regions(iReg).srcProp = str2double(parts{5});
+        regSet(iReg).id = str2double(parts{1});
+        regSet(iReg).name = parts{2};
+        regSet(iReg).spec = parts{3};
+        regSet(iReg).specnum = io.mapRegions(parts{3});
+        regSet(iReg).matProp = str2double(parts{4});
+        regSet(iReg).srcProp = str2double(parts{5});
         iReg = iReg + 1;
     end
 end
 
 fclose(fid);
+save(files.respth, 'regSet', 'nIt', '-append')
 
 
 
