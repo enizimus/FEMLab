@@ -1,4 +1,4 @@
-function files = parseGmesh(files)
+function files = parseGmesh(files, elemOrder)
 % PARSE_GMESH - reads the .msh file and extracts the data into a
 % more suitable format for further calculations
 %
@@ -25,12 +25,11 @@ function files = parseGmesh(files)
 % Author: Eniz Museljic
 % email: eniz.m@outlook.com
 % Feb 2019
-tic
+
 def.defRead();
-%[fileName, filePath] = io.getMeshFile(projPath, projName);
-%fileName = strrep(fileName, '.msh', '');
 fileInfo = io.readFInfo(files);
 files.filesModified = io.isFileModified(files, fileInfo);
+form = io.getElemFormSpec(elemOrder);
 
 if(files.filesModified)
     
@@ -40,7 +39,6 @@ if(files.filesModified)
     io.generateFInfo(files);
     inputFile = files.mshFile;
     fid = fopen(inputFile);
-    content = fileread(inputFile);
     
     reading = true;
     nLine = 0;
@@ -53,6 +51,10 @@ if(files.filesModified)
             line = fgetl(fid);
             reading = false;
         end
+    end
+    
+    if(~strcmp(mshFormat, '2.2 0 8'))
+        error('Not supported msh format')
     end
     
     reading = true;
@@ -73,10 +75,16 @@ if(files.filesModified)
                 dataSize = [4 nNodes];
                 matNodes = fscanf(fid, formSpec, dataSize)';
             case {'$Elements'}
+                
                 nElems = sscanf(fgetl(fid), '%f');
-                formSpec = '%f %f %f %f %f %f %f %f';
-                cData = textscan(fid, formSpec, nElems)';
-                matElements = [cData{1} cData{2} cData{3} cData{4} cData{5} cData{6} cData{7} cData{8}];
+                matElements = zeros(nElems, form.specLen);
+                
+                cData = textscan(fid, form.spec, nElems)';
+                
+                for iDat = 1:form.specLen
+                    matElements(:,iDat) = cData{iDat};
+                end
+                
                 elemReadFinished = true;
         end
         
@@ -84,14 +92,15 @@ if(files.filesModified)
             reading = false;
         end
     end
-    toc
-    [regions, nodes, elements] = util.mat2struct(regionNames, regionIds, nRegions,...
-        matNodes, nNodes, matElements, nElems);
+    
+    regions = msh.getRegionStruct(regionNames, regionIds, nRegions);
+    
+    [nodes, elements] = msh.getNodesElements(matNodes, matElements);
     
     fclose(fid);
     
     save(files.respth, 'regions', 'nodes', 'elements', ...
-        'nRegions', 'nNodes', 'nElems')
+        'nRegions', 'nNodes', 'nElems', 'form')
     
 else
     disp('-Files not changed since last parse')

@@ -2,8 +2,8 @@ function [regions, nodes, elements] = mat2struct(regionNames, regionIds, nRegion
 
 regions = struct('dim', {}, 'id', {}, 'name', {});
 nodes = zeros(nNodes, 2);
-elements = struct('type', {}, 'nTags',...
-    {}, 'tags', {}, 'nodes', {}, 'matK', {}, 'vecR', {}, 'U', {}, 'n', {});
+elements = zeros(nElems, 7);
+
 
 for i_region = nRegions:-1:1
     regions(i_region).dim = regionIds(i_region, 1);
@@ -16,12 +16,15 @@ end
 
 nodes = matNodes(:,[2,3]);
 
-for iElem = nElems:-1:1
-    elements(iElem).type = matElements(iElem, 2);
-    elements(iElem).nTags = matElements(iElem, 3);
-    i_tags = 3+elements(iElem).nTags;
-    elements(iElem).tags = matElements(iElem,...
-        4:3+elements(iElem).nTags);
-    i_end = size(matElements, 2) - 2 + elements(iElem).type;
-    elements(iElem).nodes = matElements(iElem, i_tags+1:i_end);
-end
+elements = matElements(:, 2:end);
+
+% 
+% for iElem = nElems:-1:1
+%     elements(iElem).type = matElements(iElem, 2);
+%     elements(iElem).nTags = matElements(iElem, 3);
+%     i_tags = 3+elements(iElem).nTags;
+%     elements(iElem).tags = matElements(iElem,...
+%         4:3+elements(iElem).nTags);
+%     i_end = size(matElements, 2) - 2 + elements(iElem).type;
+%     elements(iElem).nodes = matElements(iElem, i_tags+1:i_end);
+% end
