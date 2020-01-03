@@ -4,8 +4,8 @@ load(files.respth, 'U', 'triangles', 'nodes', 'nNodes', ...
     'nodesBc', 'Bp', 'Bpx', 'Bpy')
 
 N = slv.getFuns('formarr');
-x = [nodes.x];
-y = [nodes.y];
+x = nodes(:,1);
+y = nodes(:,2);
 %clear nodes
 xc = nodesBc(:,1);
 yc = nodesBc(:,2);

@@ -1,3 +1,3 @@
 function [xe, ye] = getElementXY(nodes, eNodes)
-xe = [nodes(eNodes).x];
-ye = [nodes(eNodes).y];
+xe = nodes(eNodes,1);
+ye = nodes(eNodes,2);

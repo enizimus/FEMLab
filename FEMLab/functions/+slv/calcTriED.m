@@ -21,8 +21,8 @@ eps(eps == 0) = 1;
 
 for iTri = 1:nTris
     
-    x = [nodes(triangles(iTri,:)).x];
-    y = [nodes(triangles(iTri,:)).y];
+    x = nodes(triangles(iTri,:),1);
+    y = nodes(triangles(iTri,:),2);
     ABC = slv.solveAbc(x,y);
     nodes_Ec(iTri, :) = [sum(x)*c, sum(y)*c];
     

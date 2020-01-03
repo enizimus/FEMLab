@@ -39,7 +39,7 @@ for iPt = 1:nPts
     I = triangles(parentTri(iPt), :);
     xtri = x(I);
     ytri = y(I);
-    ABC = slv.solveAbc(xtri', ytri');
+    ABC = slv.solveAbc(xtri, ytri);
     
     hNForm = N(X(iPt), Y(iPt), ABC');
     H(iPt) = Hp(I)*hNForm;

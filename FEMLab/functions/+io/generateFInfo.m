@@ -1,11 +1,16 @@
-function generateFInfo(files)
+function generateFInfo(files, opt)
 
-fileInfo = dir(files.mshFile);
-infoSet = dir(files.settxtfile);
-
-if(isempty(fileInfo))
-    fileInfo = struct();
+switch(opt)
+    
+    case 'MSH'
+        
+        infoMsh = dir(files.mshFile);
+        mshDate = infoMsh.date;
+        save(files.finfo, 'mshDate', '-append')
+        
+    case 'REG'
+        
+        infoReg = dir(files.regfile);
+        regDate = infoReg.date;
+        save(files.finfo, 'regDate', '-append')
 end
-
-fileInfo.setDate = '';
-save(files.finfo, 'fileInfo')

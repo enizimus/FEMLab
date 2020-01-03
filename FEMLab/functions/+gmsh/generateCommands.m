@@ -1,7 +1,7 @@
-function cmd = generateCommands(files)
+function cmd = generateCommands(files, sys)
 
 cmd = struct();
-Gmesh = '.\gmesh\gmsh';
+Gmesh = ['./gmesh/gmsh_', sys];
 
 cmd.Gmesh = Gmesh;
 cmd.editGeo = [Gmesh, ' ', files.geoFile];

@@ -1,13 +1,24 @@
-function fileMod = isFileModified(files, fileInfo)
+function fileModified = isFileModified(files, savedDate, opt)
 
-fileMod = false;
-mfile = dir(files.mshFile);
-setfile = dir(files.setfile);
-if isempty(mfile) || isempty(setfile)
-    fileMod = true;
+fileModified = false;
+
+switch(opt)
+    
+    case 'MSH'
+    fileDate = dir(files.mshFile).date;
+    
+    case 'REG'
+    fileDate = dir(files.regfile).date;
+
+end
+
+if(isempty(fileDate))
+    
+    error(['No ' opt ' file present!!!'])
    
-elseif(~strcmp(mfile.date, fileInfo.date) || ...
-   ~strcmp(setfile.date, fileInfo.setDate))
-    fileMod = true;
+elseif(~strcmp(fileDate, savedDate))
+
+    fileModified = true;
+    io.generateFInfo(files, opt);
 
 end

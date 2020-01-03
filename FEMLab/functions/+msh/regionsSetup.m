@@ -1,22 +1,19 @@
 function regionsSetup(files)
 
-load(files.respth, 'regions', 'nElems', 'elements', 'nNodes', 'nodes')
+load(files.respth, 'regSet', 'nElems', 'elements', 'nNodes', 'nodes', 'form')
 
-% If new project started with no region setup file this function will
-% create a new one and read it, if a file already exists it will just read
-% the file and give it back.
-[regSet, nRegSets] = io.readRegions(files);
+sElements = msh.structureElements(elements);
 
-[elemsRegion, elemsTag] = msh.getElemRegions(elements, nElems, regSet);
-
-[prescNodes, nSys] = msh.getPrescribedNodes(elements, elemsTag, nNodes);
+[elemsRegion, elemsTag] = msh.getElemRegions(sElements, nElems, regSet);
 
 [triangles, ptriangles, lines, elemOffset,...
-    regsLines, regsTris, nTris, nLines] = msh.extractLT(elements, nElems, elemsRegion);
+    regsLines, regsTris, nTris, nLines] = msh.extractLT(sElements, nElems, elemsRegion, form);
 
-x = [nodes.x]';
-y = [nodes.y]';
+[prescNodes, nSys] = msh.getPrescribedNodes(sElements.nodes, elemsTag, nNodes);
 
-save(files.respth, 'elemsRegion', 'regSet', 'elemsTag', ...
+x = nodes(:,1);
+y = nodes(:,2);
+
+save(files.respth, 'sElements', 'elemsRegion', 'elemsTag', ...
     'prescNodes', 'nSys', 'triangles', 'lines', 'elemOffset',...
     'regsLines', 'regsTris', 'nTris', 'nLines', 'x', 'y', 'ptriangles', '-append');
