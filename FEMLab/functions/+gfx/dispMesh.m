@@ -24,10 +24,10 @@ function dispMesh(files, optProb)
 % Mar 2019
 
 load(files.respth, 'regSet', 'elemsRegion', 'x', 'y', ...
-    'nTris', 'ptriangles', 'lines', 'nLines');
+    'nTris', 'ptriangles', 'lines', 'nLines', ...
+    'nEdgeElems', 'nFaceElems');
 
 warning('off','all')
-[nEdgeElems, nFaceElems] = msh.getItemNums(regSet);
 [legnd, regKeys] = msh.getComboKeys(regSet);
 
 f = figure;

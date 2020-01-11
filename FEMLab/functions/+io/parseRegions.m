@@ -56,6 +56,7 @@ for iTag = 1:nTags
     for iItem = 1:dataParsed(iTag).nItems
         parts = strsplit(dataParsed(iTag).cValues{iItem});
         regSet(iReg).id = str2double(parts{1});
+        regSet(iReg).dim = iTag;
         regSet(iReg).name = parts{2};
         regSet(iReg).spec = parts{3};
         regSet(iReg).specnum = io.mapRegions(parts{3});
@@ -65,8 +66,12 @@ for iTag = 1:nTags
     end
 end
 
+nEdgeElems = dataParsed(1).nItems;
+nFaceElems = dataParsed(2).nItems;
+
 fclose(fid);
-save(files.respth, 'regSet', 'nIt', '-append')
+save(files.respth, 'regSet', 'nIt', ... 
+    'nEdgeElems', 'nFaceElems', '-append')
 
 
 
