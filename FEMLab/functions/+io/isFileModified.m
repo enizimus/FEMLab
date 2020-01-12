@@ -5,10 +5,12 @@ fileModified = false;
 switch(opt)
     
     case 'MSH'
-    fileDate = dir(files.mshFile).date;
+    fileDir = dir(files.mshFile);
+    fileDate = fileDir.date;
     
     case 'REG'
-    fileDate = dir(files.regfile).date;
+    fileDir = dir(files.regfile);
+    fileDate = fileDir.date;
 
 end
 
