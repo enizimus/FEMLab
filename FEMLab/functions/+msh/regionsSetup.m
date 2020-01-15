@@ -4,12 +4,14 @@ load(files.respth, 'regSet', 'nElems', 'elements', 'nNodes', 'nodes', 'form')
 
 sElements = msh.structureElements(elements);
 
+prescRegions = msh.getPrescribedRegions(regSet);
+
 [elemsRegion, elemsTag] = msh.getElemRegions(sElements, nElems, regSet);
 
 [triangles, ptriangles, lines, elemOffset,...
     regsLines, regsTris, nTris, nLines] = msh.extractLT(sElements, nElems, elemsRegion, form);
 
-[prescNodes, nSys] = msh.getPrescribedNodes(sElements.nodes, elemsTag, nNodes);
+[prescNodes, nSys] = msh.getPrescribedNodes(sElements.nodes, elemsRegion, prescRegions, nNodes);
 
 x = nodes(:,1);
 y = nodes(:,2);
