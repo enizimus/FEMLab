@@ -1,4 +1,4 @@
-function [matK,vecR,U,n] = calcElementMats(U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I)
+function [matK, vecR, n] = calcElementMats(U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I)
 
 iK = find(I ~= 0);
 iN = 1:3;
