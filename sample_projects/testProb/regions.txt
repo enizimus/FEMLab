@@ -1,1 +1,0 @@
-$Edges11 diri DRB 0 0$EndEdges$Faces22 airi MAT 1 03 souri SRC 1 1e-3$EndFaces
