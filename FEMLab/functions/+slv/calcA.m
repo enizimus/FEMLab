@@ -3,14 +3,15 @@ disp('-Setting up element matrices and calculating A')
 tic
 
 load(files.respth, 'sElements', 'regSet', 'nNodes', 'nElems', 'prescNodes', ...
-    'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y', 'const')
+    'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y', 'const', 'form')
 
 [hFunElemK, hFunElemR] = slv.getFuns('element', optProb);
 [hFunQuadK, hFunQuadR] = slv.getFuns('quadrature', optProb);
+[hFunAbc, ~] = slv.getFuns('coefs', optProb);
 
-[xTri, yTri] = msh.getTriXY(triangles, x, y, nTris);
+[xTri, yTri] = msh.getTriXY(triangles, x, y, nTris, form.nTriNodes);
 areaTri = util.calcAreaTri(xTri, yTri, nTris);
-ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri);
+ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri, hFunAbc);
 
 [matParams, srcParams] = msh.getElemParams(optProb, elemsRegion, regSet, const);
 
