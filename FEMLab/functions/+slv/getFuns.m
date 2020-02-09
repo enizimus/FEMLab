@@ -1,4 +1,4 @@
-function [f1, f2] = getFuns(type, optProb)
+function [f1, f2] = getFuns(type, optProb, elemOrder)
 
 if(nargin < 2 || isempty(optProb))
     optProb = struct('class', {''}, 'type', {''}, ...
@@ -16,7 +16,7 @@ switch lower(type)
         f1 = @slv.integrateWas;
         f2 = 0;
     case {'element'}
-        [f1, f2] = slv.getElementFun(optProb);
+        [f1, f2] = slv.getElementFun(optProb, elemOrder);
     case {'efield', 'e'}
         [f1, f2] = slv.getEFun(optProb);
     case {'bfield', 'b'}
