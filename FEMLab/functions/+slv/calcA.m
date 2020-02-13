@@ -5,9 +5,9 @@ tic
 load(files.respth, 'sElements', 'regSet', 'nNodes', 'nElems', 'prescNodes', ...
     'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y', 'const', 'form')
 
-[hFunElemK, hFunElemR] = slv.getFuns('element', optProb, form.elemOrder);
-[hFunQuadK, hFunQuadR] = slv.getFuns('quadrature', optProb, form.elemOrder);
-[hFunAbc, ~] = slv.getFuns('coefs', optProb, form.elemOrder);
+[hFunElemK, hFunElemR] = slv.getFuns('element', optProb);
+[hFunQuadK, hFunQuadR] = slv.getFuns('quadrature', optProb);
+[hFunAbc, ~] = slv.getFuns('coefs', optProb);
 
 [xTri, yTri] = msh.getTriXY(triangles, x, y, nTris, form.nTriNodes);
 areaTri = util.calcAreaTri(xTri, yTri, nTris);
