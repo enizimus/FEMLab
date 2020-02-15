@@ -1,6 +1,6 @@
-function ABCs = calcAbcs(xTri, yTri, nTris, areaTri, calcAbc)
+function ABCs = calcAbcs(xTri, yTri, nTris, areaTri, calcAbc, nTriNodes)
 
-ABCs = zeros(nTris, 3, 3);
+ABCs = zeros(nTris, nTriNodes, nTriNodes);
 
 for iTri = 1:nTris
     ABCs(iTri,:,:) = calcAbc(xTri(iTri, :)', yTri(iTri, :)', areaTri(iTri)');

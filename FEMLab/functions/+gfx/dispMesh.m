@@ -47,7 +47,7 @@ for iReg = nEdgeElems + 1:(nEdgeElems + nFaceElems)
     clr = msh.getColor(files, regSet(iReg));
     
     tris = ptriangles(elemTriangles == regKeys(iReg),:);
-    TRI = triangulation(tris,x,y);
+    TRI = triangulation(tris(:,1:3),x,y);
     
     hTris(ih) = triplot(TRI, 'color', clr);
     ih = ih + 1;

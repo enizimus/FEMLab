@@ -1,7 +1,7 @@
-function [U, I, A] = setKnownPot(triangles, nTris, nodeProps, regSet)
+function [U, I, A] = setKnownPot(triangles, nTris, nodeProps, regSet, nTriNodes)
 
 Aknown = nan(size(nodeProps));
-I = reshape(nodeProps(triangles(:)), [nTris, 3]);
+I = reshape(nodeProps(triangles(:)), [nTris, nTriNodes]);
 U = zeros(size(I));
 keys_U = unique(I);
 keys_U(keys_U == 0) = [];

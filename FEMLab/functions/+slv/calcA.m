@@ -11,11 +11,11 @@ load(files.respth, 'sElements', 'regSet', 'nNodes', 'nElems', 'prescNodes', ...
 
 [xTri, yTri] = msh.getTriXY(triangles, x, y, nTris, form.nTriNodes);
 areaTri = util.calcAreaTri(xTri, yTri, nTris);
-ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri, hFunAbc);
+ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri, hFunAbc, form.nTriNodes);
 
 [matParams, srcParams] = msh.getElemParams(optProb, elemsRegion, regSet, const);
 
-[Uk, Ik, Aknown] = slv.setKnownPot(triangles, nTris, prescNodes, regSet);
+[Uk, Ik, Aknown] = slv.setKnownPot(triangles, nTris, prescNodes, regSet, form.nTriNodes);
 
 matK = spalloc(nNodes, nNodes, 6*nNodes);
 vecR = zeros(nNodes, 1);
@@ -27,6 +27,7 @@ for iElem = nLines+1:nElems
         
         abc = reshape(ABCs(iTri,:,:), [form.nTriNodes, form.nTriNodes]);
         
+        %% bauštela : 
         [tK, tR, tn] = ... % U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I)
             slv.calcElementMats(Uk(iTri,:)', hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, areaTri(iTri),abc,...
             xTri(iTri,:), yTri(iTri,:), matParams(iElem), srcParams(iElem), Ik(iTri,:), form.nTriNodes);
