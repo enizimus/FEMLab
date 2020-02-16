@@ -16,7 +16,7 @@ switch lower(type)
         f1 = @slv.integrateWas;
         f2 = 0;
     case {'element'}
-        [f1, f2] = slv.getElementFun(optProb, optProb.elementOrder);
+        [f1, f2] = slv.getElementFun(optProb);
     case {'efield', 'e'}
         [f1, f2] = slv.getEFun(optProb);
     case {'bfield', 'b'}

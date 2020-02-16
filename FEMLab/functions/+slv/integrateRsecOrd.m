@@ -1,6 +1,6 @@
-function I = integrateR(A, abc, f, fun, x, y)
+function I = integrateRsecOrd(A, abc, f, fun, x, y)
 
-gData = [0.333333333333333, 0.333333333333333, 0.1125
+w = [0.333333333333333, 0.333333333333333, 0.1125
          0.470142064105115, 0.470142064000000, 0.066197076394253
          0.059715871789770, 0.470142064000000, 0.066197076394253
          0.470142064105115, 0.059715872000000, 0.066197076394253
@@ -13,13 +13,20 @@ I = 0;
 
 for iPt = 1:nP
     
-    % Transformation into unit element (triangle) at (0,0) (1,0) (0,1) : 
-    xv = x(1)*(1-gData(iPt,1)-gData(iPt,2))+x(2)*gData(iPt,1)+x(3)*gData(iPt,2);
-    yv = y(1)*(1-gData(iPt,1)-gData(iPt,2))+y(2)*gData(iPt,1)+y(3)*gData(iPt,2);
+    % Transformation into unit element (triangle) at (0,0) (1,0) (0,1) :
+    z2 = w(iPt,1);
+    z3 = w(iPt,2);
+    z1 = 1-z2-z3;
+    
+    q = [z1*(2*z1-1); z2*(2*z2-1); z3*(2*z3-1);
+         4*z1*z2;      4*z2*z3;    4*z1*z3];
+    
+    xv = x*q;
+    yv = y*q;
     
     % Gaussian quadrature : sum(f(xi)*wi)
-    fv = fun(xv, yv, abc, A);
-    I = I + fv*gData(iPt,3);
+    fv = fun(xv, yv, A, abc);
+    I = I + fv*w(iPt,3);
 end
 
 I = f*I*A*2;

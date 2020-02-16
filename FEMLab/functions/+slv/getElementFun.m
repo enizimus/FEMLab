@@ -1,4 +1,4 @@
-function [hFunElemK, hFunElemR] = getElementFun(optProb, elemOrder)
+function [hFunElemK, hFunElemR] = getElementFun(optProb)
 
 [type1, type2] = def.getProbTypeVals();
 type = def.getProbType(optProb.symmetry);
@@ -7,12 +7,12 @@ if(def.isPlanar(optProb.symmetry))
 
     if(def.isInt(optProb.computation)) % magnetostatic & electrostatic planar case for integration
 
-        if(elemOrder == 1) % For first order elements 
+        if(optProb.elementOrder == 1) % For first order elements, same for EStatic and MStatic 
         
             hFunElemK = @(A, k, b, c) 0.25*(k(1)*b(1)*b(2) + k(2)*c(1)*c(2))/(A^2);
-            hFunElemR = @(x,y,abc,A) 0.5*(abc(1)+abc(2)*x+abc(3)*y)/(A);
+            hFunElemR = @(x, y, A, abc) 0.5*(abc(1)+abc(2)*x+abc(3)*y)/(A);
 
-        elseif(elemOrder == 2) % For second order elements 
+        elseif(optProb.elementOrder == 2) % For second order elements, same for EStatic and MStatic 
 
             % Partial derivatives of quadr. element function 
             dNdx = @(x,y,abc) abc(2) + 2*abc(4)*x + abc(5)*y;
@@ -20,14 +20,14 @@ if(def.isPlanar(optProb.symmetry))
 
             hFunElemK = @(x, y, A, k, abc) 0.25/A^2*(k(1)*dNdx(x,y,abc(:,1))*dNdx(x,y,abc(:,2))+...
                                                      k(2)*dNdy(x,y,abc(:,1))*dNdy(x,y,abc(:,2)));
-
-            % ! Vectorize squaring and multiplication later !!  
-            hFunElemR = @(x, y, A, abc) 0.5/A*(abc(1)+abc(2)*x+abc(3)*y+abc(4)*x^2+abc(5)*x*y+abc(6)*y^2); % + neumann (for now zero)
+ 
+            hFunElemR = @(x, y, A, abc) 0.5/A*(abc(1)+abc(2)*x+abc(3)*y+...
+                                         abc(4)*x^2+abc(5)*x*y+abc(6)*y^2); % + neumann (for now zero)
         end
     
     else % magnetostatic & electrostatic planar case for direct calculation 1st order elements
     
-        hFunElemK = @(A, k, b, c) 0.25*(k(1)*b(1)*b(2) + k(2)*c(1)*c(2))/(A); 
+        hFunElemK = @(~, ~, A, k, b, c) 0.25*(k(1)*b(1)*b(2) + k(2)*c(1)*c(2))/(A); 
         
         hFunElemR = @(f,A) f*A*0.333333333333333;                             
     
@@ -37,17 +37,17 @@ elseif(def.isRotsym(optProb.symmetry))
     
     if(def.isMstatic(optProb.problemClass)) % magnetostatic rot-sym case
        
-        if(elemOrder == 1)
+        if(optProb.elementOrder == 1)
             N = @(abc, r, z) (abc(1) + abc(2)*r + abc(3)*z);
         
-            hFunElemK = @(A, abc, r, z, k) 0.25*(k(1)*((N(abc(:,1),r,z)*N(abc(:,2),r,z))/r + ...
+            hFunElemK = @(r, z, A, k, abc) 0.25*(k(1)*((N(abc(:,1),r,z)*N(abc(:,2),r,z))/r + ...
                 N(abc(:,1),r,z)*abc(2,2) + N(abc(:,2),r,z)*abc(2,1)+...
                 r*abc(2,2)*abc(2,1))+...
                 k(2)*r*(abc(3,1)*abc(3,2)))/(A^2);
         
-            hFunElemR = @(r, z, abc, A) 0.5*r*(abc(1)+abc(2)*r+abc(3)*z)/(A);
+            hFunElemR = @(r, z, A, abc) 0.5*r*(abc(1)+abc(2)*r+abc(3)*z)/(A);
 
-        elseif(elemOrder == 2)
+        elseif(optProb.elementOrder == 2)
 
             % Partial derivatives of quadr. element function 
             dNdr = @(r,z,abc) abc(2) + 2*abc(4)*r + abc(5)*z;
@@ -55,32 +55,32 @@ elseif(def.isRotsym(optProb.symmetry))
 
             N = @(r,z,abc) abc(1)+abc(2)*r+abc(3)*z+abc(4)*r^2+abc(5)*r*z+abc(6)*z^2;
 
-            hFunElemK = @(A, abc, r, z, k) 0.25/A^2*r*(k(2)*(N(r,z,abc(:,1)*N(r,z,abc(:,2)))/r^2 + ...
+            hFunElemK = @(r, z, A, k, abc) 0.25/A^2*r*(k(2)*(N(r,z,abc(:,1)*N(r,z,abc(:,2)))/r^2 + ...
                                                              N(r,z,abc(:,1))*dNdr(r,z,abc(:,2))/r + ... 
                                                              N(r,z,abc(:,2))*dNdr(r,z,abc(:,1))/r + ...
                                                              dNdr(r,z,abc(:,1))*dNdr(r,z,abc(:,2))) + ...
                                                        k(1)*dNdz(r,z,abc(:,1))*dNdz(r,z,abc(:,2)));
 
-            hFunElemR = @(A, abc, r, z, k) 0.5/A*r*N(r,z,abc);
+            hFunElemR = @(r, z, A, abc) 0.5/A*r*N(r,z,abc);
         end
         
     elseif(def.isEstatic(optProb.problemClass)) % electrostatic rot-sym case
 
-        if(elemOrder == 1)
+        if(optProb.elementOrder == 1)
         
-            hFunElemK = @(A, abc, r, ~, k) 0.25*r*(k(1)*abc(2,1)*abc(2,2) + k(2)*abc(3,1)*abc(3,2))/(A^2);
-            hFunElemR = @(r, z, abc, A) 0.5*r*(abc(1)+abc(2)*r+abc(3)*z)/(A);
+            hFunElemK = @(r, ~, A, k, abc) 0.25*r*(k(1)*abc(2,1)*abc(2,2) + k(2)*abc(3,1)*abc(3,2))/(A^2);
+            hFunElemR = @(r, z, A, abc) 0.5*r*(abc(1)+abc(2)*r+abc(3)*z)/(A);
 
-        elseif(elemOrder == 2)
+        elseif(optProb.elementOrder == 2)
 
             % Partial derivatives of quadr. element function 
             dNdr = @(r,z,abc) abc(2) + 2*abc(4)*r + abc(5)*z;
             dNdz = @(r,z,abc) abc(3) + 2*abc(6)*z + abc(5)*r;
 
-            hFunElemK = @(A, abc, r, z, k) 0.25/A^2*r*(k(1)*dNdr(r,z,abc(:,1))*dNdr(r,z,abc(:,2)) +...
+            hFunElemK = @(r, z, A, k, abc) 0.25/A^2*r*(k(1)*dNdr(r,z,abc(:,1))*dNdr(r,z,abc(:,2)) +...
                                                        k(2)*dNdz(r,z,abc(:,1))*dNdz(r,z,abc(:,2)));
 
-            hFunElemR = @(r, z, abc, A) 0.5/A*r*(abc(1)+abc(2)*r+abc(3)*z+abc(4)*r^2+abc(5)*r*z+abc(6)*z^2);
+            hFunElemR = @(r, z, A, abc) 0.5/A*r*(abc(1)+abc(2)*r+abc(3)*z+abc(4)*r^2+abc(5)*r*z+abc(6)*z^2);
 
         end
     

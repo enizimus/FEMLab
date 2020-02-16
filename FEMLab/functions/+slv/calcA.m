@@ -27,7 +27,6 @@ for iElem = nLines+1:nElems
         
         abc = reshape(ABCs(iTri,:,:), [form.nTriNodes, form.nTriNodes]);
         
-        %% bauštela : 
         [tK, tR, tn] = ... % U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I)
             slv.calcElementMats(Uk(iTri,:)', hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, areaTri(iTri),abc,...
             xTri(iTri,:), yTri(iTri,:), matParams(iElem), srcParams(iElem), Ik(iTri,:), form.nTriNodes);
