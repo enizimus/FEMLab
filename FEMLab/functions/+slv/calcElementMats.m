@@ -1,4 +1,4 @@
-function [matK, vecR, n] = calcElementMats(U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I, nElemNodes)
+function [matK, vecR, iN] = calcElementMats(U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I, nElemNodes)
 
 iK = find(I ~= 0);
 iN = 1:nElemNodes;
@@ -18,12 +18,6 @@ for i=1:nElemNodes
     Rp(i) = hFunQuadR(A, abc(:,i), f, hFunElemR, xe, ye);
 end
 
-lenK = max([length(iK), length(iN)]);
-
 tempR = zeros(nElemNodes,1);
-tempR(iN) = U(iK)'*reshape(matK(iN, iK),[lenK, 1]);
+tempR(iN) = matK(iN, iK)*U(iK);
 vecR = Rp - tempR;
-n = iN;
-
-
-

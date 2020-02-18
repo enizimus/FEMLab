@@ -18,7 +18,7 @@ for iPt = 1:nP
     yv = y(1)*(1-gData(iPt,1)-gData(iPt,2))+y(2)*gData(iPt,1)+y(3)*gData(iPt,2);
     
     % Gaussian quadrature : sum(f(xi)*wi)
-    fv = fun(xv, yv, abc, A);
+    fv = fun(xv, yv, A, abc);
     I = I + fv*gData(iPt,3);
 end
 
