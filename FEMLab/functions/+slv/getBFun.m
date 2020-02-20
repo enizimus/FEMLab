@@ -4,14 +4,11 @@ function [hFunBx, hFunBy] = getBFun(optProb)
 type = def.getProbType(optProb.symmetry);
 
 if(type == type1) % planar case
-    hFunBx = @(A, ABC) A'*ABC(2,:)';
-    hFunBy = @(A, ABC, ~, ~) - A'*ABC(1,:)';
+    hFunBx = @(A, ABC) ABC(3,:)*A;
+    hFunBy = @(A, ABC, ~, ~) - ABC(2,:)*A;
     
 elseif(type == type2) %axissymetric case
-    N = @(abc, r, z) [r z 1]*abc;
-    hFunBx = @(A, ABC) -A'*ABC(2,:)';
-    hFunBy = @(A, ABC, r, z) (A(1)*N(ABC(:,1), r, z) + ...
-        A(2)*N(ABC(:,2), r, z) + ...
-        A(3)*N(ABC(:,3), r, z))/r + ...
-        A'*ABC(1,:)';
+    N = @(ABC, r, z) [1 r z]*ABC;
+    hFunBx = @(A, ABC) -ABC(3,:)*A;
+    hFunBy = @(A, ABC, r, z) N(ABC,r,z)*A/r + ABC(2,:)*A;
 end

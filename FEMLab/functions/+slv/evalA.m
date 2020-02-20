@@ -1,15 +1,15 @@
-function evalA(files)
+function evalA(files, optProb)
 
 load(files.respth, 'triangles', 'x', 'y', 'Ap',...
-    'X', 'Y')
+    'X', 'Y', 'ABCs', 'areaTri')
 
 nPts = size(X,1)*size(X,2);
 A = zeros(size(X));
 
-TRI = triangulation(triangles, x, y);
+TRI = triangulation(triangles(:,1:3), x, y);
 parentTri = pointLocation(TRI, X(:), Y(:));
 
-N = slv.getFuns('formfun');
+N = slv.getFuns('formfun', optProb);
 
 for iPt = 1:nPts
     if isnan(parentTri(iPt))
@@ -27,13 +27,13 @@ for iPt = 1:nPts
             continue;
         end
     end
-    I = triangles(parentTri(iPt), :);
-    xtri = x(I);
-    ytri = y(I);
-    ABC = slv.solveAbc(xtri, ytri);
     
-    hNForm = N(X(iPt), Y(iPt), ABC');
-    A(iPt) = Ap(I)'*hNForm;
+    iTri = parentTri(iPt);
+    I = triangles(iTri, :);
+    ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));
+    hNForm = N(X(iPt), Y(iPt), ABC);
+    
+    A(iPt) = hNForm*Ap(I);
 end
 
 save(files.respth, 'A', '-append')

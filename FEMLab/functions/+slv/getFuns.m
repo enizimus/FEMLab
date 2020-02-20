@@ -8,7 +8,8 @@ end
 switch lower(type)
     
     case {'formfun'}
-        f1 = @(x,y,ABC) ABC*[x, y, 1]';
+        f1 = slv.getFormFun(optProb);
+        %f1 = @(x,y,ABC) ABC*[x, y, 1]';
         f2 = 0; 
     case {'quadrature'}
         [f1, f2] = slv.getIntegralFun(optProb);

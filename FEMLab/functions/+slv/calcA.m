@@ -25,10 +25,10 @@ for iElem = nLines+1:nElems
     iTri = iElem-nLines;
     if(~all(Ik(iTri,:)))
         
-        abc = reshape(ABCs(iTri,:,:), [form.nTriNodes, form.nTriNodes]);
+        ABC = ABCs(:,:,iTri);
         
         [tK, tR, tn] = ... % U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I)
-            slv.calcElementMats(Uk(iTri,:)', hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, areaTri(iTri),abc,...
+            slv.calcElementMats(Uk(iTri,:)', hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, areaTri(iTri),ABC,...
             xTri(iTri,:), yTri(iTri,:), matParams(iElem), srcParams(iElem), Ik(iTri,:), form.nTriNodes);
         
         iN = sElements.nodes(iElem, tn);

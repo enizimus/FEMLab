@@ -29,7 +29,7 @@ tic
 slv.calcTriED(files, optProb)
 slv.calcTriPointED(files)
 
-[E, Ex, Ey, D, Dx, Dy] = slv.evalED(files);
+[E, Ex, Ey, D, Dx, Dy] = slv.evalED(files, optProb);
 save(files.respth, 'E', 'Ex', 'Ey', ...
                    'D', 'Dx', 'Dy', '-append')
 

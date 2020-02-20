@@ -1,6 +1,6 @@
 function calcTriBH(files, optProb)
 
-load(files.respth, 'Ap', 'triangles', 'nodes', 'nNodes', ...
+load(files.respth, 'Ap', 'triangles', 'nodes', 'areaTri', ...
     'ABCs', 'regsTris', 'regSet', 'const')
 
 nTris = length(triangles);
@@ -23,7 +23,8 @@ for iTri = 1:nTris
     
     x = nodes(triangles(iTri,:),1);
     y = nodes(triangles(iTri,:),2);
-    ABC = slv.solveAbc(x,y);
+    ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));
+    
     nodesBc(iTri, :) = [sum(x)*c, sum(y)*c];
     
     cBy = hFunBy(Ap(triangles(iTri,:)), ABC, nodesBc(iTri, 1), nodesBc(iTri, 2));

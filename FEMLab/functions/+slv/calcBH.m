@@ -31,7 +31,7 @@ tic
 slv.calcTriBH(files, optProb)
 slv.calcTriPointBH(files)
 
-[B, Bx, By, H, Hx, Hy] = slv.evalBH(files);
+[B, Bx, By, H, Hx, Hy] = slv.evalBH(files, optProb);
 save(files.respth, 'B', 'Bx', 'By', 'H', 'Hx', 'Hy', '-append')
 
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])

@@ -1,6 +1,6 @@
 function calcTriED(files, optProb)
 
-load(files.respth, 'Ap', 'triangles', 'nodes', 'nNodes', ...
+load(files.respth, 'Ap', 'triangles', 'nodes', 'areaTri', ...
                    'regsTris', 'regSet', 'const', 'ABCs')
 
 nTris = length(triangles);
@@ -23,7 +23,9 @@ for iTri = 1:nTris
     
     x = nodes(triangles(iTri,:),1);
     y = nodes(triangles(iTri,:),2);
-    ABC = slv.solveAbc(x,y);
+    
+    ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));
+    
     nodes_Ec(iTri, :) = [sum(x)*c, sum(y)*c];
     
     cEy = hFunEy(Ap(triangles(iTri,:)), ABC, nodes_Ec(iTri, 1), nodes_Ec(iTri, 2));

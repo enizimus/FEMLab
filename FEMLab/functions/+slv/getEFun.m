@@ -1,4 +1,4 @@
 function [hFunEx, hFunEy] = getEFun(optProb)
 
-hFunEx = @(A, ABC) -A'*ABC(1,:)';
-hFunEy = @(A, ABC, ~, ~) -A'*ABC(2,:)';
+hFunEx = @(A, ABC) -ABC(2,:)*A;
+hFunEy = @(A, ABC, ~, ~) -ABC(3,:)*A;

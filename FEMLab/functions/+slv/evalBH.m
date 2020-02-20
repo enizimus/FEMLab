@@ -1,10 +1,11 @@
-function [B, Bx, By, H, Hx, Hy] = evalBH(files, X, Y)
+function [B, Bx, By, H, Hx, Hy] = evalBH(files, optProb, X, Y)
 
 load(files.respth, 'triangles', 'x', 'y',...
                     'Bp', 'Bpx', 'Bpy', ...
-                    'Hp', 'Hpx', 'Hpy')
+                    'Hp', 'Hpx', 'Hpy', ...
+                    'ABCs', 'areaTri')
                 
-if(nargin < 2 || (isempty(X) && isempty(Y)))
+if(nargin < 3 || (isempty(X) && isempty(Y)))
     load(files.respth, 'X', 'Y')
 end
 
@@ -21,7 +22,7 @@ Hy = zeros(size(X));
 TRI = triangulation(triangles, x, y);
 parentTri = pointLocation(TRI, X(:), Y(:));
 
-N = slv.getFuns('formfun');
+N = slv.getFuns('formfun', optProb);
 
 for iPt = 1:nPts
     if isnan(parentTri(iPt))
@@ -48,12 +49,12 @@ for iPt = 1:nPts
         end
 
     end
-    I = triangles(parentTri(iPt), :);
-    xtri = x(I);
-    ytri = y(I);
-    ABC = slv.solveAbc(xtri, ytri);
     
-    hNForm = N(X(iPt), Y(iPt), ABC');
+    iTri = parentTri(iPt);
+    I = triangles(iTri, :);
+    ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));
+    
+    hNForm = N(X(iPt), Y(iPt), ABC)';
     
     B(iPt) = Bp(I)*hNForm;
     Bx(iPt) = Bpx(I)*hNForm;
