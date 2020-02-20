@@ -9,9 +9,9 @@ if(type == type1) % planar case
         hFunBy = @(A, ABC, ~, ~) - ABC(2,:)*A;
     elseif(optProb.elementOrder == 2)
         dNdx = @(ABC, x, y) [1 2*x y]*ABC([2,4,5],:);
-        dNdy = @(ABC, x, y) [1 x 2*y]*ABC([3,5,6],:);
+        dNdz = @(ABC, x, y) [1 x 2*y]*ABC([3,5,6],:);
         
-        hFunBx = @(A, ABC, x, y)  dNdy(ABC,x,y)*A;
+        hFunBx = @(A, ABC, x, y)  dNdz(ABC,x,y)*A;
         hFunBy = @(A, ABC, x, y) -dNdx(ABC,x,y)*A;
     end
     
@@ -21,10 +21,10 @@ elseif(type == type2) %axissymetric case
         hFunBx = @(A, ABC, ~, ~) -ABC(3,:)*A;
         hFunBy = @(A, ABC, r, z) N(ABC,r,z)*A/r + ABC(2,:)*A;
     elseif(optProb.elementOrder == 2)
-        dNdr = @(ABC, r, z) ABC(:,[2,4,5])*[1; 2*r; z];
-        dNdz = @(ABC, r, z) ABC(:,[3,5,6])*[1; r; 2*z];
+        dNdr = @(ABC, r, z) [1 2*r z]*ABC([2,4,5],:);
+        dNdz = @(ABC, r, z) [1 r 2*z]*ABC([3,5,6],:);
         N = @(ABC, r, z) [1 r z r^2 r*z z^2]*ABC;
-        hFunBx = @(A, ABC, r, z) -A'*dNdz(ABC,r,z);
-        hFunBy = @(A, ABC, r, z) N(ABC, r, z)*A + A'*dNdr(ABC,r,z);
+        hFunBx = @(A, ABC, r, z) -dNdz(ABC,r,z)*A;
+        hFunBy = @(A, ABC, r, z) N(ABC, r, z)*A + dNdr(ABC,r,z)*A;
     end
 end
