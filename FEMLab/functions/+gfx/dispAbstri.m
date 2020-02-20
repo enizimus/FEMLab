@@ -7,7 +7,7 @@ end
 var = [optProb.plots, 'p'];
 load(files.respth, var, 'triangles', 'x', 'y')
 val = reshape(eval(var), [length(eval(var)), 1]);
-tri = triangulation(triangles, x, y, val);
+tri = triangulation(triangles(:,1:3), x, y, val);
 
 figure
 trisurf(tri)

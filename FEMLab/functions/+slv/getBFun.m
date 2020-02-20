@@ -4,11 +4,27 @@ function [hFunBx, hFunBy] = getBFun(optProb)
 type = def.getProbType(optProb.symmetry);
 
 if(type == type1) % planar case
-    hFunBx = @(A, ABC) ABC(3,:)*A;
-    hFunBy = @(A, ABC, ~, ~) - ABC(2,:)*A;
+    if(optProb.elementOrder == 1)
+        hFunBx = @(A, ABC, ~, ~) ABC(3,:)*A;
+        hFunBy = @(A, ABC, ~, ~) - ABC(2,:)*A;
+    elseif(optProb.elementOrder == 2)
+        dNdx = @(ABC, x, y) ABC(:,[2,4,5])*[1; 2*x; y];
+        dNdy = @(ABC, x, y) ABC(:,[3,5,6])*[1; x; 2*y];
+        
+        hFunBx = @(A, ABC, x, y)  A'*dNdy(ABC,x,y);
+        hFunBy = @(A, ABC, x, y) -A'*dNdx(ABC,x,y);
+    end
     
 elseif(type == type2) %axissymetric case
-    N = @(ABC, r, z) [1 r z]*ABC;
-    hFunBx = @(A, ABC) -ABC(3,:)*A;
-    hFunBy = @(A, ABC, r, z) N(ABC,r,z)*A/r + ABC(2,:)*A;
+    if(optProb.elementOrder == 1)
+        N = @(ABC, r, z) [1 r z]*ABC;
+        hFunBx = @(A, ABC, ~, ~) -ABC(3,:)*A;
+        hFunBy = @(A, ABC, r, z) N(ABC,r,z)*A/r + ABC(2,:)*A;
+    elseif(optProb.elementOrder == 2)
+        dNdr = @(ABC, r, z) ABC(:,[2,4,5])*[1; 2*r; z];
+        dNdz = @(ABC, r, z) ABC(:,[3,5,6])*[1; r; 2*z];
+        N = @(ABC, r, z) [1 r z r^2 r*z z^2]*ABC;
+        hFunBx = @(A, ABC, r, z) -A'*dNdz(ABC,r,z);
+        hFunBy = @(A, ABC, r, z) N(ABC, r, z)*A + A'*dNdr(ABC,r,z);
+    end
 end
