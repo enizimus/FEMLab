@@ -8,11 +8,11 @@ if(type == type1) % planar case
         hFunBx = @(A, ABC, ~, ~) ABC(3,:)*A;
         hFunBy = @(A, ABC, ~, ~) - ABC(2,:)*A;
     elseif(optProb.elementOrder == 2)
-        dNdx = @(ABC, x, y) ABC(:,[2,4,5])*[1; 2*x; y];
-        dNdy = @(ABC, x, y) ABC(:,[3,5,6])*[1; x; 2*y];
+        dNdx = @(ABC, x, y) [1 2*x y]*ABC([2,4,5],:);
+        dNdy = @(ABC, x, y) [1 x 2*y]*ABC([3,5,6],:);
         
-        hFunBx = @(A, ABC, x, y)  A'*dNdy(ABC,x,y);
-        hFunBy = @(A, ABC, x, y) -A'*dNdx(ABC,x,y);
+        hFunBx = @(A, ABC, x, y)  dNdy(ABC,x,y)*A;
+        hFunBy = @(A, ABC, x, y) -dNdx(ABC,x,y)*A;
     end
     
 elseif(type == type2) %axissymetric case
