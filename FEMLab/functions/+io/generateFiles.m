@@ -9,6 +9,7 @@ else
 end
 
 files.mesh = [fileName, '.msh'];
+files.projectFile = [filePath, fileName, '.mat'];
 files.geo = [fileName, '.geo'];
 files.fileName = fileName;
 files.filePath = filePath;
@@ -54,4 +55,8 @@ end
 
 if(exist([files.respth, '.mat'], 'file') ~= 2)
     save(files.respth, 'fileName')
+end
+
+if(exist(files.projectFile, 'file') ~= 2)
+    save(files.projectFile, 'fileName')
 end
