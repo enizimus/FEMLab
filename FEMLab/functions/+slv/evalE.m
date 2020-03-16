@@ -1,13 +1,15 @@
-function [E, Ex, Ey] = evalE(files, X, Y)
+function [E, Ex, Ey] = evalE(files, optProb, X, Y)
 
 load(files.respth, 'triangles', 'x', 'y',...
-                    'Ep', 'Epx', 'Epy')
+                    'Ep', 'Epx', 'Epy', ...
+                    'ABCs', 'areaTri')
                 
-if(nargin < 2 || (isempty(X) && isempty(Y)))
+if(nargin < 3 || (isempty(X) && isempty(Y)))
     load(files.respth, 'X', 'Y')
 end
 
 nPts = size(X,1)*size(X,2);
+
 E = zeros(size(X));
 Ex = zeros(size(X));
 Ey = zeros(size(X));
@@ -15,18 +17,19 @@ Ey = zeros(size(X));
 TRI = triangulation(triangles, x, y);
 parentTri = pointLocation(TRI, X(:), Y(:));
 
-N = slv.getFuns('formfun');
+N = slv.getFuns('formfun', optProb);
 
 for iPt = 1:nPts
     
-    I = triangles(parentTri(iPt), :);
-    xtri = x(I);
-    ytri = y(I);
-    ABC = slv.solveAbc(xtri, ytri);
+    iTri = parentTri(iPt);
+    I = triangles(iTri, :);
+    ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));
     
-    hNForm = N(X(iPt), Y(iPt), ABC');
-    E(iPt) = Ep(I)*hNForm;
-    Ex(iPt) = Epx(I)*hNForm;
-    Ey(iPt) = Epy(I)*hNForm;
+    hNForm = N(X(iPt), Y(iPt), ABC);
+    
+    E(iPt) = hNForm*Ep(I)';
+    Ex(iPt) = hNForm*Epx(I)';
+    Ey(iPt) = hNForm*Epy(I)';
 end
+
 

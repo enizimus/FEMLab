@@ -1,7 +1,10 @@
-function evalA(files, optProb)
+function A = evalA(files, optProb, X, Y)
 
-load(files.respth, 'triangles', 'x', 'y', 'Ap',...
-    'X', 'Y', 'ABCs', 'areaTri')
+load(files.respth, 'triangles', 'x', 'y', 'Ap', 'ABCs', 'areaTri')
+
+if(nargin < 3 || (isempty(X) && isempty(Y)))
+    load(files.respth, 'X', 'Y')
+end
 
 nPts = size(X,1)*size(X,2);
 A = zeros(size(X));
@@ -36,5 +39,5 @@ for iPt = 1:nPts
     A(iPt) = hNForm*Ap(I);
 end
 
-save(files.respth, 'A', '-append')
+
 
