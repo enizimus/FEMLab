@@ -26,16 +26,16 @@ isWriting = true;
 iTag = 1;
 while(isWriting)
     tag = tags{iTag};
-    fprintf(fid, [tag, '\r']); % print region tag
-    fprintf(fid, [num2str(length(indices{iTag})), '\r']); % print number of regions following
+    fprintf(fid, [tag, '\n\r']); % print region tag
+    fprintf(fid, [num2str(length(indices{iTag})), '\n\r']); % print number of regions following
     for iReg = indices{iTag}
         % Constructing line to be written
         line = [num2str(regions(iReg).id), ' ', regions(iReg).name, ' ', ...
             regions(iReg).spec, ' ', num2str(regions(iReg).matProp), ' ', ...
-            num2str(regions(iReg).srcProp), '\r'];
+            num2str(regions(iReg).srcProp), '\n\r'];
         fprintf(fid, line);
     end
-    fprintf(fid, ['$End', tag(2:end), '\r']);
+    fprintf(fid, ['$End', tag(2:end), '\n\r']);
     iTag = iTag + 1;
     if(iTag > length(tags))
         isWriting = false;
