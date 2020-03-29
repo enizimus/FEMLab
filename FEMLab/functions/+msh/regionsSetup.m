@@ -11,7 +11,7 @@ prescRegions = msh.getPrescribedRegions(regSet);
 [triangles, ptriangles, lines, elemOffset,...
     regsLines, regsTris, nTris, nLines] = msh.extractLT(sElements, nElems, elemsRegion, form);
 
-[prescNodes, nSys] = msh.getPrescribedNodes(sElements.nodes, elemsRegion, prescRegions, nNodes);
+[prescNodes, nSys] = msh.getPrescribedNodes(sElements.nodes, elemsRegion, elemsTag, prescRegions, nNodes);
 
 x = nodes(:,1);
 y = nodes(:,2);

@@ -3,11 +3,13 @@ disp('-Setting up element matrices and calculating A')
 tic
 
 load(files.respth, 'sElements', 'regSet', 'nNodes', 'nElems', 'prescNodes', ...
-    'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y', 'const', 'form')
+    'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y', 'const', 'form', 'lines')
 
-[hFunElemK, hFunElemR] = slv.getFuns('element', optProb);
-[hFunQuadK, hFunQuadR] = slv.getFuns('quadrature', optProb);
-[hFunAbc, ~] = slv.getFuns('coefs', optProb);
+[hFunElemK, hFunElemR, ~] = slv.getFuns('element', optProb);
+[hFunQuadK, hFunQuadR, ~] = slv.getFuns('quadrature', optProb);
+[hFunAbc, ~, ~] = slv.getFuns('coefs', optProb);
+[hSideFun1, hSideFun2, hSideFun3] = slv.getFuns('neumann', optProb);
+%[hNeuQuad, ~, ~] = slv.getFuns('neumann quadrature', optProb);
 
 [xTri, yTri] = msh.getTriXY(triangles, x, y, nTris, form.nTriNodes);
 areaTri = util.calcAreaTri(xTri, yTri, nTris);
@@ -16,6 +18,8 @@ ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri, hFunAbc, form.nTriNodes);
 [matParams, srcParams] = msh.getElemParams(optProb, elemsRegion, regSet, const);
 
 [Uk, Ik, Aknown] = slv.setKnownPot(triangles, nTris, prescNodes, regSet, form.nTriNodes);
+%In = msh.getNeumannTrianglePoints(prescNodes, triangles, nTris, form.nTriNodes);
+triNeumannLines = zeros(size(triangles));%msh.getTriNeumannLines(triangles, nTris, lines);
 
 matK = spalloc(nNodes, nNodes, 6*nNodes);
 vecR = zeros(nNodes, 1);
@@ -28,8 +32,8 @@ for iElem = nLines+1:nElems
         ABC = ABCs(:,:,iTri);
         
         [tK, tR, tn] = ... % U, hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, A, abc, xe, ye, k1, f, I)
-            slv.calcElementMats(Uk(iTri,:)', hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, areaTri(iTri),ABC,...
-            xTri(iTri,:), yTri(iTri,:), matParams(iElem), srcParams(iElem), Ik(iTri,:), form.nTriNodes);
+            slv.calcElementMats(Uk(iTri,:)', hFunQuadK, hFunQuadR, hFunElemK, hFunElemR, hSideFun1, hSideFun2, hSideFun3, areaTri(iTri),ABC,...
+            xTri(iTri,:), yTri(iTri,:), matParams(iElem), srcParams, iElem, Ik(iTri,:), form.nTriNodes, triNeumannLines(iTri,:), lines);
         
         iN = sElements.nodes(iElem, tn);
         

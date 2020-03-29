@@ -1,8 +1,5 @@
 function [hFunElemK, hFunElemR] = getElementFun(optProb)
 
-[type1, type2] = def.getProbTypeVals();
-type = def.getProbType(optProb.symmetry);
-
 if(def.isPlanar(optProb.symmetry))
 
     if(def.isInt(optProb.computation)) % magnetostatic & electrostatic planar case for integration

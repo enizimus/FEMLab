@@ -1,4 +1,6 @@
-function [f1, f2] = getFuns(type, optProb)
+function [f1, f2, f3] = getFuns(type, optProb)
+
+f1=0; f2=0; f3 = 0;
 
 if(nargin < 2 || isempty(optProb))
     optProb = struct('class', {''}, 'type', {''}, ...
@@ -9,13 +11,10 @@ switch lower(type)
     
     case {'formfun'}
         f1 = slv.getFormFun(optProb);
-        %f1 = @(x,y,ABC) ABC*[x, y, 1]';
-        f2 = 0; 
     case {'quadrature'}
         [f1, f2] = slv.getIntegralFun(optProb);
     case {'wint', 'wquadrature'}
         f1 = @slv.integrateWas;
-        f2 = 0;
     case {'element'}
         [f1, f2] = slv.getElementFun(optProb);
     case {'efield', 'e'}
@@ -25,14 +24,15 @@ switch lower(type)
     case {'coefs'}
         if(optProb.elementOrder == 1)
             f1 = @slv.calcAbcFirstOrder;
-            f2 = 0;
         elseif(optProb.elementOrder == 2)
             f1 = @slv.calcAbcSecondOrder;
-            f2 = 0;
         end
     case {'w', 'energy'}
         f1 = @(B, A, mu, r) 0.5*B^2*mu*r;%get_energy_fun(optProb);
-        f2 = 0;
+    case {'neumann'}
+        [f1, f2, f3] = slv.getNeumannFun(optProb);
+    case {'neumann quadrature'}
+        f1 = @slv.integrateNeumann;
     otherwise
         error('Unsupported function!?')
 end

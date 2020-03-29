@@ -14,7 +14,7 @@ E = zeros(size(X));
 Ex = zeros(size(X));
 Ey = zeros(size(X));
 
-TRI = triangulation(triangles, x, y);
+TRI = triangulation(triangles(:,1:3), x, y);
 parentTri = pointLocation(TRI, X(:), Y(:));
 
 N = slv.getFuns('formfun', optProb);

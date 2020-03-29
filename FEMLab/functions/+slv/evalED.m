@@ -19,7 +19,7 @@ D = zeros(size(X));
 Dx = zeros(size(X));
 Dy = zeros(size(X));
 
-TRI = triangulation(triangles, x, y);
+TRI = triangulation(triangles(:,1:3), x, y);
 parentTri = pointLocation(TRI, X(:), Y(:));
 
 N = slv.getFuns('formfun', optProb);
