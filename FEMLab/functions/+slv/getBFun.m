@@ -25,6 +25,6 @@ elseif(type == type2) %axissymetric case
         dNdz = @(ABC, r, z) [1 r 2*z]*ABC([3,5,6],:);
         N = @(ABC, r, z) [1 r z r^2 r*z z^2]*ABC;
         hFunBx = @(A, ABC, r, z) -dNdz(ABC,r,z)*A;
-        hFunBy = @(A, ABC, r, z) N(ABC, r, z)*A + dNdr(ABC,r,z)*A;
+        hFunBy = @(A, ABC, r, z) N(ABC, r, z)*A/r + dNdr(ABC,r,z)*A;
     end
 end

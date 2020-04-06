@@ -26,6 +26,31 @@ N = slv.getFuns('formfun', optProb);
 
 for iPt = 1:nPts
     
+    if isnan(parentTri(iPt))
+        pointId = nearestNeighbor(TRI, X(iPt), Y(iPt));
+        pointNear = [x(pointId),y(pointId)];
+        point = [X(iPt), Y(iPt)];
+        deltaDist = pdist([pointNear;point]);
+        mindistance = min(pdist([x,y]));
+        
+        if deltaDist<mindistance
+            [row,~]=find(triangles==pointId);
+            parentTri(iPt)=row(1);
+        else
+            
+            E(iPt) = nan;
+            Ex(iPt) = nan;
+            Ey(iPt) = nan;
+            
+            D(iPt) = nan;
+            Dx(iPt) = nan;
+            Dy(iPt) = nan;
+            
+            continue;
+        end
+
+    end
+    
     iTri = parentTri(iPt);
     I = triangles(iTri, :);
     ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));

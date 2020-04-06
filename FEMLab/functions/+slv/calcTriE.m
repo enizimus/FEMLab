@@ -19,7 +19,7 @@ for iTri = 1:nTris
     nodes_Ec(iTri, :) = [sum(x)*c, sum(y)*c];
     
     cEy = hFunEy(Ap(triangles(iTri,:)), ABC, nodes_Ec(iTri, 1), nodes_Ec(iTri, 2));
-    cEx = hFunEx(Ap(triangles(iTri,:)), ABC);
+    cEx = hFunEx(Ap(triangles(iTri,:)), ABC, nodes_Ec(iTri, 1), nodes_Ec(iTri, 2));
     
     Ecx(iTri) = cEx;
     Ecy(iTri) = cEy;

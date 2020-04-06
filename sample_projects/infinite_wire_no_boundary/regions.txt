@@ -1,1 +1,0 @@
-$Edges0$EndEdges$Faces21 Air MAT 1 02 Wire SRC 1 1e-3$EndFaces

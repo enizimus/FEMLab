@@ -1,1 +1,0 @@
-$Edges0$EndEdges$Faces31 Qplus DRB 1 102 Qminus DRB 1 03 Medium MAT 1 0$EndFaces

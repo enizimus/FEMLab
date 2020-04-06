@@ -1,1 +1,0 @@
-$Edges31 V_plus DRB 0 102 V_gnd DRB 0 03 neumann NRB 0 0$EndEdges$Faces14 medium MAT 1 0$EndFaces
