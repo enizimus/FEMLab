@@ -1,0 +1,1 @@
+$Edges21 symmetry_axis DRB 0 02 dirichlet_boundary DRB 0 0$EndEdges$Faces33 cylinder1 SRC 1 1e-84 cylinder2 SRC 1 1e-85 medium MAT 1 0$EndFaces

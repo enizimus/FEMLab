@@ -1,44 +1,127 @@
-%close all
+close all
 clear 
 
-%% Electrostatic planar case : Charged sphere
+%% Electrostatic rotsym case : Charged sphere
 % ----------------------------
-load('..\sample_projects\charged_sphere\results\E_line_values.mat')
+load('..\sample_projects\charged_sphere\results\E_line_values_1D.mat')
 E_1d = Q;
+load('..\sample_projects\charged_sphere\results\E_line_values_2D.mat')
+E_2d = Q;
 
-load('..\sample_projects\charged_sphere\results\V_line_values_1Dy.mat')
+load('..\sample_projects\charged_sphere\results\V_line_values_1D.mat')
 V_1d = Q;
+load('..\sample_projects\charged_sphere\results\V_line_values_2D.mat')
+V_2d = Q;
 
 N = length(Q);
 r = linspace(0, 1, N);
-rc = 0.3;
+rc = 0.1;
 
-E = vld.calc_exact_E(N, rc, 'sphere');
-V = vld.calc_exact_V(N, rc, 'sphere');
+[E, V] = vld.calc_exact_E(N, rc, 'sphere');
 
 fig = figure();
 plot(r, E, 'LineWidth', 1.5)
 hold on
 grid on
 plot(r, E_1d, 'LineWidth', 1.5)
+plot(r, E_2d, 'LineWidth', 1.5)
 
-title('Magnetostatic planar problem : Wire in plane R = 0.2')
+title('Electrostatic rotsym problem : charged sphere R = 0.1')
 xlabel('r [m]')
-ylabel('|B| [T]') 
-legend('B-exact', 'B-1D', 'B-2D')
+ylabel('|E| [V/m]') 
+legend('E-exact', 'E-1D', 'E-2D')
+
+print('C:\Users\museljic\Desktop\validation\Field_validation_Estatic_rotsym_1D_2D', '-dpng', '-r300')
 
 fig = figure();
 plot(r, V, 'LineWidth', 1.5)
 hold on
 grid on
 plot(r, V_1d, 'LineWidth', 1.5)
+plot(r, V_2d, 'LineWidth', 1.5)
 
-title('Magnetostatic planar problem : Wire in plane R = 0.2')
+title('Magnetostatic planar problem : Wire in plane R = 0.1')
 xlabel('r [m]')
 ylabel('V [V]') 
 legend('V-exact', 'V-1D', 'V-2D')
 
-print('C:\Users\museljic\Desktop\validation\Field_validation_Estatic_planar_1D_2D', '-dpdf', '-r300')
+%print('C:\Users\museljic\Desktop\validation\Field_validation_Estatic_planar_1D_2D', '-dpng', '-r300')
+
+% -----------------------------
+
+%% Electrostatic rotsym case : Charged spheres over conducting plate
+% ----------------------------
+load('..\sample_projects\spheres_over_conducting_plate\results\E_line_values_1D.mat')
+E_1d = Q;
+load('..\sample_projects\spheres_over_conducting_plate\results\E_line_values_2D.mat')
+E_2d = Q;
+
+N = length(Q);
+r = linspace(0, 2, N);
+rc = 0.1;
+
+[E, V] = vld.calc_exact_E(N, rc, 'spheres');
+
+fig = figure();
+plot(r, E, 'LineWidth', 1.5)
+hold on
+grid on
+plot(r, E_1d, 'LineWidth', 1.5)
+plot(r, E_2d, 'LineWidth', 1.5)
+
+title('Electrostatic rotsym problem : spheres R = 0.1')
+xlabel('y [m]')
+ylabel('|E| [V/m]') 
+legend('E-exact', 'E-1D', 'E-2D')
+
+print('C:\Users\museljic\Desktop\validation\Field_validation_Estatic_rotsym_spheres_1D_2D', '-dpng', '-r300')
+% -----------------------------
+
+%% Electrostatic planar case : Charged cylinder
+% ----------------------------
+load('..\sample_projects\charged_cylinder\results\E_line_values_1D.mat')
+E_1d = Q;
+load('..\sample_projects\charged_cylinder\results\E_line_values_2D.mat')
+E_2d = Q;
+
+load('..\sample_projects\charged_cylinder\results\A_line_values_1D.mat')
+V_1d = Q;
+load('..\sample_projects\charged_cylinder\results\A_line_values_2D.mat')
+V_2d = Q;
+
+N = length(Q);
+r = linspace(0, 1, N);
+rc = 0.1;
+
+[E, V] = vld.calc_exact_E(N, rc, 'cylinder');
+
+fig = figure();
+plot(r, E, 'LineWidth', 1.5)
+hold on
+grid on
+plot(r, E_1d, 'LineWidth', 1.5)
+plot(r, E_2d, 'LineWidth', 1.5)
+
+title('Electrostatic planar problem : infinite charged cylinder R = 0.1')
+xlabel('r [m]')
+ylabel('|E| [V/m]') 
+legend('E-exact', 'E-1D', 'E-2D')
+
+print('C:\Users\museljic\Desktop\validation\Field_validation_Estatic_planar_1D_2D', '-dpng', '-r300')
+
+fig = figure();
+plot(r, V, 'LineWidth', 1.5)
+hold on
+grid on
+plot(r, V_1d, 'LineWidth', 1.5)
+plot(r, V_2d, 'LineWidth', 1.5)
+
+title('Magnetostatic planar problem : Wire in plane R = 0.1')
+xlabel('r [m]')
+ylabel('V [V]') 
+legend('V-exact', 'V-1D', 'V-2D')
+
+%print('C:\Users\museljic\Desktop\validation\Field_validation_Estatic_planar_1D_2D', '-dpng', '-r300')
 
 % -----------------------------
 

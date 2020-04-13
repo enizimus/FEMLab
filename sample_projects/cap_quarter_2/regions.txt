@@ -1,1 +1,0 @@
-$Edges21 inner_electrode DRB 0 102 outer_electrode DRB 0 0$EndEdges$Faces13 medium MAT 1 0$EndFaces
