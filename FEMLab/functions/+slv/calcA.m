@@ -1,5 +1,5 @@
-function calcA(files, optProb)
-disp('-Setting up element matrices and calculating A')
+function time = calcA(files, optProb)
+%disp('-Setting up element matrices and calculating A')
 tic
 
 load(files.respth, 'sElements', 'regSet', 'nNodes', 'nElems', 'prescNodes', ...
@@ -60,6 +60,9 @@ PotUnknown = matK\vecR;
 Ap(bUnknownPot) = PotUnknown;
 Ap(bKnownPot) = Aknown;
 
+time = toc;
+
 save(files.respth, 'Ap', 'matK', 'vecR', 'areaTri', 'ABCs', '-append');
-disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
+%disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
+
 end

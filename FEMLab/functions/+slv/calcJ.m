@@ -1,4 +1,4 @@
-function calcJ(files, optProb)
+function time = calcJ(files, optProb)
 % CALC_J - Calculates the stationary current field from the previously calculated
 % potentials. First the stationary current field defined in the middle of the
 % triangle is calculated and from those the field in the triangle nodes.
@@ -23,7 +23,7 @@ function calcJ(files, optProb)
 % Mar 2019
 
 
-disp('-Calculating stationary current field ...')
+% disp('-Calculating stationary current field ...')
 tic
 
 slv.calcTriE(files, optProb)
@@ -50,5 +50,5 @@ Jy = gamma*Ey;
 save(files.respth, 'J', 'Jx', 'Jy', ...
                    'Jc', 'Jcx', 'Jcy', ...
                    'Jp', 'Jpx', 'Jpy', '-append')
-
-disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
+time = toc;
+% disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])

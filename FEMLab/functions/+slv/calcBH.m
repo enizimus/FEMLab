@@ -1,4 +1,4 @@
-function calcBH(files, optProb)
+function time = calcBH(files, optProb)
 % CALC_B - Calculates the magnetic field from the previously calculated
 % potentials. First the magnetic field defined in the middle of the
 % triangle is calculated and from those the field in the triangle nodes.
@@ -25,7 +25,7 @@ function calcBH(files, optProb)
 % Mar 2019
 
 
-disp('-Calculating magnetic field ...')
+% disp('-Calculating magnetic field ...')
 tic
 
 slv.calcTriBH(files, optProb)
@@ -34,4 +34,5 @@ slv.calcTriPointBH(files)
 [B, Bx, By, H, Hx, Hy] = slv.evalBH(files, optProb);
 save(files.respth, 'B', 'Bx', 'By', 'H', 'Hx', 'Hy', '-append')
 
-disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
+time = toc;
+%disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])

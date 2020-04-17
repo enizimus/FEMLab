@@ -1,10 +1,11 @@
 function calcW(files, settings, regions)
-regions = [2,3]; % just for test, remove later !!!
+
 strField = [def.getFieldLetter(settings.problemClass), 'c'];
 
 load(files.respth, strField, 'elements', 'nLines', 'regSet', ...
     'elemsRegion', 'areaTri', 'triangles', 'const')
 
+regions = [1:length(regSet)]; % just for tests, remove later !!!
 X = eval(strField);
 [paramsElem, ~] = msh.getElemParams(settings, elemsRegion, regSet, const);
 
@@ -30,7 +31,7 @@ else
         iElem = regionIndex(i_index);
         W = W + int_W(X(iElem), areaTri(iElem), paramsElem(iElem), x(triangles(iElem,:)), fun_W);
     end
-    W = W*pi;
+    W = W*pi*2;
 end
 
 %W = 0.5*paramsElem(regionIndex)'.*X(regionIndex).^2*areaTri(regionIndex);

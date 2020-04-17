@@ -39,7 +39,7 @@ Curve Loop(2) = {4, 1, 2, 3};
 //+
 Plane Surface(2) = {1, 2};
 //+
-Physical Curve("Dirichlet_Boundary") = {4, 3, 2};
+Physical Curve("Dirichlet_Boundary") = {4, 3, 2, 1};
 //+
 Physical Surface("Medium") = {2};
 //+

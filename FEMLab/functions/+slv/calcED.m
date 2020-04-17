@@ -1,4 +1,4 @@
-function calcED(files, optProb)
+function time = calcED(files, optProb)
 % CALC_E - Calculates the electric field from the previously calculated
 % potentials. First the electric field defined in the middle of the
 % triangle is calculated and from those the field in the triangle nodes.
@@ -23,7 +23,7 @@ function calcED(files, optProb)
 % Mar 2019
 
 
-disp('-Calculating electric field ...')
+% disp('-Calculating electric field ...')
 tic
 
 slv.calcTriED(files, optProb)
@@ -32,5 +32,5 @@ slv.calcTriPointED(files)
 [E, Ex, Ey, D, Dx, Dy] = slv.evalED(files, optProb);
 save(files.respth, 'E', 'Ex', 'Ey', ...
                    'D', 'Dx', 'Dy', '-append')
-
-disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
+time = toc;
+%disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])
