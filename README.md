@@ -30,15 +30,18 @@
 ## Examples : 
 
 ### Electrostatic planar (Cylindrical charge) :
-![Mesh](/docfigs/figs_cyl_charge/figure_0.png=200x200)
-![Field Vector](/docfigs/figs_cyl_charge/figure_1.png=200x200)
-![Potential](/docfigs/figs_cyl_charge/figure_4.png=200x200)
-![Field abs](/docfigs/figs_cyl_charge/figure_5.png=200x200)
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_0.png" width="500" alt="mesh_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_1.png" width="500" alt="field_vector_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_4.png" width="500" alt="potential_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_5.png" width="500" alt="field_abs_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_7.png" width="500" alt="fcomp_estatic_planar">
+
 ### Electrostatic axissymmetric (Spherical charge) :
-![Field vector](/docfigs/figs_sphere_charge/figure_9.png=200x200)
-![Field abs](/docfigs/figs_sphere_charge/figure_3.png=200x200)
-![Potential](/docfigs/figs_sphere_charge/figure_5.png=200x200)
-![Field comp](/docfigs/figs_sphere_charge/figure_0.png=200x200)
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_sphere_charge/figure_9.png" width="500" alt="fvector_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_sphere_charge/figure_3.png" width="500" alt="fieldabs_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_sphere_charge/figure_5.png" width="500" alt="potential_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_sphere_charge/figure_0.png" width="500" alt="fcomp_estatic_axissym">
+
 ### Stationary current field (Metal plates) :
 ### Magnetostatic planar (Long wire in plane) :
 ### Magnetostatic axissymmetric (Solenoid) :
