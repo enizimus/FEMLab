@@ -1,1 +1,0 @@
-$Edges11 dirichlet_boundary DRB 0 0$EndEdges$Faces22 solenoid SRC 1 1e-33 medium MAT 1 0$EndFaces

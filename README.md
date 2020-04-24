@@ -27,22 +27,36 @@
   - Electrostatic 
   - Magnetostatic  
   
-## Examples : 
+## Some examples : 
 
 ### Electrostatic planar (Cylindrical charge) :
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_0.png" width="500" alt="mesh_estatic_planar">
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_1.png" width="500" alt="field_vector_estatic_planar">
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_4.png" width="500" alt="potential_estatic_planar">
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_5.png" width="500" alt="field_abs_estatic_planar">
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_cyl_charge/figure_7.png" width="500" alt="fcomp_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_cylinder/plots/figure_0.png" width="500" alt="mesh_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_cylinder/plots/figure_1.png" width="500" alt="field_vector_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_cylinder/plots/figure_4.png" width="500" alt="potential_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_cylinder/plots/figure_5.png" width="500" alt="field_abs_estatic_planar">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_cylinder/plots/figure_7.png" width="500" alt="fcomp_estatic_planar">
 
 ### Electrostatic axissymmetric (Spherical charge) :
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_sphere_charge/figure_9.png" width="500" alt="fvector_estatic_axissym">
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_sphere_charge/figure_3.png" width="500" alt="fieldabs_estatic_axissym">
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_sphere_charge/figure_5.png" width="500" alt="potential_estatic_axissym">
-<img src="https://github.com/enizimus/FEMLab/blob/master/docfigs/figs_sphere_charge/figure_0.png" width="500" alt="fcomp_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_sphere/plots/figure_9.png" width="500" alt="fvector_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_sphere/plots/figure_3.png" width="500" alt="fieldabs_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_sphere/plots/figure_5.png" width="500" alt="potential_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/charged_sphere/plots/figure_0.png" width="500" alt="fcomp_estatic_axissym">
 
 ### Stationary current field (Metal plates) :
-### Magnetostatic planar (Long wire in plane) :
-### Magnetostatic axissymmetric (Solenoid) :
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/metal_plates/plots/figure_7.png" width="500" alt="mesh_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/metal_plates/plots/figure_6.png" width="500" alt="sd_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/metal_plates/plots/figure_4.png" width="500" alt="fvector_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/metal_plates/plots/figure_3.png" width="500" alt="fvector_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/metal_plates/plots/figure_2.png" width="500" alt="fvector_estatic_axissym">
 
+### Magnetostatic planar (Long wire in plane) :
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/wire_in_plane/plots/figure_1.png" width="500" alt="mesh_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/wire_in_plane/plots/figure_4.png" width="500" alt="mesh_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/wire_in_plane/plots/figure_6.png" width="500" alt="mesh_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/wire_in_plane/plots/figure_0.png" width="500" alt="mesh_estatic_axissym">
+
+### Magnetostatic axissymmetric (Solenoid) :
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/long_solenoid/plots/figure_1.png" width="500" alt="mesh_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/long_solenoid/plots/figure_3.png" width="500" alt="mesh_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/long_solenoid/plots/figure_5.png" width="500" alt="mesh_estatic_axissym">
+<img src="https://github.com/enizimus/FEMLab/blob/master/sample_projects/long_solenoid/plots/figure_0.png" width="500" alt="mesh_estatic_axissym">
