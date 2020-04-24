@@ -1,11 +1,14 @@
-function calcW(files, settings, regions)
+function W = calcW(files, settings, regions)
 
 strField = [def.getFieldLetter(settings.problemClass), 'c'];
 
 load(files.respth, strField, 'elements', 'nLines', 'regSet', ...
     'elemsRegion', 'areaTri', 'triangles', 'const')
 
-regions = [1:length(regSet)]; % just for tests, remove later !!!
+if(isempty(regions))
+    regions = [1:length(regSet)];
+end
+
 X = eval(strField);
 [paramsElem, ~] = msh.getElemParams(settings, elemsRegion, regSet, const);
 
@@ -33,18 +36,3 @@ else
     end
     W = W*pi*2;
 end
-
-%W = 0.5*paramsElem(regionIndex)'.*X(regionIndex).^2*areaTri(regionIndex);
-
-disp(['W = ' num2str(W)])
-
-% vecR = 0.001;
-% A_sour = vecR^2*pi;
-% J = sRegions.getParam('source');
-% I = A_sour*J;
-% L = 2*W/(I^2);
-% disp(['L = ' num2str(L)])
-
-save(files.respth, 'W', '-append')
-
-

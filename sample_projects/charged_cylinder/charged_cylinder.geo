@@ -33,7 +33,7 @@ Plane Surface(1) = {1, 2};
 //+
 Plane Surface(2) = {2};
 //+
-Physical Curve("dirichlet_boundary") = {1, 4, 3, 2};
+Physical Curve("dirichlet_boundary") = {1};
 //+
 Physical Surface("medium") = {1};
 //+
