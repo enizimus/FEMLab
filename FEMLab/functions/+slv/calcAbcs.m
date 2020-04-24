@@ -1,7 +1,7 @@
-function ABCs = calcAbcs(xTri, yTri, nTris, areaTri)
+function ABCs = calcAbcs(xTri, yTri, nTris, areaTri, calcAbc, nTriNodes)
 
-ABCs = zeros(nTris, 3, 3);
+ABCs = zeros(nTriNodes, nTriNodes, nTris);
 
 for iTri = 1:nTris
-    ABCs(iTri,:,:) = slv.calcAbc(xTri(iTri, :), yTri(iTri, :), areaTri(iTri));
+    ABCs(:,:,iTri) = calcAbc(xTri(iTri, :)', yTri(iTri, :)', areaTri(iTri)');
 end

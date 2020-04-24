@@ -1,0 +1,1 @@
+$Edges31 dirichlet_boundary DRB 0 02 surface_charge_1 DRB 0 53 surface_charge_2 DRB 0 -5$EndEdges$Faces34 cap_plate_1 MAT 1.7203e-0 05 cap_plate_2 MAT 1.7203e-0 06 medium MAT 1 0$EndFaces

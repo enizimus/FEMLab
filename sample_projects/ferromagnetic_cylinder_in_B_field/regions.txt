@@ -1,0 +1,1 @@
+$Edges21 dirichlet_boundary DRB 0 02 surface_current NRB 0 1e-3$EndEdges$Faces23 medium MAT 1 04 cylinder MAT 100 0$EndFaces

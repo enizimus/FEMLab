@@ -1,0 +1,1 @@
+$Edges11 dirichlet_boundary DRB 0 0$EndEdges$Faces32 sphere1 SRC 1 1e-83 sphere2 SRC 1 1e-84 medium MAT 1 0$EndFaces

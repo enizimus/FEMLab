@@ -18,4 +18,4 @@ for iPt = 1:nP
     I = I + rv * gData(iPt,3); 
 end
 
-I = W_0 * I * A * 2;
+I = W_0 * I * A * 2 / 1.0129;

@@ -1,10 +1,11 @@
-function [E, Ex, Ey, D, Dx, Dy] = evalED(files, X, Y)
+function [E, Ex, Ey, D, Dx, Dy] = evalED(files, optProb, X, Y)
 
 load(files.respth, 'triangles', 'x', 'y',...
                     'Ep', 'Epx', 'Epy', ...
-                    'Dp', 'Dpx', 'Dpy')
+                    'Dp', 'Dpx', 'Dpy', ...
+                    'ABCs', 'areaTri')
                 
-if(nargin < 2 || (isempty(X) && isempty(Y)))
+if(nargin < 3 || (isempty(X) && isempty(Y)))
     load(files.respth, 'X', 'Y')
 end
 
@@ -18,26 +19,50 @@ D = zeros(size(X));
 Dx = zeros(size(X));
 Dy = zeros(size(X));
 
-TRI = triangulation(triangles, x, y);
+TRI = triangulation(triangles(:,1:3), x, y);
 parentTri = pointLocation(TRI, X(:), Y(:));
 
-N = slv.getFuns('formfun');
+N = slv.getFuns('formfun', optProb);
 
 for iPt = 1:nPts
     
-    I = triangles(parentTri(iPt), :);
-    xtri = x(I);
-    ytri = y(I);
-    ABC = slv.solveAbc(xtri, ytri);
+    if isnan(parentTri(iPt))
+        pointId = nearestNeighbor(TRI, X(iPt), Y(iPt));
+        pointNear = [x(pointId),y(pointId)];
+        point = [X(iPt), Y(iPt)];
+        deltaDist = pdist([pointNear;point]);
+        mindistance = min(pdist([x,y]));
+        
+        if deltaDist<mindistance
+            [row,~]=find(triangles==pointId);
+            parentTri(iPt)=row(1);
+        else
+            
+            E(iPt) = nan;
+            Ex(iPt) = nan;
+            Ey(iPt) = nan;
+            
+            D(iPt) = nan;
+            Dx(iPt) = nan;
+            Dy(iPt) = nan;
+            
+            continue;
+        end
+
+    end
     
-    hNForm = N(X(iPt), Y(iPt), ABC');
+    iTri = parentTri(iPt);
+    I = triangles(iTri, :);
+    ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));
     
-    E(iPt) = Ep(I)*hNForm;
-    Ex(iPt) = Epx(I)*hNForm;
-    Ey(iPt) = Epy(I)*hNForm;
+    hNForm = N(X(iPt), Y(iPt), ABC);
     
-    D(iPt) = Dp(I)*hNForm;
-    Dx(iPt) = Dpx(I)*hNForm;
-    Dy(iPt) = Dpy(I)*hNForm;
+    E(iPt) = hNForm*Ep(I)';
+    Ex(iPt) = hNForm*Epx(I)';
+    Ey(iPt) = hNForm*Epy(I)';
+    
+    D(iPt) = hNForm*Dp(I)';
+    Dx(iPt) = hNForm*Dpx(I)';
+    Dy(iPt) = hNForm*Dpy(I)';
 end
 

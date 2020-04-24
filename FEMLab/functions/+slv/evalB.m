@@ -1,21 +1,23 @@
-function [B, Bx, By] = evalB(files, X, Y)
+function [B, Bx, By] = evalB(files, optProb, X, Y)
 
 load(files.respth, 'triangles', 'x', 'y',...
-                    'Bp', 'Bpx', 'Bpy')
+                    'Bp', 'Bpx', 'Bpy', ...
+                    'ABCs', 'areaTri')
                 
-if(nargin < 2 || (isempty(X) && isempty(Y)))
+if(nargin < 3 || (isempty(X) && isempty(Y)))
     load(files.respth, 'X', 'Y')
 end
 
 nPts = size(X,1)*size(X,2);
+
 B = zeros(size(X));
 Bx = zeros(size(X));
 By = zeros(size(X));
 
-TRI = triangulation(triangles, x, y);
+TRI = triangulation(triangles(:,1:3), x, y);
 parentTri = pointLocation(TRI, X(:), Y(:));
 
-N = slv.getFuns('formfun');
+N = slv.getFuns('formfun', optProb);
 
 for iPt = 1:nPts
     if isnan(parentTri(iPt))
@@ -29,21 +31,24 @@ for iPt = 1:nPts
             [row,~]=find(triangles==pointId);
             parentTri(iPt)=row(1);
         else
-            B(iPt)=nan;
-            Bx(iPt)=nan;
-            By(iPt)=nan;
+            
+            B(iPt) = nan;
+            Bx(iPt) = nan;
+            By(iPt) = nan;
+            
             continue;
         end
 
     end
-    I = triangles(parentTri(iPt), :);
-    xtri = x(I);
-    ytri = y(I);
-    ABC = slv.solveAbc(xtri, ytri);
     
-    hNForm = N(X(iPt), Y(iPt), ABC');
+    iTri = parentTri(iPt);
+    I = triangles(iTri, :);
+    ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));
+    
+    hNForm = N(X(iPt), Y(iPt), ABC)';
+    
     B(iPt) = Bp(I)*hNForm;
     Bx(iPt) = Bpx(I)*hNForm;
     By(iPt) = Bpy(I)*hNForm;
+    
 end
-

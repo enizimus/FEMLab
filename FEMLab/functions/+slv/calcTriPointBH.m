@@ -1,8 +1,8 @@
 function calcTriPointBH(files)
 
 load(files.respth, 'triangles', 'nodes', 'nNodes', ...
-                   'Bc', 'Bcx', 'Bcy', 'nodesBc', ...
-                   'Hc', 'Hcx', 'Hcy', 'areaTri')
+                   'Bcx', 'Bcy', 'nodesBc', ...
+                   'Hcx', 'Hcy', 'areaTri')
 
 matConnect = msh.matConn(triangles, nNodes);
 

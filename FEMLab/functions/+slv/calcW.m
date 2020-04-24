@@ -1,16 +1,20 @@
-function calcW(files, optProb, region)
+function W = calcW(files, settings, regions)
 
-strField = [optProb.field, 'c'];
+strField = [def.getFieldLetter(settings.problemClass), 'c'];
 
-load(files.respth, strField, 'elements', 'nLines', 'sRegions', ...
-    'elemsRegion', 'areaTri', 'triangles')
+load(files.respth, strField, 'elements', 'nLines', 'regSet', ...
+    'elemsRegion', 'areaTri', 'triangles', 'const')
+
+if(isempty(regions))
+    regions = [1:length(regSet)];
+end
 
 X = eval(strField);
-[paramsElem, ~] = msh.getElemParams(optProb, elemsRegion, sRegions);
+[paramsElem, ~] = msh.getElemParams(settings, elemsRegion, regSet, const);
 
 regionIndex = false(size(elemsRegion));
-for iReg = 1:length(region)
-    tempIndex = elemsRegion == region(iReg);
+for iReg = 1:length(regions)
+    tempIndex = elemsRegion == regions(iReg);
     regionIndex = regionIndex | tempIndex;
 end
 
@@ -18,7 +22,7 @@ regionIndex = regionIndex(nLines+1:end);
 paramsElem = paramsElem(nLines+1:end);
 nElems = length(regionIndex);
 
-if(def.isPlanar(optProb.symmetry))
+if(def.isPlanar(settings.symmetry))
     W = 0.5*paramsElem(regionIndex)'.*X(regionIndex).^2*areaTri(regionIndex);
 else
     regionIndex = find(regionIndex);
@@ -30,17 +34,5 @@ else
         iElem = regionIndex(i_index);
         W = W + int_W(X(iElem), areaTri(iElem), paramsElem(iElem), x(triangles(iElem,:)), fun_W);
     end
-    W = W*2*pi;
+    W = W*pi*2;
 end
-disp(['W = ' num2str(W)])
-
-% vecR = 0.001;
-% A_sour = vecR^2*pi;
-% J = sRegions.getParam('source');
-% I = A_sour*J;
-% L = 2*W/(I^2);
-% disp(['L = ' num2str(L)])
-
-save(files.respth, 'W', '-append')
-
-

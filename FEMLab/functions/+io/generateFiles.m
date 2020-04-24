@@ -1,24 +1,29 @@
-function files = generateFiles(filePath, fileName)
+function files = generateFiles(filePath, fileName, sep)
 
 files = struct();
 
-if(filePath(end) ~= '/')
-    filePath = [filePath, '/'];
+if(filePath(end) ~= '\' & filePath(end) ~= '/')
+    filePath = [filePath, sep];
+else
+    filePath(end) = sep;
 end
 
 files.mesh = [fileName, '.msh'];
+files.projectFile = [filePath, fileName, '.mat'];
 files.geo = [fileName, '.geo'];
 files.fileName = fileName;
 files.filePath = filePath;
+files.setupPath = [filePath, 'setup_files', sep];
 files.mshFile = [filePath, fileName, '.msh'];
 files.geoFile = [filePath, fileName, '.geo'];
-files.results = [filePath, 'results/'];
+files.results = [filePath, 'results', sep];
 files.finfo = [files.results, 'finfo.mat'];
 files.setfile = [filePath, 'settings.mat'];
 files.regfile = [filePath, 'regions.txt'];
+files.linePoints = [files.setupPath, 'linePoints.txt'];
 files.settxtfile = [filePath, 'settings.txt'];
 files.respth = [files.results, fileName];
-files.pltpth = [filePath, 'plots/'];
+files.pltpth = [filePath, 'plots', sep];
 files.pltpthMesh = [files.pltpth, fileName, '_mesh'];
 files.pltpthPot = [files.pltpth, fileName, '_potential'];
 files.pltpthAbsB = [files.pltpth, fileName, '_absB'];
@@ -50,6 +55,18 @@ if(exist(files.results, 'dir') ~= 7)
     mkdir(files.results)
 end
 
+if(exist(files.setupPath, 'dir') ~= 7)
+    mkdir(files.setupPath)
+end
+
 if(exist([files.respth, '.mat'], 'file') ~= 2)
     save(files.respth, 'fileName')
+end
+
+if(exist(files.projectFile, 'file') ~= 2)
+    save(files.projectFile, 'fileName')
+end
+
+if(exist(files.linePoints, 'file') ~= 2)
+    io.generateLinePointsFile(files.linePoints)
 end

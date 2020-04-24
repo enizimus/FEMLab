@@ -1,4 +1,4 @@
-function [xTri,yTri]  = getTriXY(triangles, x, y, nTris)
+function [xTri, yTri]  = getTriXY(triangles, x, y, nTris, nPts)
 
-xTri = reshape(x(triangles(:)), [nTris, 3]);
-yTri = reshape(y(triangles(:)), [nTris, 3]);
+xTri = reshape(x(triangles(:)), [nTris, nPts]);
+yTri = reshape(y(triangles(:)), [nTris, nPts]);

@@ -1,6 +1,6 @@
 function calcTriED(files, optProb)
 
-load(files.respth, 'Ap', 'triangles', 'nodes', 'nNodes', ...
+load(files.respth, 'Ap', 'triangles', 'nodes', 'areaTri', ...
                    'regsTris', 'regSet', 'const', 'ABCs')
 
 nTris = length(triangles);
@@ -10,7 +10,12 @@ Ecy = zeros(1,nTris);
 nodes_Ec = zeros(nTris, 2);
 
 [hFunEx, hFunEy] = slv.getFuns('Efield', optProb);
-c = 0.333333333333333;
+
+if(optProb.elementOrder == 1)
+    c = 0.333333333333333;
+elseif(optProb.elementOrder == 2)
+    c = 0.166666666666667;
+end
 
 % parameters according to region
 eps_r = [regSet(regsTris).matProp];
@@ -23,11 +28,12 @@ for iTri = 1:nTris
     
     x = nodes(triangles(iTri,:),1);
     y = nodes(triangles(iTri,:),2);
-    ABC = slv.solveAbc(x,y);
+    ABC = ABCs(:,:,iTri)/(2*areaTri(iTri));
+    
     nodes_Ec(iTri, :) = [sum(x)*c, sum(y)*c];
     
     cEy = hFunEy(Ap(triangles(iTri,:)), ABC, nodes_Ec(iTri, 1), nodes_Ec(iTri, 2));
-    cEx = hFunEx(Ap(triangles(iTri,:)), ABC);
+    cEx = hFunEx(Ap(triangles(iTri,:)), ABC, nodes_Ec(iTri, 1), nodes_Ec(iTri, 2));
     
     Ecx(iTri) = cEx;
     Ecy(iTri) = cEy;

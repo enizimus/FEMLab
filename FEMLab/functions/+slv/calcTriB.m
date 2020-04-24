@@ -9,7 +9,12 @@ Bcy = zeros(1,nTris);
 nodesBc = zeros(nTris, 2);
 
 [hFunBx, hFunBy] = slv.getFuns('Bfield', optProb);
-c = 0.333333333333333;
+
+if(optProb.elementOrder == 1)
+    c = 0.333333333333333;
+elseif(optProb.elementOrder == 2)
+    c = 0.166666666666667;
+end
 
 for iTri = 1:nTris
     
