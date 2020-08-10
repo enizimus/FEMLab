@@ -19,8 +19,8 @@ function parseRegions(files)
 %                             current region 
 
 inputFile = files.regfile;
-
-fid = fopen(inputFile);
+fid = fopen(inputFile, 'r', 'n', 'UTF-8');
+%fid = fopen(inputFile);
 
 regSet = struct();
 dataParsed = struct();

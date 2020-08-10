@@ -6,7 +6,7 @@ end
 
 load(files.respth, optProb.plots, 'X', 'Y');
 
-figure
+f = figure;
 surf(X,Y,eval(optProb.plots))
 colorbar
 shading interp
@@ -25,7 +25,8 @@ end
 
 if(optProb.doPrint)
     plotpath = eval(['files.pltpthAbs', optProb.plots]);
-    print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
+    %print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
+    savefig(f, plotpath);
 end
 
 end

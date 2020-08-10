@@ -9,7 +9,7 @@ load(files.respth, var, 'triangles', 'x', 'y')
 val = reshape(eval(var), [length(eval(var)), 1]);
 tri = triangulation(triangles(:,1:3), x, y, val);
 
-figure
+f = figure;
 trisurf(tri)
 colorbar
 title(['|', optProb.plots,'|'])
@@ -28,7 +28,8 @@ end
 
 if(optProb.doPrint)
     plotpath = eval(['files.pltpthAbstri', optProb.plots]);
-    print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
+    %print(plotpath, optProb.printFormat, ['-r' num2str(optProb.res)])
+    savefig(f, plotpath);
 end
 
 end

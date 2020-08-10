@@ -1,9 +1,10 @@
-function calcA(files, optProb)
+function calcA(files, optProb, varargin)
 disp('-Setting up element matrices and calculating A')
 tic
 
 load(files.respth, 'sElements', 'regSet', 'nNodes', 'nElems', 'prescNodes', ...
-    'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y', 'const', 'form')
+    'elemsRegion', 'nTris', 'nLines', 'triangles', 'x', 'y', 'const', 'form' ...
+    )
 
 [hFunElemK, hFunElemR] = slv.getFuns('element', optProb);
 [hFunQuadK, hFunQuadR] = slv.getFuns('quadrature', optProb);
@@ -14,6 +15,12 @@ areaTri = util.calcAreaTri(xTri, yTri, nTris);
 ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri, hFunAbc, form.nTriNodes);
 
 [matParams, srcParams] = msh.getElemParams(optProb, elemsRegion, regSet, const);
+
+% In case of nonlinear problem, load material from file
+if optProb.isNonlinear
+    S = load(files.respth, "nl_material_params");
+    matParams(nLines + 1 : end) = 1./(S.nl_material_params * const.mu_0);
+end
 
 [Uk, Ik, Aknown] = slv.setKnownPot(triangles, nTris, prescNodes, regSet, form.nTriNodes);
 

@@ -11,6 +11,9 @@ switch lower(type)
         f1 = slv.getFormFun(optProb);
         %f1 = @(x,y,ABC) ABC*[x, y, 1]';
         f2 = 0; 
+    case {'formfun_pdiff'}
+        f1 = slv.getFormFunPDiff(optProb);
+        f2 = 0; 
     case {'quadrature'}
         [f1, f2] = slv.getIntegralFun(optProb);
     case {'wint', 'wquadrature'}

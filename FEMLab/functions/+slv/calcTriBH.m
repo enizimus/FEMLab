@@ -17,8 +17,13 @@ elseif(optProb.elementOrder == 2)
     c = 0.166666666666667;
 end
 
-% parameters according to region
-mu_r = [regSet(regsTris).matProp];
+if optProb.isNonlinear
+    S = load(files.respth, "nl_material_params");
+    mu_r = S.nl_material_params(:)';
+else
+    % parameters according to region
+    mu_r = [regSet(regsTris).matProp];
+end
 mu = mu_r.*const.mu_0;
 
 mu(mu == 0) = 1;
