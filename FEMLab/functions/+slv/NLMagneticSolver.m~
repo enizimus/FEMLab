@@ -293,28 +293,30 @@ end
 function ret = convergenceCondition(app)
     S = load(app.files.respth, "mu_r_old", "mu_r", "isNonlinearMaterial");
     
-    mu_r = S.mu_r(S.isNonlinearMaterial);
-    mu_r_old = S.mu_r_old(S.isNonlinearMaterial);
+    mu_r = S.mu_r(S.isNonlinearMaterial)
+    mu_r_old = 
     
-    delta_mu_r =  mu_r - mu_r_old;
-    delta_mu_r_rel = delta_mu_r ./ mu_r_old;
-    p = quantile(abs(delta_mu_r_rel), 0.95);
-    p_limit = 0.05;
+    delta_mu_r =  - S.mu_r_old(S.isNonlinearMaterial);
+    delta_mu_r_rel = delta_mu_r ./ S.mu_r_old;
+    delta_mu_r_rel_max = max(abs(delta_mu_r_rel));
 
+    %S = load(app.files.respth, "Bp", "Bp_old_nl");
+    %B_new = S.Bp(:);
+    %B_old = S.Bp_old_nl(:);
     
+    %diff_B = abs(B_new - B_old);
+    %diff_B_rel = diff_B ./ B_old;
     
-    figure()
-    histogram(abs(delta_mu_r_rel) * 100)
-    grid minor
-    xlabel("\Delta \mu_{r,rel} in % ")
-    title("Histogram of \Delta \mu_{r,rel}")
+    %diff_B_rel_max = max(diff_B_rel);
+    %diff_B_int = sum(diff_B_rel) / length(B_new);
     
     fprintf("\nNL-solver stats:\n")
     fprintf("----------------\n")
-    fprintf("\tp-quantile of |delta_mu_r_rel| = %5.2f %%\n", p*100)
-    fprintf("\t(Limit is %5.2f %%)\n\n",p_limit*100)
+    fprintf("\tmax(|delta_mu_rel|) = %5.2f %%\n\n", delta_mu_r_rel_max*100)
+    %fprintf("\tBmax : %e\n", max(B_new))
+    %fprintf("\tDiff max: %e\nDiff int: %e\n\n", diff_B_rel_max, diff_B_int);
     
-    
-    ret =  p < p_limit;
+    %ret = (diff_B_rel_max < 0.01) || max(diff_B) < 0.01;
+    ret = delta_mu_r_rel_max < 0.01;
 end
 

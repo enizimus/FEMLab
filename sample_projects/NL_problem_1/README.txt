@@ -1,0 +1,3 @@
+-) 2nd order triangles
+-) Plane symmetry
+-) Material: Electrical-Steel-NGO-35PN250

@@ -18,8 +18,8 @@ ABCs = slv.calcAbcs(xTri, yTri, nTris, areaTri, hFunAbc, form.nTriNodes);
 
 % In case of nonlinear problem, load material from file
 if optProb.isNonlinear
-    S = load(files.respth, "nl_material_params");
-    matParams(nLines + 1 : end) = 1./(S.nl_material_params * const.mu_0);
+    S = load(files.respth, "mu_r");
+    matParams(nLines + 1 : end) = 1./(S.mu_r * const.mu_0);
 end
 
 [Uk, Ik, Aknown] = slv.setKnownPot(triangles, nTris, prescNodes, regSet, form.nTriNodes);
