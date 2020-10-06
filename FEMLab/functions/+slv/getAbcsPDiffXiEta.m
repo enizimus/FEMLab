@@ -26,22 +26,22 @@ if (optProb.elementOrder == 1)
                  1;     % N3
               ];
 elseif (optProb.elementOrder == 2)
-    
+          
               % 1      xi      eta     
     abc_xi = [ -3,     4,      4;     % N1
-                4,    -8,     -4;     % N2
                -1,     4,      0;     % N3
-                0,     0,      4;     % N4
                 0,     0,      0;     % N5
+                4,    -8,     -4;     % N2
+                0,     0,      4;     % N4
                 0,     0,     -4;     % N6
              ];
          
                % 1      xi      eta     
     abc_eta = [ -3,     4,      4;     % N1
-                 0,    -4,      0;     % N2
                  0,     0,      0;     % N3
-                 0,     4,      0;     % N4
                 -1,     0,      4;     % N5
+                 0,    -4,      0;     % N2
+                 0,     4,      0;     % N4
                  4,    -4,     -8;     % N6
               ];
 end

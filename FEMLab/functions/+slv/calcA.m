@@ -59,9 +59,12 @@ I = any(matK,1);
 matK = matK(:,I);
 
 PotUnknown = matK\vecR;
-
-Ap(bUnknownPot) = PotUnknown;
-Ap(bKnownPot) = Aknown;
+try
+    Ap(bUnknownPot) = PotUnknown;
+    Ap(bKnownPot) = Aknown;
+catch
+    keyboard
+end
 
 save(files.respth, 'Ap', 'matK', 'vecR', 'areaTri', 'ABCs', '-append');
 disp(['  Finished (Elapsed time : ', num2str(toc) ' s)'])

@@ -1,5 +1,5 @@
 function f = getFormFunPDiff(optProb)
-% \brief Get a function handle formcalculating the partial derivative of
+% \brief Get a function handle for calculating the partial derivative of
 %        the triangle-formfunctions.
 %
 % \details The partial derivatives have a polynomial-degree of one lower
@@ -13,7 +13,7 @@ function f = getFormFunPDiff(optProb)
 %
 %
 if optProb.elementOrder == 1
-    f = @(x,y,ABC) ABC;
+    f = @(x,y,ABC) repmat(ABC', length(x),1);
 elseif optProb.elementOrder == 2
-    f = @(x,y,ABC) [1, x, y]*ABC;
+    f = @(x,y,ABC) [ones(length(x),1), x, y]*ABC';
 end
