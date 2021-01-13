@@ -182,7 +182,8 @@ function postprocessing(app, iteration_counter, delta_mu_r_rel)
     hold on
     for k = 1 : N_triangles
         patch(x_nodes(k,plot_node_idx), y_nodes(k,plot_node_idx), ...
-            ones(N_triangle_nodes, 1) * S.H_abs_mean(k), S.H_abs_mean(k))
+            ones(N_triangle_nodes, 1) * S.H_abs_mean(k), S.H_abs_mean(k), ...
+            'EdgeAlpha', 0.5)
     end
     xlabel("x- or r-axis in m")
     ylabel("y- or z-axis in m")
@@ -197,7 +198,7 @@ function postprocessing(app, iteration_counter, delta_mu_r_rel)
     hold on
     for k = 1 : N_triangles
         patch(x_nodes(k,plot_node_idx), y_nodes(k,plot_node_idx), ...
-            ones(N_triangle_nodes, 1) * B_abs_mean(k), B_abs_mean(k))
+            ones(N_triangle_nodes, 1) * B_abs_mean(k), B_abs_mean(k), 'EdgeAlpha', 0.5)
     end
     %scatter3(x_center, y_center, B_abs_mean, 10, B_abs_mean, 'filled')
     xlabel("x- or r-axis in m")
@@ -213,7 +214,7 @@ function postprocessing(app, iteration_counter, delta_mu_r_rel)
     hold on
     for k = 1 : N_triangles
         patch(x_nodes(k,plot_node_idx), y_nodes(k,plot_node_idx), ...
-            ones(N_triangle_nodes, 1) * S.mu_r(k), S.mu_r(k))
+            ones(N_triangle_nodes, 1) * S.mu_r(k), S.mu_r(k), 'EdgeAlpha', 0.5)
     end
     %scatter3(x_center, y_center, S.mu_r, 10, S.mu_r, 'filled')
     xlabel("x- or r-axis in m")
@@ -439,15 +440,20 @@ mu_r_old = S.mu_r_old(S.isNonlinearMaterial);
 
 delta_mu_r =  mu_r - mu_r_old;
 delta_mu_r_rel = delta_mu_r ./ mu_r_old;
+delta_mu_r_rel(isnan(delta_mu_r_rel)) = realmax;
 
-% Quantile-function requires "Statistica and Machine-Learning Toolbox". See
+% ecdf-function requires "Statistica and Machine-Learning Toolbox". See
 % corresponding help-entry.
 % ToDo: Implement alternative (self-programmed quantile or use
 % python/Julia/R)
+
 p = 0.95;
 Qp_limit = 0.05;
 
-Qp = quantile(abs(delta_mu_r_rel), p);
+[f,x] = ecdf(abs(delta_mu_r_rel));
+Qp = x(find(f >= p, 1));
+
+
 
 fprintf("\nNL-solver stats:\n")
 fprintf("----------------\n")
